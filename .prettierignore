@@ -4,3 +4,4 @@ coverage
 target
 package.json
 package-lock.json
+lib
