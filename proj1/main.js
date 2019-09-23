@@ -53,6 +53,10 @@ serialInclude([
   'MySceneGraph.js',
   'MyInterface.js',
   'MyRectangle.js',
+  'MyCylinder.js',
+  'MySphere.js',
+  'MyTriangle.js',
+  'MyTorus.js',
 
   (main = function() {
     // Standard application, scene and interface setup
