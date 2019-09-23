@@ -381,10 +381,44 @@ class MySceneGraph {
 
       //Continue here
       this.onXMLMinorError('To do: Parse materials.');
+      this.materials[materialID] = this.parseMaterial(children[i]);
     }
 
     //this.log("Parsed materials");
     return null;
+  }
+
+  parseMaterial(material) {
+    const children = material.children;
+    const nodeNames = [];
+    for (var j = 0; j < children.length; j++) {
+      nodeNames.push(children[j].nodeName);
+    }
+    const emissionIndex = nodeNames.indexOf('emission');
+    const ambientIndex = nodeNames.indexOf('ambient');
+    const diffuseIndex = nodeNames.indexOf('diffuse');
+    const specularIndex = nodeNames.indexOf('specular');
+    const appearance = new CGFappearance(this.scene);
+    if (emissionIndex != -1 && ambientIndex != -1 && diffuseIndex != -1 && specularIndex != -1) {
+      const emission = this.parseMaterialColors(children[emissionIndex]);
+      appearance.setEmission(emission.red, emission.green, emission.blue, emission.alpha);
+      const ambient = this.parseMaterialColors(children[ambientIndex]);
+      appearance.setAmbient(ambient.red, ambient.green, ambient.blue, ambient.alpha);
+      const diffuse = this.parseMaterialColors(children[diffuseIndex]);
+      appearance.setDiffuse(diffuse.red, diffuse.green, diffuse.blue, diffuse.alpha);
+      const specular = this.parseMaterialColors(children[specularIndex]);
+      appearance.setSpecular(specular.red, specular.green, specular.blue, specular.alpha);
+    }
+    return appearance;
+  }
+
+  parseMaterialColors(component) {
+    const colors = {};
+    colors.red = this.reader.getFloat(component, 'r');
+    colors.green = this.reader.getFloat(component, 'g');
+    colors.blue = this.reader.getFloat(component, 'b');
+    colors.alpha = this.reader.getFloat(component, 'a');
+    return colors;
   }
 
   /**
@@ -562,15 +596,41 @@ class MySceneGraph {
       var textureIndex = nodeNames.indexOf('texture');
       var childrenIndex = nodeNames.indexOf('children');
 
+      const currentComponent = {};
       this.onXMLMinorError('To do: Parse components.');
       // Transformations
 
       // Materials
+      currentComponent.materials = this.parseComponentMaterials(
+        grandChildren[materialsIndex].getElementsByTagName('material')
+      );
 
       // Texture
 
       // Children
+      currentComponent.children = currentComponent.children = this.parseComponentChildren(
+        grandChildren[childrenIndex].getElementsByTagName('primitiveref')
+      );
+      this.components.push(currentComponent);
     }
+  }
+  parseComponentMaterials(materials){
+    const componentMaterials = [];
+    for(let i = 0; i < materials.length; i++){
+      const materialID = this.reader.getString(materials[i], 'id');
+      if(this.materials[materialID] != null){
+        componentMaterials.push(materialID);
+      }
+    }
+    return componentMaterials;
+  }
+
+  parseComponentChildren(primitiveChildren) {
+    const components = [];
+    for (let i = 0; i < primitiveChildren.length; i++) {
+      components.push(this.reader.getString(primitiveChildren[i], 'id'));
+    }
+    return components;
   }
 
   /**
@@ -679,8 +739,9 @@ class MySceneGraph {
    */
   displayScene() {
     //To do: Create display loop for transversing the scene graph
-
-    //To test the parsing/creation of the primitives, call the display function directly
-    this.primitives['demoRectangle'].display();
+    this.components.forEach(component => {
+      component.materials.forEach((material) => this.materials[material].apply());
+      component.children.forEach(primitive => this.primitives[primitive].display());
+    });
   }
 }
