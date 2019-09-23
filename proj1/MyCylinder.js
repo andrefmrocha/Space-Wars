@@ -61,8 +61,9 @@ class MyCylinder extends CGFobject {
 		}
 	}
 
-	initBase() {
+	initBases() {
 
+		/* Base and top outer vertices */
 		for (let radiusDiv = 0; radiusDiv <= this.slices; radiusDiv++) {
 
 			let theta = radiusDiv * 2 * Math.PI / this.slices;
@@ -71,59 +72,38 @@ class MyCylinder extends CGFobject {
 			let x = Math.sin(theta);
 			let y = Math.cos(theta);
 			this.vertices.push(x * this.base, y * this.base, 0);
-
-			/* Normals */
-			this.normals.push(0, 0, -1);
-
-			/* Texture coordinates */
-			let u = -x/2 + 0.5;
-			let v = -y/2 + 0.5;
-			this.texCoords.push(u, v);
-		}
-
-		this.vertices.push(0, 0, 0);
-		this.normals.push(0,0,-1);
-		this.texCoords.push(0.5, 0.5);
-		
-		let vertexCount = (this.slices+1) * (this.stacks+1);
-		let center = vertexCount + this.slices + 1;
-		for (let radiusDiv = 0; radiusDiv < this.slices; radiusDiv++) {
-			let vIndex = vertexCount + radiusDiv;			
-			this.indices.push(vIndex, vIndex+1, center);
-		}	
-	}
-
-	initTop() {
-
-		for (let radiusDiv = 0; radiusDiv <= this.slices; radiusDiv++) {
-
-			let theta = radiusDiv * 2 * Math.PI / this.slices;
-
-			/* Vertices coordinates */
-			let x = Math.sin(theta);
-			let y = Math.cos(theta);
 			this.vertices.push(x * this.top, y * this.top, this.height);
 
 			/* Normals */
+			this.normals.push(0, 0, -1);
 			this.normals.push(0, 0, 1);
 
 			/* Texture coordinates */
-			let u = x/2 + 0.5;
-			let v = -y/2 + 0.5;
-			this.texCoords.push(u, v);
+			this.texCoords.push(-x/2 + 0.5, -y/2 + 0.5);
+			this.texCoords.push(x/2 + 0.5, -y/2 + 0.5);
 		}
 
+		/* Center vertices */
+		this.vertices.push(0, 0, 0);
 		this.vertices.push(0, 0, this.height);
+
+		this.normals.push(0,0,-1);
 		this.normals.push(0,0,1);
+
+		this.texCoords.push(0.5, 0.5);
 		this.texCoords.push(0.5, 0.5);
 		
-		let vertexCount = (this.slices+1) * (this.stacks+1) + this.slices + 1;
-		let center = vertexCount + this.slices + 1;
+		/* Indexes */
+		let vertexCount = (this.slices+1) * (this.stacks+1);
+		let centerBase = vertexCount + this.slices*2;
+		let centerTop = centerBase+1;
 		for (let radiusDiv = 0; radiusDiv < this.slices; radiusDiv++) {
-			let vIndex = vertexCount + radiusDiv;			
-			this.indices.push(vIndex, center, vIndex+1);
-		}	
+			let indexBase = vertexCount + radiusDiv*2;			
+			let indexTop = vertexCount + radiusDiv*2 + 1;
 
+			this.indices.push(indexBase, indexBase+2, centerBase);
+			this.indices.push(indexTop, centerTop, indexTop+2);
+		}
 	}
 
 	initBuffers() {
@@ -133,8 +113,7 @@ class MyCylinder extends CGFobject {
 		this.texCoords = [];
 
 		this.initSide();
-		this.initBase();
-		this.initTop();
+		this.initBases();
 
         this.primitiveType = this.scene.gl.TRIANGLES;
         this.initGLBuffers();
