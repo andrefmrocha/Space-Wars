@@ -1,9 +1,109 @@
 class MyCylinder extends CGFobject {
 
-	constructor(scene, slices) {
+	constructor(scene, height, base, top, slices, stacks) {
 		super(scene);
+		this.height = height;
+		this.base = base;
+		this.top = top;
 		this.slices = slices;
+		this.stacks = stacks;
 		this.initBuffers();
+	}
+
+	initSide() {
+		/*
+			sizePerStack - z increment by division along the z axis
+			radius - radius of current side division, resulting from interpolating base and top
+			theta - angle in the xy plane
+			sideDivVertices - number of vertices per latitude band
+
+			the vertices go from quadrants on the xy plane: 1 -> 4 -> 3 -> 2
+
+			u ranges linearly from 0.0 at z = 0 to 1.0 at z = height, 
+			and v ranges from 0.0 at the +y axis, to 0.25 at the +x axis, 
+			to 0.5 at the -y axis, to 0.75 at the \-x axis, and back to 1.0 at the +y axis
+		*/
+
+		let sizePerStack = this.height / this.stacks;
+		for (let sideDiv = 0; sideDiv <= this.stacks; sideDiv++) {
+
+			let z = sideDiv * sizePerStack;
+			let radius = (this.top*1.0 - this.base) / this.height * z + this.base;
+
+			for (let radiusDiv = 0; radiusDiv <= this.slices; radiusDiv++) {
+
+				let theta = radiusDiv * 2 * Math.PI / this.slices;
+
+				/* Vertices coordinates */
+				let x = Math.sin(theta);
+				let y = Math.cos(theta);
+				this.vertices.push(x * radius, y * radius, z)
+
+				/* Normals */
+				this.normals.push(x, y, 0);
+
+				/* Texture coordinates */
+				let u = radiusDiv / this.slices;
+				let v = sideDiv / this.stacks;
+				this.texCoords.push(u, v);
+			}	
+		}
+
+		let sideDivVertices = this.slices+1;
+		for (let sideDiv = 0; sideDiv < this.stacks; sideDiv++) {
+			for (let radiusDiv = 0; radiusDiv < this.slices; radiusDiv++) {
+				let first = sideDiv * sideDivVertices + radiusDiv;
+				let second = first + sideDivVertices;
+
+				this.indices.push(first, second, first + 1);
+				this.indices.push(second, second + 1, first + 1);
+			}
+		}
+	}
+
+	initBases() {
+
+		/* Base and top outer vertices */
+		for (let radiusDiv = 0; radiusDiv <= this.slices; radiusDiv++) {
+
+			let theta = radiusDiv * 2 * Math.PI / this.slices;
+
+			/* Vertices coordinates */
+			let x = Math.sin(theta);
+			let y = Math.cos(theta);
+			this.vertices.push(x * this.base, y * this.base, 0);
+			this.vertices.push(x * this.top, y * this.top, this.height);
+
+			/* Normals */
+			this.normals.push(0, 0, -1);
+			this.normals.push(0, 0, 1);
+
+			/* Texture coordinates */
+			this.texCoords.push(-x/2 + 0.5, -y/2 + 0.5);
+			this.texCoords.push(x/2 + 0.5, -y/2 + 0.5);
+		}
+
+		/* Center vertices */
+		this.vertices.push(0, 0, 0);
+		this.vertices.push(0, 0, this.height);
+
+		this.normals.push(0,0,-1);
+		this.normals.push(0,0,1);
+
+		this.texCoords.push(0.5, 0.5);
+		this.texCoords.push(0.5, 0.5);
+		
+		/* Indexes */
+		let vertexCount = (this.slices+1) * (this.stacks+1);
+		let centerBase = vertexCount + this.slices*2;
+		let centerTop = centerBase+1;
+		for (let radiusDiv = 0; radiusDiv < this.slices; radiusDiv++) {
+			let indexBase = vertexCount + radiusDiv*2;			
+			let indexTop = vertexCount + radiusDiv*2 + 1;
+
+			this.indices.push(indexBase, indexBase+2, centerBase);
+			this.indices.push(indexTop, centerTop, indexTop+2);
+		}
 	}
 
 	initBuffers() {
@@ -12,50 +112,8 @@ class MyCylinder extends CGFobject {
 		this.normals = [];
 		this.texCoords = [];
 
-		let ang = 0;
-		let ang_inc = 2*Math.PI/this.slices;
-		let n_verts = (this.slices+1)*4;
-
-		for (var i = 0; i <= this.slices; i++) {
-
-			var sa=Math.sin(ang);
-            var ca=Math.cos(ang);
-
-			/* VERTICES */
-            this.vertices.push(ca, 0, -sa);
-            this.vertices.push(ca, 1, -sa);
-            this.vertices.push(ca, 0, -sa);
-            this.vertices.push(ca, 1, -sa);
-
-            /* TEXTURE COORDS */
-            this.texCoords.push(i*1.0/this.slices, 1);
-			this.texCoords.push(i*1.0/this.slices, 0);
-			this.texCoords.push(Math.cos(ang)/2 + 0.5, Math.sin(ang)/2 + 0.5);
-			this.texCoords.push(Math.cos(ang)/2 + 0.5, Math.sin(ang)/2 + 0.5);
-
-            /* INDICES */
-            this.indices.push(i*4, ((i+1)*4) % n_verts, (i*4+1) % n_verts);
-            this.indices.push(((i+1)*4) % n_verts, ((i+1)*4+1) % n_verts, (i*4+1) % n_verts);
-            this.indices.push(((i+1)*4+2) % n_verts, (i*4+2) % n_verts, n_verts);
-            this.indices.push((i*4+3) % n_verts, ((i+1)*4+3) % n_verts, n_verts+1);
-
-            /* NORMALS */
-            this.normals.push(ca, 0,-sa);
-			this.normals.push(ca, 0,-sa);
-			this.normals.push(0,-1,0);
-			this.normals.push(0,1,0);
-
-            ang += ang_inc;
-		}
-
-		this.vertices.push(0,0,0);
-		this.vertices.push(0,1,0);
-
-		this.texCoords.push(0.5,0.5);
-		this.texCoords.push(0.5,0.5);
-		
-		this.normals.push(0,-1,0);
-		this.normals.push(0,1,0);
+		this.initSide();
+		this.initBases();
 
         this.primitiveType = this.scene.gl.TRIANGLES;
         this.initGLBuffers();

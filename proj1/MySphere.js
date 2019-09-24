@@ -16,7 +16,8 @@ class MySphere extends CGFobject {
 		this.normals = [];
 		this.texCoords = [];
         
-        /* Calculate sphere vertex positions, normals, and texture coordinates.
+        /* 
+        * Calculate sphere vertex positions, normals, and texture coordinates.
         *
         * Visual representation of the calculus below:
         * https://mse.redwoods.edu/darnold/math50c/mathjax/spherical/spherical3.png
@@ -32,46 +33,33 @@ class MySphere extends CGFobject {
                 let sinTheta = Math.sin(theta);
                 let cosTheta = Math.cos(theta);
                 
-                /* Vertex coordinates */
+                /* Vertices coordinates */
                 let x = cosTheta * sinPhi;
                 let y = sinTheta * sinPhi;
                 let z = cosPhi;
-
-                this.vertices.push(this.radius * x);
-                this.vertices.push(this.radius * y);
-                this.vertices.push(this.radius * z);
+                this.vertices.push(this.radius * x, this.radius * y, this.radius * z);
 
                 /* Normals */
-                this.normals.push(x);
-                this.normals.push(y);
-                this.normals.push(z);
+                this.normals.push(x,y,z);
 
                 /* Texture coordinates */
                 let u = 1 - (longNum / this.longBands);
                 let v = 1 - (latNum / this.latBands);
-
-                this.texCoords.push(u);
-                this.texCoords.push(v);
+                this.texCoords.push(u, v);
             }
         }
 
-        // Number of vertices per latitude band
+        /* Number of vertices per latitude band */
         let latBandVertices = this.longBands+1;
 
-        // Calculate sphere indices.
+        /* Calculate sphere indices */
         for (let latNum = 0; latNum < this.latBands; latNum++) {
             for (let longNum = 0; longNum < this.longBands; longNum++) {
-
                 let first = latNum * latBandVertices + longNum;
                 let second = first + latBandVertices;
 
-                this.indices.push(first);
-                this.indices.push(second);
-                this.indices.push(first + 1);
-
-                this.indices.push(second);
-                this.indices.push(second + 1);
-                this.indices.push(first + 1);
+                this.indices.push(first, second, first + 1);
+                this.indices.push(second, second+1, first+1);
             }
         }
 
