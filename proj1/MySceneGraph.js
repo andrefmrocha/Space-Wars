@@ -349,6 +349,8 @@ class MySceneGraph {
   parseTextures(texturesNode) {
     //For each texture in textures block, check ID and file URL
     this.onXMLMinorError('To do: Parse textures.');
+    this.textures = [];
+
     return null;
   }
 
@@ -378,13 +380,13 @@ class MySceneGraph {
       // Checks for repeated IDs.
       if (this.materials[materialID] != null)
         return 'ID must be unique for each light (conflict: ID = ' + materialID + ')';
-
-      //Continue here
-      this.onXMLMinorError('To do: Parse materials.');
-      this.materials[materialID] = this.parseMaterial(children[i]);
+      const material = this.parseMaterial(children[i]);  
+      if(material)
+        this.materials[materialID] = material;
+    
     }
 
-    //this.log("Parsed materials");
+    this.log("Parsed materials");
     return null;
   }
 
@@ -408,6 +410,8 @@ class MySceneGraph {
       appearance.setDiffuse(diffuse.red, diffuse.green, diffuse.blue, diffuse.alpha);
       const specular = this.parseMaterialColors(children[specularIndex]);
       appearance.setSpecular(specular.red, specular.green, specular.blue, specular.alpha);
+    }else{
+      return null;
     }
     return appearance;
   }
@@ -464,10 +468,14 @@ class MySceneGraph {
             transfMatrix = mat4.translate(transfMatrix, transfMatrix, coordinates);
             break;
           case 'scale':
-            this.onXMLMinorError('To do: Parse scale transformations.');
+            const coords = this.parseCoordinates3D(grandChildren[j],
+              `scale information for ID ${transformationID}`);
+            transfMatrix = mat4.scale(transfMatrix, transfMatrix, coords);
             break;
           case 'rotate':
             // angle
+            const rotateInfo = this.parseRotation(grandChildren[j]);
+            transfMatrix = mat4.rotate(transfMatrix, transfMatrix, rotateInfo.angle, rotateInfo.axis);
             this.onXMLMinorError('To do: Parse rotate transformations.');
             break;
         }
@@ -478,6 +486,33 @@ class MySceneGraph {
     this.log('Parsed transformations');
     return null;
   }
+
+  parseRotation(rotate){
+    const axis = this.reader.getString(rotate, 'axis');
+    const angle = this.reader.getFloat(rotate, 'angle');
+    let axisVec;
+    if(angle && axis){
+      switch(axis){
+        case 'x':
+          axisVec = [1, 0, 0];
+          break;
+        case 'y':
+          axisVec = [0, 1, 0];
+          break;
+        case 'z':
+          axisVec = [0, 0, 1];
+          break;
+        default:
+          axisVec = [0, 0, 1];
+          break;
+      }
+    }
+    return {
+      angle,
+      axis: axisVec
+    }
+  }
+
 
   /**
    * Parses the <primitives> block.
