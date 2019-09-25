@@ -41,6 +41,7 @@ class MyCylinder extends CGFobject {
 
 				/* Normals */
 				this.normals.push(x, y, 0);
+				// TODO fix z normal
 
 				/* Texture coordinates */
 				let u = radiusDiv / this.slices;
