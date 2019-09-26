@@ -141,8 +141,8 @@ class XMLscene extends CGFscene {
       this.setDefaultAppearance();
 
       // Displays the scene (MySceneGraph function).
-      //this.graph.displayScene();
-      this.cylinder.display();
+      this.graph.displayScene();
+      // this.cylinder.display();
     }
 
     this.popMatrix();
