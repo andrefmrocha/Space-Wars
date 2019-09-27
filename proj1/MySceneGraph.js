@@ -199,8 +199,57 @@ class MySceneGraph {
    */
   parseView(viewsNode) {
     this.onXMLMinorError('To do: Parse views and create cameras.');
+    this.perspectives = [];
+    this.parsePerspectiveViews(viewsNode.getElementsByTagName('perspective'));
 
     return null;
+  }
+
+  parseOrthoViews(orthoNodes) {
+    for (let i = 0; i < orthoNodes.length; i++) {
+      const id = this.reader.getString(orthoNodes[i], 'id');
+      const near = this.reader.getFloat(orthoNodes[i], 'near');
+      const far = this.reader.getFloat(orthoNodes[i], 'far');
+      const angle = this.reader.getFloat(orthoNodes[i], 'angle');
+      const left = this.reader.getFloat(orthoNodes[i], 'left');
+      const right = this.reader.getFloat(orthoNodes[i], 'right');
+      const top = this.reader.getFloat(orthoNodes[i], 'top');
+      const bottom = this.reader.getFloat(orthoNodes[i], 'bottom');
+      const orthoChildren = orthoNodes[i].children;
+      let from, to, up;
+      for (let j = 0; j < orthoChildren.length; j++) {
+        if (orthoChildren[j].nodeName == 'from') {
+          from = this.parseCoordinates3D(orthoChildren[j], `Error parsing of from object of perspective of ${id}`);
+        } else if (orthoChildren[j].nodeName == 'to') {
+          to = this.parseCoordinates3D(orthoChildren[j], `Error parsing of from object of perspective of ${id}`);
+        } else if (orthoChildren[j].nodeName == 'up') {
+          up = this.parseCoordinates3D(orthoChildren[j], `Error parsing of from object of perspective of ${id}`);
+        }
+        this.perspectives[id] = new CGFCameraOrtho(left, right, bottom, top, near, far, from, to, up);
+      }
+    }
+  }
+
+  parsePerspectiveViews(perspectiveNodes) {
+    for (let i = 0; i < perspectiveNodes.length; i++) {
+      const id = this.reader.getString(perspectiveNodes[i], 'id');
+      const near = this.reader.getFloat(perspectiveNodes[i], 'near');
+      const far = this.reader.getFloat(perspectiveNodes[i], 'far');
+      const angle = this.reader.getFloat(perspectiveNodes[i], 'angle');
+      const perspectiveChildren = perspectiveNodes[i].children;
+      let from, to;
+      for (let j = 0; j < perspectiveChildren.length; j++) {
+        if (perspectiveChildren[j].nodeName == 'from') {
+          from = this.parseCoordinates3D(
+            perspectiveChildren[j],
+            `Error parsing of from object of perspective of ${id}`
+          );
+        } else if (perspectiveChildren[j].nodeName == 'to') {
+          to = this.parseCoordinates3D(perspectiveChildren[j], `Error parsing of from object of perspective of ${id}`);
+        }
+      }
+      this.perspectives[id] = new CGFcamera(angle, near, far, from, to);
+    }
   }
 
   /**
@@ -353,9 +402,7 @@ class MySceneGraph {
     for (let i = 0; i < childrenNodes.length; i++) {
       const id = this.reader.getString(childrenNodes[i], 'id');
       const file = this.reader.getString(childrenNodes[i], 'file');
-      const newTexture = new CGFappearance(this.scene);
-      newTexture.loadTexture(file);
-      this.textures[id] = newTexture;
+      this.textures[id] = new CGFtexture(this.scene, file);
     }
 
     return null;
@@ -755,7 +802,6 @@ class MySceneGraph {
       // Transformations
       currentComponent.transformation = this.parseComponentTransformations(grandChildren[transformationIndex].children);
       // Materials
-      console.log(nodeNames);
       currentComponent.materials = this.parseComponentMaterials(
         grandChildren[materialsIndex].getElementsByTagName('material')
       );
@@ -774,7 +820,7 @@ class MySceneGraph {
         currentComponent.children.forEach(children => {
           this.scene.pushMatrix();
           this.scene.multMatrix(currentComponent.transformation);
-          currentComponent.texture.apply();
+          currentComponent.materials[0].setTexture(currentComponent.texture);
           currentComponent.materials[0].apply();
           children.display();
           this.scene.popMatrix();
@@ -821,7 +867,13 @@ class MySceneGraph {
   parsePrimitiveChildren(primitiveChildren) {
     const components = [];
     for (let i = 0; i < primitiveChildren.length; i++) {
-      components.push(this.primitives[this.reader.getString(primitiveChildren[i], 'id')]);
+      components.push({
+        display: () => {
+          const primitive = this.primitives[this.reader.getString(primitiveChildren[i], 'id')];
+          typeof primitive.updateTextCoords === 'function' && primitive.updateTextCoords();
+          primitive.display();
+        }
+      });
     }
     return components;
   }
