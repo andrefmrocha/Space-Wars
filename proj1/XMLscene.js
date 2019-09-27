@@ -34,9 +34,6 @@ class XMLscene extends CGFscene {
 
     this.axis = new CGFaxis(this);
     this.setUpdatePeriod(100);
-
-    this.cylinder = new MyCylinder(this, 3, 1, 2, 20, 20);
-    this.torus = new MyTorus(this, 1, 4, 10, 10);
   }
 
   /**
@@ -143,9 +140,6 @@ class XMLscene extends CGFscene {
 
       // Displays the scene (MySceneGraph function).
       this.graph.displayScene();
-      // this.cylinder.display();
-
-      // this.torus.display();
     }
 
     this.popMatrix();

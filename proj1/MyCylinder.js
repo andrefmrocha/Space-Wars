@@ -6,7 +6,7 @@ class MyCylinder extends CGFobject {
 		this.base = base;
 		this.top = top;
 		this.slices = slices;
-		this.stacks = stacks;
+		this.stacks = stacks*2;
 		this.initBuffers();
 	}
 
@@ -116,7 +116,7 @@ class MyCylinder extends CGFobject {
 		this.texCoords = [];
 
 		this.initSide();
-		this.initBases();
+		//this.initBases();
 
         this.primitiveType = this.scene.gl.TRIANGLES;
         this.initGLBuffers();
