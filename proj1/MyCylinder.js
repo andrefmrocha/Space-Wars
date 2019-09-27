@@ -23,6 +23,9 @@ class MyCylinder extends CGFobject {
 			and v ranges from 0.0 at the +y axis, to 0.25 at the +x axis, 
 			to 0.5 at the -y axis, to 0.75 at the \-x axis, and back to 1.0 at the +y axis
 		*/
+		let alphaTan = Math.abs(this.top - this.base) / this.height;
+		let normalMagn = Math.sqrt(1 + Math.pow(alphaTan, 2)); /* x=sin, y=cos -> x^2 + y^2 = 1 */
+		let normalz = -alphaTan/normalMagn;
 
 		let sizePerStack = this.height / this.stacks;
 		for (let sideDiv = 0; sideDiv <= this.stacks; sideDiv++) {
@@ -40,8 +43,7 @@ class MyCylinder extends CGFobject {
 				this.vertices.push(x * radius, y * radius, z)
 
 				/* Normals */
-				this.normals.push(x, y, 0);
-				// TODO fix z normal
+				this.normals.push(x/normalMagn, y/normalMagn, normalz);
 
 				/* Texture coordinates */
 				let u = radiusDiv / this.slices;
