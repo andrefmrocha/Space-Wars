@@ -1,6 +1,6 @@
 class MyTriangle extends CGFobject {
 
-    constructor(scene, x1, x2, x3, y1, y2, y3, z1, z2, z3) {
+    constructor(scene, x1, y1, z1, x2, y2, z2, x3, y3, z3) {
         super(scene);
 
         this.x1 = x1;
@@ -49,25 +49,36 @@ class MyTriangle extends CGFobject {
         ];
 
         /* Texture coordinates */
-        let b = Math.sqrt(Math.pow(this.x1 - this.x3, 2) + Math.pow(this.y1 - this.y3, 2) + Math.pow(this.z1 - this.z3, 2));
-        let c = Math.sqrt(Math.pow(this.x2 - this.x1, 2) + Math.pow(this.y2 - this.y1, 2) + Math.pow(this.z2 - this.z1, 2));
-        let a = Math.sqrt(Math.pow(this.x3- this.x2, 2) + Math.pow(this.y3 - this.y2, 2) + Math.pow(this.z3 - this.z2, 2));
+        let a = Math.sqrt(Math.pow(this.x1 - this.x3, 2) + Math.pow(this.y1 - this.y3, 2) + Math.pow(this.z1 - this.z3, 2));
+        let b = Math.sqrt(Math.pow(this.x2 - this.x1, 2) + Math.pow(this.y2 - this.y1, 2) + Math.pow(this.z2 - this.z1, 2));
+        let c = Math.sqrt(Math.pow(this.x3- this.x2, 2) + Math.pow(this.y3 - this.y2, 2) + Math.pow(this.z3 - this.z2, 2));
 
-        let alpha = (Math.pow(a,2) + Math.pow(b,2) + Math.pow(c,2)) / (2 * b * c);
-        let beta = (Math.pow(a,2) - Math.pow(b,2) + Math.pow(c,2)) / (2 * a * c);
-        let gama = (Math.pow(a,2) + Math.pow(b,2) - Math.pow(c,2)) / (2 * a * b);
-
-        let u = 1;
-        let v = 1;
+        let cosBeta = (Math.pow(a,2) - Math.pow(b,2) + Math.pow(c,2)) / (2 * a * c);
+        let beta = Math.acos(cosBeta);
 
         this.texCoords = [
-            0, v,
-            c, v,
-            c - a * Math.cos(beta), v - a * Math.sin(beta)
+            c - a * Math.cos(beta), 1 - a * Math.sin(beta),
+            0, 1,
+            c, 1
         ];
 
         this.primitiveType = this.scene.gl.TRIANGLES;
         this.initGLBuffers();
-    }
+    }    
 
+	updateTexCoords(length_s, length_t) {
+        let a = Math.sqrt(Math.pow(this.x1 - this.x3, 2) + Math.pow(this.y1 - this.y3, 2) + Math.pow(this.z1 - this.z3, 2));
+        let b = Math.sqrt(Math.pow(this.x2 - this.x1, 2) + Math.pow(this.y2 - this.y1, 2) + Math.pow(this.z2 - this.z1, 2));
+        let c = Math.sqrt(Math.pow(this.x3- this.x2, 2) + Math.pow(this.y3 - this.y2, 2) + Math.pow(this.z3 - this.z2, 2));
+
+        let cosBeta = (Math.pow(a,2) - Math.pow(b,2) + Math.pow(c,2)) / (2 * a * c);
+        let beta = Math.acos(cosBeta);
+
+		this.texCoords = [
+            (c - a * cosBeta) / length_s, (1 - a * Math.sin(beta) / length_t),
+            0, 1,
+            c / length_s, 1
+        ];
+		this.updateTexCoordsGLBuffers();
+	}
 }
