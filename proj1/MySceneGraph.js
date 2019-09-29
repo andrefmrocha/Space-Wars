@@ -199,9 +199,15 @@ class MySceneGraph {
    */
   parseView(viewsNode) {
     this.onXMLMinorError('To do: Parse views and create cameras.');
-    this.perspectives = [];
+    this.perspectives = this.scene.viewsList;
     this.parsePerspectiveViews(viewsNode.getElementsByTagName('perspective'));
+    this.parseOrthoViews(viewsNode.getElementsByTagName('ortho'));
 
+    if (Object.keys(this.perspectives).length == 0) {
+      return 'No perspectives found!';
+    }
+    this.scene.onSelectedView(Object.keys(this.perspectives));
+    this.scene.addViews();
     return null;
   }
 
@@ -210,7 +216,6 @@ class MySceneGraph {
       const id = this.reader.getString(orthoNodes[i], 'id');
       const near = this.reader.getFloat(orthoNodes[i], 'near');
       const far = this.reader.getFloat(orthoNodes[i], 'far');
-      const angle = this.reader.getFloat(orthoNodes[i], 'angle');
       const left = this.reader.getFloat(orthoNodes[i], 'left');
       const right = this.reader.getFloat(orthoNodes[i], 'right');
       const top = this.reader.getFloat(orthoNodes[i], 'top');
@@ -225,8 +230,9 @@ class MySceneGraph {
         } else if (orthoChildren[j].nodeName == 'up') {
           up = this.parseCoordinates3D(orthoChildren[j], `Error parsing of from object of perspective of ${id}`);
         }
-        this.perspectives[id] = new CGFCameraOrtho(left, right, bottom, top, near, far, from, to, up);
       }
+      up = up ? up: [0, 1, 0];
+      this.perspectives[id] = new CGFCameraOrtho(left, right, bottom, top, near, far, from, to, up);
     }
   }
 
