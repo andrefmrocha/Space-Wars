@@ -209,7 +209,7 @@ class MySceneGraph {
 
     Object.keys(this.perspectives).forEach((key, index) => {
       this.scene.viewsIDs[key] = index;
-      this.scene.viewsList.push(this.perspectives[key]); 
+      this.scene.viewsList.push(this.perspectives[key]);
     });
 
     this.scene.addViews();
@@ -237,7 +237,7 @@ class MySceneGraph {
           up = this.parseCoordinates3D(orthoChildren[j], `Error parsing of from object of perspective of ${id}`);
         }
       }
-      up = up ? up: [0, 1, 0];
+      up = up ? up : [0, 1, 0];
       this.perspectives[id] = new CGFCameraOrtho(left, right, bottom, top, near, far, from, to, up);
     }
   }
@@ -829,12 +829,13 @@ class MySceneGraph {
         this.parseComponentChildren(grandChildren[childrenIndex].getElementsByTagName('componentref'))
       );
       currentComponent.display = () =>
-        currentComponent.children.forEach(children => {
+        currentComponent.children.forEach(child => {
           this.scene.pushMatrix();
           this.scene.multMatrix(currentComponent.transformation);
-          currentComponent.materials[0].setTexture(currentComponent.texture);
+          const texture = currentComponent.texture;
+          currentComponent.materials[0].setTexture(texture.texture);
           currentComponent.materials[0].apply();
-          children.display();
+          child.display(texture.lengthS, texture.lengthT);
           this.scene.popMatrix();
         });
       this.components[componentID] = currentComponent;
@@ -842,7 +843,14 @@ class MySceneGraph {
   }
 
   parseComponentTexture(textureRef) {
-    return this.textures[this.reader.getString(textureRef, 'id')];
+    const lengthS = this.reader.getFloat(textureRef, 'length_s');
+    const lengthT = this.reader.getFloat(textureRef, 'length_t');
+    const texture = this.textures[this.reader.getString(textureRef, 'id')];
+    return {
+      lengthS: lengthS ? lengthS : 1,
+      lengthT: lengthT ? lengthT : 1,
+      texture: texture ? texture : null
+    };
   }
 
   parseComponentTransformations(componentTransformation) {
@@ -879,10 +887,10 @@ class MySceneGraph {
   parsePrimitiveChildren(primitiveChildren) {
     const components = [];
     for (let i = 0; i < primitiveChildren.length; i++) {
+      const primitive = this.primitives[this.reader.getString(primitiveChildren[i], 'id')];
       components.push({
-        display: () => {
-          const primitive = this.primitives[this.reader.getString(primitiveChildren[i], 'id')];
-          typeof primitive.updateTextCoords === 'function' && primitive.updateTextCoords();
+        display: (lengthS, lengthT) => {
+          typeof primitive.updateTexCoords === 'function' && primitive.updateTexCoords(lengthS, lengthT);
           primitive.display();
         }
       });

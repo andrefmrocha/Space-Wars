@@ -50,10 +50,10 @@
     <primitives>
         <primitive id="demoRectangle">
             <!-- <rectangle x1="-0.5" y1="-1" x2="0.5" y2="1" /> -->
-            <!-- <triangle x1="-0.5" y1="-1" z1="1" x2="0.5" y2="1" z2="1" x3="-0.5" y3="1" z3="1" /> -->
+            <triangle x1="-0.5" y1="-1" z1="1" x2="0.5" y2="1" z2="1" x3="-0.5" y3="1" z3="1" />
             <!-- <torus inner="1" outer="3" slices="10" loops="10"/> -->
             <!-- <cylinder base="1" top="0.5" height="4" slices="10" stacks="10"/> -->
-            <sphere radius="1" slices="10" stacks="10"/>
+            <!-- <sphere radius="1" slices="10" stacks="10"/> -->
         </primitive>
     </primitives>
 
@@ -67,7 +67,7 @@
             <materials>
                 <material id="demoMaterial" />
             </materials>
-            <texture id="demoTexture"/>
+            <texture id="demoTexture" length_s="2" length_t="2"/>
             <children>
                 <primitiveref id="demoRectangle" />
             </children>
