@@ -35,7 +35,8 @@ class XMLscene extends CGFscene {
 
     this.axis = new CGFaxis(this);
     this.setUpdatePeriod(100);
-    this.viewsList = {};
+    this.viewsList = [];
+    this.viewsIDs = {};
   }
 
   /**
@@ -81,16 +82,15 @@ class XMLscene extends CGFscene {
   }
 
   addViews(){
+    this.currentView = Object.keys(this.viewsList)[0];
     this.interface.gui
-      .add(this, 'currentView', this.viewsList)
+      .add(this, 'currentView', this.viewsIDs)
       .name('Views')
       .onChange(this.onSelectedView.bind(this));
   }
 
-  onSelectedView(view){
-    this.camera = this.viewsList[view];
-    this.currentView = this.viewsList[view];
-    console.log(this.currentView);
+  onSelectedView(){
+    this.camera = this.viewsList[this.currentView];
   }
 
   setDefaultAppearance() {

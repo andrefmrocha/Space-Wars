@@ -199,15 +199,21 @@ class MySceneGraph {
    */
   parseView(viewsNode) {
     this.onXMLMinorError('To do: Parse views and create cameras.');
-    this.perspectives = this.scene.viewsList;
+    this.perspectives = {};
     this.parsePerspectiveViews(viewsNode.getElementsByTagName('perspective'));
     this.parseOrthoViews(viewsNode.getElementsByTagName('ortho'));
 
     if (Object.keys(this.perspectives).length == 0) {
       return 'No perspectives found!';
     }
-    this.scene.onSelectedView(Object.keys(this.perspectives));
+
+    Object.keys(this.perspectives).forEach((key, index) => {
+      this.scene.viewsIDs[key] = index;
+      this.scene.viewsList.push(this.perspectives[key]); 
+    });
+
     this.scene.addViews();
+    this.scene.onSelectedView();
     return null;
   }
 
