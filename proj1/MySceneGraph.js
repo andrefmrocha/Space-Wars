@@ -414,8 +414,12 @@ class MySceneGraph {
     for (let i = 0; i < childrenNodes.length; i++) {
       const id = this.reader.getString(childrenNodes[i], 'id');
       const file = this.reader.getString(childrenNodes[i], 'file');
-      this.textures[id] = new CGFtexture(this.scene, file);
+      if(id && file){
+        this.textures[id] = new CGFtexture(this.scene, file);
+      }
     }
+    if(Object.keys(this.textures).length == 0)
+      return 'No valid textures found!';
 
     return null;
   }
@@ -428,9 +432,7 @@ class MySceneGraph {
     var children = materialsNode.children;
 
     this.materials = [];
-
-    var grandChildren = [];
-    var nodeNames = [];
+    
 
     // Any number of materials.
     for (var i = 0; i < children.length; i++) {
@@ -449,6 +451,9 @@ class MySceneGraph {
       const material = this.parseMaterial(children[i]);
       if (material) this.materials[materialID] = material;
     }
+
+    if(Object.keys(this.materials).length == 0)
+      return 'No valid materials found!';
 
     this.log('Parsed materials');
     return null;
