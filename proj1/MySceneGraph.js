@@ -28,6 +28,7 @@ class MySceneGraph {
     this.nodes = [];
 
     this.idRoot = null; // The id of the root element.
+    this.materialSwitch = 0;
 
     this.axisCoords = [];
     this.axisCoords['x'] = [1, 0, 0];
@@ -531,6 +532,7 @@ class MySceneGraph {
 
   parseTransformation(transformationChildren, transformationID) {
     let transfMatrix = mat4.create();
+    mat4.identity(transfMatrix);
 
     for (var j = 0; j < transformationChildren.length; j++) {
       switch (transformationChildren[j].nodeName) {
@@ -755,13 +757,13 @@ class MySceneGraph {
           this.primitives[primitiveId] = new MyTriangle(
             this.scene,
             triX1,
-            triX2,
-            triX3,
             triY1,
-            triY2,
-            triY3,
             triZ1,
+            triX2,
+            triY2,
             triZ2,
+            triX3,
+            triY3,
             triZ3
           );
           break;
@@ -816,8 +818,10 @@ class MySceneGraph {
 
       const currentComponent = {};
       this.onXMLMinorError('To do: Parse components.');
+
       // Transformations
       currentComponent.transformation = this.parseComponentTransformations(grandChildren[transformationIndex].children);
+
       // Materials
       currentComponent.materials = this.parseComponentMaterials(
         grandChildren[materialsIndex].getElementsByTagName('material')
@@ -827,22 +831,13 @@ class MySceneGraph {
       currentComponent.texture = textureIndex != -1 ? this.parseComponentTexture(grandChildren[textureIndex]) : null;
 
       // Children
-      currentComponent.children = currentComponent.children = this.parsePrimitiveChildren(
+      currentComponent.children = this.parsePrimitiveChildren(
         grandChildren[childrenIndex].getElementsByTagName('primitiveref')
       );
       currentComponent.children = currentComponent.children.concat(
         this.parseComponentChildren(grandChildren[childrenIndex].getElementsByTagName('componentref'))
       );
-      currentComponent.display = () =>
-        currentComponent.children.forEach(child => {
-          this.scene.pushMatrix();
-          this.scene.multMatrix(currentComponent.transformation);
-          const texture = currentComponent.texture;
-          currentComponent.materials[0].setTexture(texture.texture);
-          currentComponent.materials[0].apply();
-          child.display(texture.lengthS, texture.lengthT);
-          this.scene.popMatrix();
-        });
+
       this.components[componentID] = currentComponent;
     }
   }
@@ -850,7 +845,8 @@ class MySceneGraph {
   parseComponentTexture(textureRef) {
     const lengthS = this.reader.getFloat(textureRef, 'length_s');
     const lengthT = this.reader.getFloat(textureRef, 'length_t');
-    const texture = this.textures[this.reader.getString(textureRef, 'id')];
+    const textureID = this.reader.getString(textureRef, 'id');
+    const texture = (textureID == 'inherit' || textureID == 'none') ? textureID : this.textures[textureID];
     return {
       lengthS: lengthS ? lengthS : 1,
       lengthT: lengthT ? lengthT : 1,
@@ -874,7 +870,10 @@ class MySceneGraph {
     const componentMaterials = [];
     for (let i = 0; i < materials.length; i++) {
       const materialID = this.reader.getString(materials[i], 'id');
-      if (this.materials[materialID] != null) {
+      if (materialID == 'inherit'){
+        componentMaterials.push('inherit');
+      }
+      else if (this.materials[materialID] != null) {
         componentMaterials.push(this.materials[materialID]);
       }
     }
@@ -893,12 +892,7 @@ class MySceneGraph {
     const components = [];
     for (let i = 0; i < primitiveChildren.length; i++) {
       const primitive = this.primitives[this.reader.getString(primitiveChildren[i], 'id')];
-      components.push({
-        display: (lengthS, lengthT) => {
-          typeof primitive.updateTexCoords === 'function' && primitive.updateTexCoords(lengthS, lengthT);
-          primitive.display();
-        }
-      });
+      components.push(primitive);
     }
     return components;
   }
@@ -1009,6 +1003,58 @@ class MySceneGraph {
    */
   displayScene() {
     //To do: Create display loop for transversing the scene graph
-    this.components[this.idRoot].display();
+    let identityM = mat4.create();
+    mat4.identity(identityM);
+    this.displayComponent(this.components[this.idRoot], identityM, null, null, 1, 1);
+  }
+
+  /**
+   * Displays a component and all its children recursively
+   */
+  displayComponent(component, pTransform, pMaterial, pTexture, pLengthS, pLengthT) {
+
+    // if primitive
+    if (component instanceof CGFobject) {
+      this.scene.pushMatrix();
+      
+      this.scene.multMatrix(pTransform);
+      if (pMaterial && pTexture) pMaterial.setTexture(pTexture);
+      if (pTexture && component.updateTexCoords) component.updateTexCoords(pLengthS, pLengthT);
+      if (pMaterial) pMaterial.apply();
+      component.display();
+
+      this.scene.popMatrix();
+    }
+    else {
+      // update variables
+      let cTransform = mat4.create();
+      mat4.multiply(cTransform, pTransform, component.transformation);
+      
+      // TODO update materialSwitch
+      let cMaterial = component.materials[this.materialSwitch % component.materials.length];
+      if (cMaterial == "inherit") cMaterial = pMaterial;
+
+      // TODO check if material inherit works
+
+      let cTextureObj = component.texture;
+      let cTexture = cTextureObj.texture;
+      let cLengthS = cTextureObj.lengthS;
+      let cLengthT = cTextureObj.lengthT;
+
+      if (cTexture == "none") {
+        cTexture = null;
+
+        //TODO set default texture when none
+      }
+      else if (cTexture == "inherit") {
+        cTexture = pTexture;
+        cLengthS = pLengthS;
+        cLengthT = pLengthT;
+      }
+
+      component.children.forEach(child => {
+        this.displayComponent(child, cTransform, cMaterial, cTexture, cLengthS, cLengthT);
+      });
+    }
   }
 }
