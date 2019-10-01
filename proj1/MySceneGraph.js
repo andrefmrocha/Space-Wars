@@ -18,7 +18,10 @@ class MySceneGraph {
   /**
    * @constructor
    */
+
+  
   constructor(filename, scene) {
+    this.DEGREE_TO_RAD = Math.PI / 180;
     this.loadedOk = null;
 
     // Establish bidirectional references between scene and graph.
@@ -495,6 +498,7 @@ class MySceneGraph {
     return colors;
   }
 
+
   /**
    * Parses the <transformations> block.
    * @param {transformations block element} transformationsNode
@@ -583,7 +587,7 @@ class MySceneGraph {
       }
     }
     return {
-      angle,
+      angle: this.DEGREE_TO_RAD * angle,
       axis: axisVec
     };
   }
