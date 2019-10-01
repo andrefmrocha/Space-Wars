@@ -1018,10 +1018,11 @@ class MySceneGraph {
     if (component instanceof CGFobject) {
 
       // materials and texture
-      if (pMaterial) {
-        if (pTexture) pMaterial.setTexture(pTexture);
+      if (pMaterial) {  
+        let matCopy = Object.assign( Object.create( Object.getPrototypeOf(pMaterial)), pMaterial);
+        if (pTexture) matCopy.setTexture(pTexture);
         if (component.updateTexCoords) component.updateTexCoords(pLengthS, pLengthT);
-        pMaterial.apply();
+        matCopy.apply();
       }
 
       // display primitive
@@ -1043,8 +1044,6 @@ class MySceneGraph {
 
       if (cTexture == "none") {
         cTexture = null;
-
-        //TODO set default texture when none
       }
       else if (cTexture == "inherit") {
         cTexture = pTexture;
