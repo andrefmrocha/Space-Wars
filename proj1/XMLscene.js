@@ -23,7 +23,7 @@ class XMLscene extends CGFscene {
 
     this.sceneInited = false;
 
-    this.currentView = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
+    this.currentView;
     this.initCameras();
 
     this.enableTextures(true);
@@ -39,11 +39,25 @@ class XMLscene extends CGFscene {
     this.viewsIDs = {};
   }
 
+  addViews() {
+    this.currentView = Object.keys(this.viewsList)[0];
+    this.interface.gui
+      .add(this, 'currentView', this.viewsIDs)
+      .name('Views')
+      .onChange(this.onSelectedView.bind(this));
+  }
+
+  onSelectedView() {
+    this.camera = this.viewsList[this.currentView];
+    this.interface.setActiveCamera(this.camera);
+
+  }
+
   /**
    * Initializes the scene cameras.
    */
   initCameras() {
-    this.camera = this.currentView;
+    this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
   }
   /**
    * Initializes the scene lights with the values read from the XML file.
@@ -79,18 +93,6 @@ class XMLscene extends CGFscene {
         i++;
       }
     }
-  }
-
-  addViews(){
-    this.currentView = Object.keys(this.viewsList)[0];
-    this.interface.gui
-      .add(this, 'currentView', this.viewsIDs)
-      .name('Views')
-      .onChange(this.onSelectedView.bind(this));
-  }
-
-  onSelectedView(){
-    this.camera = this.viewsList[this.currentView];
   }
 
   setDefaultAppearance() {
