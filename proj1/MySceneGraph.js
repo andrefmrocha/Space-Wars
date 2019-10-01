@@ -998,43 +998,43 @@ class MySceneGraph {
     console.log('   ' + message);
   }
 
+  updateMaterial() {
+    this.materialSwitch += 1;
+  }
+
   /**
    * Displays the scene, processing each node, starting in the root node.
    */
   displayScene() {
-    //To do: Create display loop for transversing the scene graph
-    let identityM = mat4.create();
-    mat4.identity(identityM);
-    this.displayComponent(this.components[this.idRoot], identityM, null, null, 1, 1);
+    this.displayComponent(this.components[this.idRoot], null, null, 1, 1);
   }
 
   /**
    * Displays a component and all its children recursively
    */
-  displayComponent(component, pTransform, pMaterial, pTexture, pLengthS, pLengthT) {
+  displayComponent(component, pMaterial, pTexture, pLengthS, pLengthT) {
 
     // if primitive
     if (component instanceof CGFobject) {
-      this.scene.pushMatrix();
-      
-      this.scene.multMatrix(pTransform);
-      if (pMaterial && pTexture) pMaterial.setTexture(pTexture);
-      if (pTexture && component.updateTexCoords) component.updateTexCoords(pLengthS, pLengthT);
-      if (pMaterial) pMaterial.apply();
-      component.display();
 
-      this.scene.popMatrix();
+      // materials and texture
+      if (pMaterial) {
+        if (pTexture) pMaterial.setTexture(pTexture);
+        if (component.updateTexCoords) component.updateTexCoords(pLengthS, pLengthT);
+        pMaterial.apply();
+      }
+
+      // display primitive
+      component.display();
     }
     else {
-      // update variables
-      let cTransform = mat4.create();
-      mat4.multiply(cTransform, pTransform, component.transformation);
+      this.scene.pushMatrix();
       
-      // TODO update materialSwitch
+      // multiply transformations
+      this.scene.multMatrix(component.transformation);
+
       let cMaterial = component.materials[this.materialSwitch % component.materials.length];
       if (cMaterial == "inherit") cMaterial = pMaterial;
-
-      // TODO check if material inherit works
 
       let cTextureObj = component.texture;
       let cTexture = cTextureObj.texture;
@@ -1053,8 +1053,10 @@ class MySceneGraph {
       }
 
       component.children.forEach(child => {
-        this.displayComponent(child, cTransform, cMaterial, cTexture, cLengthS, cLengthT);
+        this.displayComponent(child, cMaterial, cTexture, cLengthS, cLengthT);
       });
+
+      this.scene.popMatrix();
     }
   }
 }

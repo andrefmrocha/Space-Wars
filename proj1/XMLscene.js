@@ -124,6 +124,16 @@ class XMLscene extends CGFscene {
     this.sceneInited = true;
   }
 
+  update(t) {
+    this.checkKeys();
+  }
+
+  checkKeys() {
+    if (this.gui.isKeyPressed("KeyM")) {
+      this.graph.updateMaterial();
+    }
+  }
+
   /**
    * Displays the scene.
    */
