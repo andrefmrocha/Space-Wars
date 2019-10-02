@@ -474,6 +474,7 @@ class MySceneGraph {
     const diffuseIndex = nodeNames.indexOf('diffuse');
     const specularIndex = nodeNames.indexOf('specular');
     const appearance = new CGFappearance(this.scene);
+    appearance.setTextureWrap('REPEAT', 'REPEAT');
     if (emissionIndex != -1 && ambientIndex != -1 && diffuseIndex != -1 && specularIndex != -1) {
       const emission = this.parseMaterialColors(children[emissionIndex]);
       appearance.setEmission(emission.red, emission.green, emission.blue, emission.alpha);
