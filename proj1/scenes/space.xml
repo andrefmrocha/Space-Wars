@@ -1,5 +1,5 @@
 <lxs>
-    <scene root="saturn" axis_length="5"/>
+    <scene root="X-spaceship" axis_length="5"/>
 
     <views default="defaultCamera">
         <perspective id="defaultCamera" near="5" far="500" angle="45">
@@ -49,16 +49,12 @@
     </materials>
 
     <transformations>
-        <transformation id="demoTransform">
-            <scale x="5" y="10" z="5" /><!--
-            <rotate axis="x" angle="-45" />
-            <rotate axis="z" angle="-45" />-->
-        </transformation>
+    
     </transformations>
 
     <primitives>
         <primitive id="triangle">
-            <triangle x1="-3" y1="0" z1="0" x2="3" y2="0" z2="0" x3="0" y3="3" z3="0" />
+            <triangle x1="0" y1="1" z1="0" x2="-0.5" y2="0" z2="0" x3="0.5" y3="0" z3="0" />
         </primitive>
         <primitive id="rectangle">
             <rectangle x1="-2" y1="-2" x2="2" y2="2" />
@@ -70,58 +66,67 @@
             <torus inner="1" outer="8" slices="20" loops="40"/>
         </primitive>
         <primitive id="cylinder">
-            <cylinder base="1" top="1" height="4" slices="30" stacks="10"/>
+            <cylinder base="1" top="1" height="1" slices="30" stacks="10"/>
+        </primitive>
+        <primitive id="laser-cylinder">
+            <cylinder base="1" top="1" height="1" slices="8" stacks="1"/>
+        </primitive>
+        <primitive id="cone">
+            <cylinder base="1" top="0" height="1" slices="30" stacks="5"/>
+        </primitive>
+        <primitive id="X-spaceship-arm-base">
+            <cylinder base="1" top="0.2" height="1" slices="30" stacks="5"/>
         </primitive>
     </primitives>
 
     <components>
-        <component id="circle">
+        <component id="wormhole-circle">
             <transformation>
-                <scale x="4" y="4" z="0.2" />
+                <scale x="10" y="4" z="0.2" />
             </transformation>
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="stargate" length_s="4" length_t="4"/>
+            <texture id="stargate" length_s="1" length_t="1"/>
             <children>
                 <primitiveref id="sphere" />
             </children>
         </component>
-        <component id="ring">
+        <component id="wormhole-ring">
             <transformation>
                 <scale x="0.5" y="0.5" z="0.3" />
             </transformation>
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="saturn-ring" length_s="4" length_t="4"/>
+            <texture id="saturn-ring" length_s="1" length_t="1"/>
             <children>
                 <primitiveref id="torus" />
             </children>
         </component>
         <component id="wormhole">
             <transformation>
-                <scale x="1" y="1" z="1" />
+
             </transformation>
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="inherit" length_s="4" length_t="4"/>
+            <texture id="none" length_s="1" length_t="1"/>
             <children>
-                <componentref id="circle" />
-                <componentref id="ring" />
+                <componentref id="wormhole-circle" />
+                <componentref id="wormhole-ring" />
             </children>
         </component>
         <component id="space-laser">
             <transformation>
-                <scale x="0.05" y="0.05" z="0.5" />
+                <scale x="0.05" y="0.05" z="1" />
             </transformation>
             <materials>
                 <material id="red" />
             </materials>
-            <texture id="none" length_s="4" length_t="4"/>
+            <texture id="none" length_s="1" length_t="1"/>
             <children>
-                <primitiveref id="cylinder" />
+                <primitiveref id="laser-cylinder" />
             </children>
         </component>
         <component id="saturn-ring">
@@ -132,7 +137,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="saturn-ring" length_s="4" length_t="4"/>
+            <texture id="saturn-ring" length_s="1" length_t="1"/>
             <children>
                 <primitiveref id="torus" />
             </children>
@@ -144,22 +149,180 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="saturn-planet" length_s="4" length_t="4"/>
+            <texture id="saturn-planet" length_s="1" length_t="1"/>
             <children>
                 <primitiveref id="sphere" />
             </children>
         </component>
         <component id="saturn">
             <transformation>
-                <translate x="0" y="0" z="0" />
+
             </transformation>
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="inherit" length_s="4" length_t="4"/>
+            <texture id="none" length_s="1" length_t="1"/>
             <children>
                 <componentref id="saturn-sphere" />
                 <componentref id="saturn-ring" />
+            </children>
+        </component>
+        <component id="X-spaceship-arm-cone">
+            <transformation>
+                <scale x="1" y="1" z="2" />
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="none" length_s="1" length_t="1"/>
+            <children>
+                <primitiveref id="cone" />
+            </children>
+        </component>
+        <component id="X-spaceship-arm-cone-base">
+            <transformation>
+                <rotate axis="y" angle="180" />
+                <scale x="1" y="1" z="0.5" />
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="none" length_s="1" length_t="1"/>
+            <children>
+                <primitiveref id="X-spaceship-arm-base" />
+            </children>
+        </component>
+        <component id="X-spaceship-arm-connector">
+            <transformation>
+                <translate x="0" y="0" z="-0.5" />
+                <rotate axis="y" angle="180" />
+                <scale x="0.2" y="0.2" z="1" />
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="none" length_s="1" length_t="1"/>
+            <children>
+                <primitiveref id="cylinder" />
+            </children>
+        </component>
+        <component id="X-spaceship-arm-ring">
+            <transformation>
+                <translate x="0" y="0" z="-1" />
+                <scale x=".25" y=".25" z=".3" />
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="none" length_s="1" length_t="1"/>
+            <children>
+                <primitiveref id="torus" />
+            </children>
+        </component>
+        <component id="X-spaceship-arm">
+            <transformation>                
+                <translate x="0" y="0" z="1.5" /> <!-- 0.5 from cone base + 1 from arm connector -->
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="none" length_s="1" length_t="1"/>
+            <children>
+                <componentref id="X-spaceship-arm-cone" />
+                <componentref id="X-spaceship-arm-cone-base" />
+                <componentref id="X-spaceship-arm-connector" />
+                <componentref id="X-spaceship-arm-ring" />
+            </children>
+        </component>
+        <component id="X-spaceship-arm-left">
+            <transformation>                
+                <translate x="-3.5" y="0" z="0" />    
+                <rotate axis="y" angle="-90" />
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="none" length_s="1" length_t="1"/>
+            <children>
+                <componentref id="X-spaceship-arm" />
+            </children>
+        </component>
+        <component id="X-spaceship-arm-right">
+            <transformation>       
+                <translate x="3.5" y="0" z="0" />         
+                <rotate axis="y" angle="90" />
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="none" length_s="1" length_t="1"/>
+            <children>
+                <componentref id="X-spaceship-arm" />
+            </children>
+        </component>
+        <component id="X-spaceship-body">
+            <transformation>
+                <scale x="3.5" y="3.5" z="3.5" />
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="none" length_s="1" length_t="1"/>
+            <children>
+                <primitiveref id="sphere" />
+            </children>
+        </component>
+        <component id="X-spaceship-ring">
+            <transformation>
+                <scale x="0.3" y="0.4" z="0.4" />
+                <rotate axis="y" angle="90" />
+            </transformation>
+            <materials>
+                <material id="red" />
+            </materials>
+            <texture id="none" length_s="1" length_t="1"/>
+            <children>
+                <primitiveref id="torus" />
+            </children>
+        </component>
+        <component id="X-spaceship-ring-1">
+            <transformation>
+                <rotate axis="z" angle="45" />
+            </transformation>
+            <materials>
+                <material id="red" />
+            </materials>
+            <texture id="none" length_s="1" length_t="1"/>
+            <children>
+                <componentref id="X-spaceship-ring" />
+            </children>
+        </component>
+        <component id="X-spaceship-ring-2">
+            <transformation>
+                <rotate axis="z" angle="-45" />
+            </transformation>
+            <materials>
+                <material id="red" />
+            </materials>
+            <texture id="none" length_s="1" length_t="1"/>
+            <children>
+                <componentref id="X-spaceship-ring" />
+            </children>
+        </component>
+        <component id="X-spaceship">
+            <transformation>
+
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="none" length_s="1" length_t="1"/>
+            <children>
+                <componentref id="X-spaceship-arm-left" />
+                <componentref id="X-spaceship-body" />
+                <componentref id="X-spaceship-arm-right" />
+                <componentref id="X-spaceship-ring-1" />
+                <componentref id="X-spaceship-ring-2" />
             </children>
         </component>
     </components>
