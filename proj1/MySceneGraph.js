@@ -1,3 +1,4 @@
+"use strict";
 var DEGREE_TO_RAD = Math.PI / 180;
 
 // Order of the groups in the XML document.
