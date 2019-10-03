@@ -1,5 +1,5 @@
 <lxs>
-    <scene root="X-spaceship" axis_length="5"/>
+    <scene root="Y-spaceship" axis_length="5"/>
 
     <views default="defaultCamera">
         <perspective id="defaultCamera" near="5" far="500" angle="45">
@@ -37,6 +37,7 @@
         <texture id="gun_metal" file="scenes/images/gun_metal.png" />
         <texture id="futuristic_blue" file="scenes/images/futuristic_blue.png" />
         <texture id="futuristic_red" file="scenes/images/futuristic_red.jpg" />
+        <texture id="ion_blast" file="scenes/images/ion_blast.jpg" />
     </textures>
 
     <materials>
@@ -175,6 +176,18 @@
             <texture id="none" length_s="1" length_t="1"/>
             <children>
                 <primitiveref id="laser-cylinder" />
+            </children>
+        </component>
+        <component id="ion-blast">
+            <transformation>
+                <scale x="0.5" y="0.5" z="0.2" />
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="ion_blast" length_s="1" length_t="1"/>
+            <children>
+                <primitiveref id="torus0.3" />
             </children>
         </component>
         <component id="saturn-ring">
@@ -587,7 +600,7 @@
                 <scale x="0.8" y="0.8" z="8" />
             </transformation>
             <materials>
-                <material id="whiteMateri   al" />
+                <material id="whiteMaterial" />
             </materials>
             <texture id="inherit" length_s="1" length_t="1"/>
             <children>
