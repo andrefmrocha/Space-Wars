@@ -57,6 +57,8 @@ serialInclude([
   'MySphere.js',
   'MyTriangle.js',
   'MyTorus.js',
+  'parser/PrimitivesParser.js',
+  'parser/ViewsParser.js',
 
   (main = function() {
     // Standard application, scene and interface setup
