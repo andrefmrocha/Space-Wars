@@ -1,5 +1,5 @@
 <lxs>
-    <scene root="X-planet" axis_length="5"/>
+    <scene root="Y-planet" axis_length="5"/>
 
     <views default="defaultCamera">
         <perspective id="defaultCamera" near="5" far="500" angle="45">
@@ -40,6 +40,8 @@
         <texture id="ion_blast" file="scenes/images/ion_blast.jpg" />
         <texture id="mars" file="scenes/images/mars.jpg" />
         <texture id="solar" file="scenes/images/solar.jpg" />
+        <texture id="neptune" file="scenes/images/neptune.jpg" />
+        <texture id="cosmos" file="scenes/images/cosmos.jpg" />
     </textures>
 
     <materials>
@@ -317,6 +319,83 @@
                 <componentref id="X-planet-sphere" />
                 <componentref id="X-planet-ring-1" />
                 <componentref id="X-planet-ring-2" />
+            </children>
+        </component>
+
+        <component id="Y-planet-sphere">
+            <transformation>
+
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="neptune" length_s="1" length_t="1"/>
+            <children>
+                <componentref id="planet-sphere" />
+            </children>
+        </component>
+        <component id="Y-planet-ring">
+            <transformation>
+                <translate x="2" y="0" z="0" />
+                <scale x="0.6" y="2000" z="0.6" />
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="inherit" length_s="1" length_t="1"/>
+            <children>
+                <componentref id="ring-planet-ring" />
+            </children>
+        </component>
+        <component id="Y-planet-ring-1">
+            <transformation>
+                <rotate axis="z" angle="45" />
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="cosmos" length_s="1" length_t="1"/>
+            <children>
+                <componentref id="Y-planet-ring" />
+            </children>
+        </component>
+        <component id="Y-planet-ring-2">
+            <transformation>
+                <rotate axis="z" angle="135" />
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="cosmos" length_s="1" length_t="1"/>
+            <children>
+                <componentref id="Y-planet-ring" />
+            </children>
+        </component>
+        <component id="Y-planet-ring-3">
+            <transformation>
+                <rotate axis="z" angle="275" />
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="cosmos" length_s="1" length_t="1"/>
+            <children>
+                <componentref id="Y-planet-ring" />
+            </children>
+        </component>
+        <component id="Y-planet">
+            <transformation>
+
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="none" length_s="1" length_t="1"/>
+            <children>
+                <componentref id="Y-planet-sphere" />
+                <componentref id="Y-planet-ring-1" />
+                <componentref id="Y-planet-ring-2" />
+                <componentref id="Y-planet-ring-3" />
             </children>
         </component>
         <!-- PLANETS END -->
