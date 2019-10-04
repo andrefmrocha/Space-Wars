@@ -1,13 +1,13 @@
 <lxs>
-    <scene root="Y-planet" axis_length="5"/>
+    <scene root="scene" axis_length="5"/>
 
     <views default="defaultCamera">
+        <perspective id="spaceCamera" near="5" far="500" angle="45">
+            <from x="0" y="0" z="100" />
+            <to x="0" y="0" z="0" />
+        </perspective>
         <perspective id="defaultCamera" near="5" far="500" angle="45">
             <from x="10" y="10" z="10" />
-            <to x="0" y="-2" z="0" />
-        </perspective>
-        <perspective id="testCamera" near="5" far="500" angle="30">
-            <from x="30" y="15" z="30" />
             <to x="0" y="-2" z="0" />
         </perspective>
     </views>
@@ -42,6 +42,7 @@
         <texture id="solar" file="scenes/images/solar.jpg" />
         <texture id="neptune" file="scenes/images/neptune.jpg" />
         <texture id="cosmos" file="scenes/images/cosmos.jpg" />
+        <texture id="starfield" file="scenes/images/starfield.jpg" />
     </textures>
 
     <materials>
@@ -99,6 +100,9 @@
         </primitive>
         <primitive id="rectangle">
             <rectangle x1="-2" y1="-2" x2="2" y2="2" />
+        </primitive>
+        <primitive id="square">
+            <rectangle x1="-0.5" y1="-0.5" x2="0.5" y2="0.5" />
         </primitive>
         <primitive id="sphere">
             <sphere radius="1" slices="28" stacks="10"/>
@@ -172,7 +176,7 @@
         </component>
         <component id="space-laser">
             <transformation>
-                <scale x="0.05" y="0.05" z="1" />
+                <scale x="0.2" y="0.2" z="4" />
             </transformation>
             <materials>
                 <material id="red" />
@@ -309,7 +313,7 @@
         </component>
         <component id="X-planet">
             <transformation>
-
+                <scale x="2" y="2" z="2" />
             </transformation>
             <materials>
                 <material id="whiteMaterial" />
@@ -385,7 +389,7 @@
         </component>
         <component id="Y-planet">
             <transformation>
-
+                <scale x="2" y="2" z="2" />
             </transformation>
             <materials>
                 <material id="whiteMaterial" />
@@ -1215,5 +1219,399 @@
             </children>
         </component>        
         <!-- Y SPACESHIP END -->
+
+        <!-- SKYBOX START -->       
+        <component id="skybox-top">
+            <transformation>
+                <translate x="0" y="0.5" z="0" />
+                <rotate axis="x" angle="90" />
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="inherit" length_s="1" length_t="1"/>
+            <children>
+                <primitiveref id="square" />
+            </children>
+        </component>   
+        <component id="skybox-bottom">
+            <transformation>
+                <translate x="0" y="-0.5" z="0" />
+                <rotate axis="x" angle="-90" />
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="inherit" length_s="1" length_t="1"/>
+            <children>
+                <primitiveref id="square" />
+            </children>
+        </component>     
+        <component id="skybox-back">
+            <transformation>
+                <translate x="0" y="0" z="-0.5" />
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="inherit" length_s="1" length_t="1"/>
+            <children>
+                <primitiveref id="square" />
+            </children>
+        </component>   
+        <component id="skybox-front">
+            <transformation>
+                <translate x="0" y="0" z="0.5" />
+                <rotate axis="y" angle="180" />
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="inherit" length_s="1" length_t="1"/>
+            <children>
+                <primitiveref id="square" />
+            </children>
+        </component>    
+        <component id="skybox-right">
+            <transformation>
+                <translate x="-0.5" y="0" z="0" />
+                <rotate axis="y" angle="90" />
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="inherit" length_s="1" length_t="1"/>
+            <children>
+                <primitiveref id="square" />
+            </children>
+        </component>   
+        <component id="skybox-left">
+            <transformation>
+                <translate x="0.5" y="0" z="0" />
+                <rotate axis="y" angle="-90" />
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="inherit" length_s="1" length_t="1"/>
+            <children>
+                <primitiveref id="square" />
+            </children>
+        </component>            
+        <component id="skybox">
+            <transformation>
+                <scale x="500" y="500" z="500" /> 
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="starfield" length_s="1" length_t="1"/>
+            <children>
+                <componentref id="skybox-top" />
+                <componentref id="skybox-bottom" />
+                <componentref id="skybox-back" />
+                <componentref id="skybox-front" />
+                <componentref id="skybox-right" />
+                <componentref id="skybox-left" />
+            </children>
+        </component>
+        <!-- SKYBOX END -->
+                  
+        <!-- X FLEET START -->
+        <component id="X-laser">
+            <transformation>
+                <translate x="0" y="-4.1" z="0" />
+                <scale x="0.5" y="0.5" z="1" />
+            </transformation>
+            <materials>
+                <material id="red" />
+            </materials>
+            <texture id="none" length_s="1" length_t="1"/>
+            <children>
+                <componentref id="space-laser" />
+            </children>
+        </component>
+        <component id="X-laser-leaving">
+            <transformation>
+                <translate x="0" y="0" z="2" />
+            </transformation>
+            <materials>
+                <material id="red" />
+            </materials>
+            <texture id="none" length_s="1" length_t="1"/>
+            <children>
+                <componentref id="X-laser" />
+            </children>
+        </component>
+        <component id="X-laser-near">
+            <transformation>
+                <translate x="0" y="0" z="10" />
+            </transformation>
+            <materials>
+                <material id="red" />
+            </materials>
+            <texture id="none" length_s="1" length_t="1"/>
+            <children>
+                <componentref id="X-laser" />
+            </children>
+        </component>
+        <component id="X-laser-medium">
+            <transformation>
+                <translate x="0" y="0" z="25" />
+            </transformation>
+            <materials>
+                <material id="red" />
+            </materials>
+            <texture id="none" length_s="1" length_t="1"/>
+            <children>
+                <componentref id="X-laser" />
+            </children>
+        </component>
+        <component id="X-laser-far">
+            <transformation>
+                <translate x="0" y="0" z="40" />
+            </transformation>
+            <materials>
+                <material id="red" />
+            </materials>
+            <texture id="none" length_s="1" length_t="1"/>
+            <children>
+                <componentref id="X-laser" />
+            </children>
+        </component>  
+        <component id="X-planet-position">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="none" length_s="1" length_t="1"/>
+            <children>
+                <componentref id="X-planet" />
+            </children>
+        </component>
+        <component id="X-spaceship-1">
+            <transformation>
+                <translate x="0" y="0" z="30" />
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="none" length_s="1" length_t="1"/>
+            <children>
+                <componentref id="X-spaceship" />
+                <componentref id="X-laser-leaving" />
+                <componentref id="X-laser-medium" />
+                <componentref id="X-laser-far" />
+            </children>
+        </component>  
+        <component id="X-spaceship-2">
+            <transformation>
+                <translate x="-10" y="-15" z="25" />
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="none" length_s="1" length_t="1"/>
+            <children>
+                <componentref id="X-spaceship" />
+                <componentref id="X-laser-near" />
+                <componentref id="X-laser-medium" />
+                <componentref id="X-laser-far" />
+            </children>
+        </component>    
+        <component id="X-spaceship-3">
+            <transformation>
+                <translate x="15" y="10" z="35" />
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="none" length_s="1" length_t="1"/>
+            <children>
+                <componentref id="X-spaceship" />
+                <componentref id="X-laser-leaving" />
+                <componentref id="X-laser-far" />
+            </children>
+        </component>    
+        <component id="X-spaceship-4">
+            <transformation>
+                <translate x="8" y="-5" z="38" />
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="none" length_s="1" length_t="1"/>
+            <children>
+                <componentref id="X-spaceship" />
+                <componentref id="X-laser-leaving" />
+                <componentref id="X-laser-near" />
+                <componentref id="X-laser-far" />
+            </children>
+        </component>    
+        <component id="X-spaceship-5">
+            <transformation>
+                <translate x="-2" y="15" z="15" />
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="none" length_s="1" length_t="1"/>
+            <children>
+                <componentref id="X-spaceship" />
+                <componentref id="X-laser-far" />
+                <componentref id="X-laser-near" />
+                <componentref id="X-laser-far" />
+            </children>
+        </component>                     
+        <component id="X-fleet">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="none" length_s="1" length_t="1"/>
+            <children>
+                <componentref id="X-planet-position" />
+                <componentref id="X-spaceship-1" />
+                <componentref id="X-spaceship-2" />
+                <componentref id="X-spaceship-3" />
+                <componentref id="X-spaceship-4" />
+                <componentref id="X-spaceship-5" />
+            </children>
+        </component>   
+        <!-- X FLEET END -->
+
+        <!-- Y FLEET START -->  
+        <component id="Y-planet-position">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="none" length_s="1" length_t="1"/>
+            <children>
+                <componentref id="Y-planet" />
+            </children>
+        </component>  
+        <component id="Y-spaceship-1">
+            <transformation>
+                <translate x="-5" y="0" z="30" />
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="none" length_s="1" length_t="1"/>
+            <children>
+                <componentref id="Y-spaceship" />
+            </children>
+        </component>  
+        <component id="Y-spaceship-2">
+            <transformation>
+                <translate x="-10" y="15" z="25" />
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="none" length_s="1" length_t="1"/>
+            <children>
+                <componentref id="Y-spaceship" />
+            </children>
+        </component>    
+        <component id="Y-spaceship-3">
+            <transformation>
+                <translate x="15" y="-10" z="35" />
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="none" length_s="1" length_t="1"/>
+            <children>
+                <componentref id="Y-spaceship" />
+            </children>
+        </component>    
+        <component id="Y-spaceship-4">
+            <transformation>
+                <translate x="-8" y="-5" z="38" />
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="none" length_s="1" length_t="1"/>
+            <children>
+                <componentref id="Y-spaceship" />
+            </children>
+        </component>    
+        <component id="Y-spaceship-5">
+            <transformation>
+                <translate x="6" y="15" z="15" />
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="none" length_s="1" length_t="1"/>
+            <children>
+                <componentref id="Y-spaceship" />
+            </children>
+        </component>                      
+        <component id="Y-fleet">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="none" length_s="1" length_t="1"/>
+            <children>
+                <componentref id="Y-planet-position" />
+                <componentref id="Y-spaceship-1" />
+                <componentref id="Y-spaceship-2" />
+                <componentref id="Y-spaceship-3" />
+                <componentref id="Y-spaceship-4" />
+                <componentref id="Y-spaceship-5" />
+            </children>
+        </component> 
+        <!-- Y FLEET END -->     
+
+        <!-- SCENE START -->                   
+        <component id="X-fleet-position">
+            <transformation>
+                <translate x="-80" y="0" z="0" />
+                <rotate axis="y" angle="90" />
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="none" length_s="1" length_t="1"/>
+            <children>
+                <componentref id="X-fleet" />
+            </children>
+        </component>                     
+        <component id="Y-fleet-position">
+            <transformation>
+                <translate x="80" y="0" z="0" />
+                <rotate axis="y" angle="-90" />
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="none" length_s="1" length_t="1"/>
+            <children>
+                <componentref id="Y-fleet" />
+            </children>
+        </component>                           
+        <component id="scene">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="starfield" length_s="1" length_t="1"/>
+            <children>
+                <componentref id="skybox" />
+                <componentref id="X-fleet-position" />
+                <componentref id="Y-fleet-position" />
+            </children>
+        </component>
+        <!-- SCENE END -->
     </components>
 </lxs>
