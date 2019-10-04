@@ -1,5 +1,5 @@
 <lxs>
-    <scene root="Y-spaceship" axis_length="5"/>
+    <scene root="space_station" axis_length="5"/>
 
     <views default="defaultCamera">
         <perspective id="defaultCamera" near="5" far="500" angle="45">
@@ -38,6 +38,8 @@
         <texture id="futuristic_blue" file="scenes/images/futuristic_blue.png" />
         <texture id="futuristic_red" file="scenes/images/futuristic_red.jpg" />
         <texture id="ion_blast" file="scenes/images/ion_blast.jpg" />
+        <texture id="space_rocks" file="scenes/images/space_rocks.jpg" />
+        <texture id="neon_sign" file="scenes/images/neon-sign.jpg" />
     </textures>
 
     <materials>
@@ -91,10 +93,10 @@
 
     <primitives>
         <primitive id="triangle">
-            <triangle x1="0" y1="1" z1="0" x2="-0.5" y2="0" z2="0" x3="0.5" y3="0" z3="0" />
+            <triangle x1="0" y1="0" z1="1" x2="1" y2="0" z2="0" x3="0" y3="1" z3="0" />
         </primitive>
         <primitive id="rectangle">
-            <rectangle x1="-2" y1="-2" x2="2" y2="2" />
+            <rectangle x1="-1" y1="-1" x2="1" y2="1" />
         </primitive>
         <primitive id="sphere">
             <sphere radius="1" slices="28" stacks="10"/>
@@ -129,6 +131,414 @@
     </primitives>
 
     <components>
+        <component id="pyramid_component">
+            <transformation>
+                <rotate axis="y" angle="45"/>
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="inherit" length_s="1" length_t="1"/>
+            <children>
+                <primitiveref id="triangle" />
+            </children>
+        </component>
+        <component id="x_z_square">
+            <transformation>
+                <scale x="0.71" y="0.71" z="0.71"/>
+                <rotate axis="x" angle="90" />
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="inherit" length_s="1" length_t="1"/>
+            <children>
+                <primitiveref id="rectangle" />
+            </children>
+        </component>
+        <component id="cube_side_1">
+            <transformation>
+                <rotate axis="x" angle="90" />
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="inherit" length_s="1" length_t="1"/>
+            <children>
+                <primitiveref id="rectangle" />
+            </children>
+        </component>
+        <component id="cube_side_2">
+            <transformation>
+                <translate x="0" y="1" z="1" /> 
+                <rotate axis="x" angle="-90" />
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="inherit" length_s="1" length_t="1"/>
+            <children>
+                <componentref id="cube_side_1" />
+            </children>
+        </component>
+        <component id="cube_side_3">
+            <transformation>
+                <translate x="0" y="1" z="-1" /> 
+                <rotate axis="x" angle="90" />
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="inherit" length_s="1" length_t="1"/>
+            <children>
+                <componentref id="cube_side_1" />
+            </children>
+        </component>
+        <component id="cube_side_4">
+            <transformation>
+                <translate x="1" y="1" z="0" /> 
+                <rotate axis="z" angle="90" />
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="inherit" length_s="1" length_t="1"/>
+            <children>
+                <componentref id="cube_side_1" />
+            </children>
+        </component>
+        <component id="cube_side_5">
+            <transformation>
+                <translate x="-1" y="1" z="0" /> 
+                <rotate axis="z" angle="-90" />
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="inherit" length_s="1" length_t="1"/>
+            <children>
+                <componentref id="cube_side_1" />
+            </children>
+        </component>
+        <component id="cube_side_6">
+            <transformation>
+                <translate x="0" y="2" z="0" /> 
+                <rotate axis="z" angle="-180" />
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="inherit" length_s="1" length_t="1"/>
+            <children>
+                <componentref id="cube_side_1" />
+            </children>
+        </component>
+        <component id="cube">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="inherit" length_s="1" length_t="1"/>
+            <children>
+                <componentref id="cube_side_1" />
+                <componentref id="cube_side_2" />
+                <componentref id="cube_side_3" />
+                <componentref id="cube_side_4" />
+                <componentref id="cube_side_5" />
+                <componentref id="cube_side_6" />
+            </children>
+        </component>
+        <component id="sign_pole">
+            <transformation>
+                <scale x="0.1" y="0.7" z="0.1"/>
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="inherit" length_s="1" length_t="1"/>
+            <children>
+                <componentref id="cube" />
+            </children>
+        </component>
+        <component id="sign_board">
+            <transformation>
+                <translate x="0" y="1.3" z="0"/>
+                <scale x="0.1" y="0.5" z="0.9"/>
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="inherit" length_s="1" length_t="1"/>
+            <children>
+                <componentref id="cube" />
+            </children>
+        </component>
+        <component id="sign_info">
+            <transformation>
+                <translate x="0.11" y="1.8" z="0"/>
+                <rotate axis="y" angle="90" />
+                <scale x="1" y="0.5" z="0.01"/>
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="neon_sign" length_s="2" length_t="2"/>
+            <children>
+                <primitiveref id="rectangle" />
+            </children>
+        </component>
+        <component id="sign">
+            <transformation>
+                <translate x="5" y="0" z="0" />
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="steel" length_s="1" length_t="1"/>
+            <children>
+                <componentref id="sign_board" />
+                <componentref id="sign_pole" />
+                <componentref id="sign_info" />
+            </children>
+        </component>
+        <component id="space-laser">
+            <transformation>
+                <scale x="0.05" y="0.05" z="1" />
+            </transformation>
+            <materials>
+                <material id="red" />
+            </materials>
+            <texture id="none" length_s="1" length_t="1"/>
+            <children>
+                <primitiveref id="laser-cylinder" />
+            </children>
+        </component>
+
+
+        <component id="pyramid_side_1">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="inherit" length_s="1" length_t="1"/>
+            <children>
+                <componentref id="pyramid_component" />
+            </children>
+        </component>
+        <component id="pyramid_side_2">
+            <transformation>
+                <rotate axis="y" angle="90"/>
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="inherit" length_s="1" length_t="1"/>
+            <children>
+                <componentref id="pyramid_component" />
+            </children>
+        </component>
+        <component id="pyramid_side_3">
+            <transformation>
+                <rotate axis="y" angle="180"/>
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="inherit" length_s="1" length_t="1"/>
+            <children>
+                <componentref id="pyramid_component" />
+            </children>
+        </component>
+        <component id="pyramid_side_4">
+            <transformation>
+                <rotate axis="y" angle="270"/>
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="inherit" length_s="1" length_t="1"/>
+            <children>
+                <componentref id="pyramid_component" />
+            </children>
+        </component>
+        <component id="pyramid">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="inherit" length_s="1" length_t="1"/>
+            <children>
+                <componentref id="pyramid_side_1" />
+                <componentref id="pyramid_side_2" />
+                <componentref id="pyramid_side_3" />
+                <componentref id="pyramid_side_4" />
+                <componentref id="x_z_square" />
+            </children>
+        </component>
+
+        <component id="base_diner">
+            <transformation>
+                <scale x="2" y="1.5" z="4" />
+                <translate x="-2" y="0" z="0" />
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="steel" length_s="1" length_t="1"/>
+            <children>
+                <componentref id="cube" />
+            </children>
+        </component>
+        <component id="roof_neon">
+            <transformation>
+                <translate x="0.7" y="0" z="-0.7" /> 
+                <scale x="1" y="1" z="1.4" />
+            </transformation>
+            <materials>
+                <material id="red" />
+            </materials>
+            <texture id="none" length_s="1" length_t="1"/>
+            <children>
+                <componentref id="space-laser" />
+            </children>
+        </component>
+        <component id="roof_neon_side_1">
+            <transformation>
+                <rotate axis="y" angle="90" />
+            </transformation>
+            <materials>
+                <material id="red" />
+            </materials>
+            <texture id="none" length_s="1" length_t="1"/>
+            <children>
+                <componentref id="roof_neon" />
+            </children>
+        </component>
+        <component id="roof_neon_side_2">
+            <transformation>
+                <rotate axis="y" angle="-90" />
+            </transformation>
+            <materials>
+                <material id="red" />
+            </materials>
+            <texture id="none" length_s="1" length_t="1"/>
+            <children>
+                <componentref id="roof_neon" />
+            </children>
+        </component>
+        <component id="roof_neon_side_3">
+            <transformation>
+                <rotate axis="y" angle="180" />
+            </transformation>
+            <materials>
+                <material id="red" />
+            </materials>
+            <texture id="none" length_s="1" length_t="1"/>
+            <children>
+                <componentref id="roof_neon" />
+            </children>
+        </component>
+        <component id="roof_diner">
+            <transformation>
+                <translate x="-4" y="3" z="0" /> 
+                <scale x="5" y="2" z="7" />
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="steel" length_s="1" length_t="1"/>
+            <children>
+                <componentref id="pyramid" />
+                <componentref id="roof_neon" />
+                <componentref id="roof_neon_side_1" />
+                <componentref id="roof_neon_side_2" />
+                <componentref id="roof_neon_side_3" />
+            </children>
+        </component>
+        <component id="diner_window_1">
+            <transformation>
+                <scale x="0.5" y="0.7" z="0.5"/>
+                <translate x="-4.8" y="0.5" z="0" />
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="stargate" length_s="2" length_t="2"/>
+            <children>
+                <componentref id="cube" />
+            </children>
+        </component>
+        <component id="diner_window_2">
+            <transformation>
+                <translate x="0" y="0" z="2.5" />
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="stargate" length_s="2" length_t="2"/>
+            <children>
+                <componentref id="diner_window_1" />
+            </children>
+        </component>
+        <component id="diner_window_3">
+            <transformation>
+                <translate x="0" y="0" z="-2.5" />
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="stargate" length_s="2" length_t="2"/>
+            <children>
+                <componentref id="diner_window_1" />
+            </children>
+        </component>
+        <component id="diner">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="steel" length_s="1" length_t="1"/>
+            <children>
+                <componentref id="roof_diner" />
+                <componentref id="base_diner" />
+                <componentref id="diner_window_1" />
+                <componentref id="diner_window_2" />
+                <componentref id="diner_window_3" />
+            </children>
+        </component>
+        <component id="space_rock">
+            <transformation>
+                <scale x="-10" y="-10" z="10"/>
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="space_rocks" length_s="2" length_t="2"/>
+            <children>
+                <componentref id="pyramid_side_1" />
+                <componentref id="pyramid_side_2" />
+                <componentref id="pyramid_side_3" />
+                <componentref id="pyramid_side_4" />
+                <componentref id="x_z_square" />
+            </children>
+        </component>
+        <component id="space_station">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="space_rocks" length_s="2" length_t="2"/>
+            <children>
+                <componentref id="space_rock" />
+                <componentref id="sign" />
+                <componentref id="diner" />
+            </children>
+        </component>
         <component id="wormhole-circle">
             <transformation>
                 <scale x="10" y="4" z="0.2" />
@@ -166,18 +576,6 @@
                 <componentref id="wormhole-ring" />
             </children>
         </component>
-        <component id="space-laser">
-            <transformation>
-                <scale x="0.05" y="0.05" z="1" />
-            </transformation>
-            <materials>
-                <material id="red" />
-            </materials>
-            <texture id="none" length_s="1" length_t="1"/>
-            <children>
-                <primitiveref id="laser-cylinder" />
-            </children>
-        </component>
         <component id="ion-blast">
             <transformation>
                 <scale x="0.5" y="0.5" z="0.2" />
@@ -206,6 +604,7 @@
         <component id="saturn-sphere">
             <transformation>
                 <scale x="5" y="5" z="5" />
+                <rotate axis="x" angle="90" />
             </transformation>
             <materials>
                 <material id="whiteMaterial" />
