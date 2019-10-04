@@ -12,12 +12,12 @@ class MyTriangle extends CGFobject {
     this.z2 = z2;
     this.z3 = z3;
 
-    this.a = Math.sqrt(Math.pow(this.x1 - this.x3, 2) + Math.pow(this.y1 - this.y3, 2) + Math.pow(this.z1 - this.z3, 2));
-    this.b = Math.sqrt(Math.pow(this.x2 - this.x1, 2) + Math.pow(this.y2 - this.y1, 2) + Math.pow(this.z2 - this.z1, 2));
-    this.c = Math.sqrt(Math.pow(this.x3 - this.x2, 2) + Math.pow(this.y3 - this.y2, 2) + Math.pow(this.z3 - this.z2, 2));
+    this.a = Math.sqrt(Math.pow(this.x1 - this.x2, 2) + Math.pow(this.y1 - this.y2, 2) + Math.pow(this.z1 - this.z2, 2));
+    this.b = Math.sqrt(Math.pow(this.x2 - this.x3, 2) + Math.pow(this.y2 - this.y3, 2) + Math.pow(this.z2 - this.z3, 2));
+    this.c = Math.sqrt(Math.pow(this.x3 - this.x1, 2) + Math.pow(this.y3 - this.y1, 2) + Math.pow(this.z3 - this.z1, 2));
 
-    this.cosBeta = (Math.pow(this.a, 2) - Math.pow(this.b, 2) + Math.pow(this.c, 2)) / (2 * this.a * this.c);
-    this.beta = Math.acos(this.cosBeta);
+    this.cosBeta = (Math.pow(this.a, 2) + Math.pow(this.b, 2) - Math.pow(this.c, 2)) / (2 * this.a * this.b);
+    this.sinBeta = Math.sqrt(1 - Math.pow(this.cosBeta, 2));
 
     this.initBuffers();
   }
@@ -46,14 +46,22 @@ class MyTriangle extends CGFobject {
     this.normals = [normalx, normaly, normalz, normalx, normaly, normalz, normalx, normaly, normalz];
 
     /* Texture coordinates */
-    this.texCoords = [this.c - this.a * Math.cos(this.beta), 1 - this.a * Math.sin(this.beta), 0, 1, this.c, 1];
+    this.texCoords = [
+      0, 1, 
+      this.a, 1, 
+      this.c * this.cosBeta, 1 - this.c * this.sinBeta
+    ];
 
     this.primitiveType = this.scene.gl.TRIANGLES;
     this.initGLBuffers();
   }
 
   updateTexCoords(length_s, length_t) {
-    this.texCoords = [(this.c - this.a * this.cosBeta) / length_s, 1 - (this.a * Math.sin(this.beta)) / length_t, 0, 1, this.c / length_s, 1];
+    this.texCoords = [
+      0, 1, 
+      this.a / length_s, 1,
+      (this.c * this.cosBeta) / length_s, 1 - (this.c * this.sinBeta) / length_t
+    ];
     this.updateTexCoordsGLBuffers();
   }
 }

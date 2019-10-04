@@ -71,20 +71,6 @@
 
     <components>
     
-        <component id="demoEle">
-            <transformation>
-                <translate x="0" y="0" z="1" />
-            </transformation>
-            <materials>
-                <material id="demoMaterial" />
-                <material id="inherit" />
-            </materials>
-            <texture id="none" length_s="4" length_t="4"/>
-            <children>
-                <primitiveref id="demoSphere" />
-                <primitiveref id="demoRectangle" />
-            </children>
-        </component>
         <component id="demoRoot">
             <transformation>
                 <translate x="0" y="2" z="0" />
@@ -93,10 +79,9 @@
             <materials>
                 <material id="demoMaterial2" />
             </materials>
-            <texture id="demoTexture" length_s="6" length_t="3"/>
+            <texture id="demoTexture" length_s="6" length_t="1.5"/>
             <children>
                 <primitiveref id="demoTriangle" />
-                <componentref id="demoEle" />
             </children>
         </component>
         
