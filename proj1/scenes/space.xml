@@ -1,5 +1,5 @@
 <lxs>
-    <scene root="Y-spaceship" axis_length="5"/>
+    <scene root="X-planet" axis_length="5"/>
 
     <views default="defaultCamera">
         <perspective id="defaultCamera" near="5" far="500" angle="45">
@@ -38,6 +38,8 @@
         <texture id="futuristic_blue" file="scenes/images/futuristic_blue.png" />
         <texture id="futuristic_red" file="scenes/images/futuristic_red.jpg" />
         <texture id="ion_blast" file="scenes/images/ion_blast.jpg" />
+        <texture id="mars" file="scenes/images/mars.jpg" />
+        <texture id="solar" file="scenes/images/solar.jpg" />
     </textures>
 
     <materials>
@@ -190,7 +192,9 @@
                 <primitiveref id="torus0.3" />
             </children>
         </component>
-        <component id="saturn-ring">
+
+        <!-- PLANETS START -->
+        <component id="ring-planet-ring">
             <transformation>
                 <rotate axis="x" angle="90" />
                 <scale x="9" y="9" z="0.001" />
@@ -198,21 +202,45 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="saturn-ring" length_s="1" length_t="1"/>
+            <texture id="inherit" length_s="1" length_t="1"/>
             <children>
                 <primitiveref id="torus" />
             </children>
         </component>
+        <component id="planet-sphere">
+            <transformation>
+                <rotate axis="x" angle="-90" /> 
+                <scale x="5" y="5" z="5" />
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="inherit" length_s="1" length_t="1"/>
+            <children>
+                <primitiveref id="sphere" />
+            </children>
+        </component>
         <component id="saturn-sphere">
             <transformation>
-                <scale x="5" y="5" z="5" />
             </transformation>
             <materials>
                 <material id="whiteMaterial" />
             </materials>
             <texture id="saturn-planet" length_s="1" length_t="1"/>
             <children>
-                <primitiveref id="sphere" />
+                <componentref id="planet-sphere" />
+            </children>
+        </component>
+        <component id="saturn-ring">
+            <transformation>
+
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="saturn-ring" length_s="1" length_t="1"/>
+            <children>
+                <componentref id="ring-planet-ring" />
             </children>
         </component>
         <component id="saturn">
@@ -228,6 +256,70 @@
                 <componentref id="saturn-ring" />
             </children>
         </component>
+
+        <component id="X-planet-sphere">
+            <transformation>
+
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="mars" length_s="1" length_t="1"/>
+            <children>
+                <componentref id="planet-sphere" />
+            </children>
+        </component>
+        <component id="X-planet-ring">
+            <transformation>
+                <scale x="1" y="2000" z="0.8" />
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="inherit" length_s="1" length_t="1"/>
+            <children>
+                <componentref id="ring-planet-ring" />
+            </children>
+        </component>
+        <component id="X-planet-ring-1">
+            <transformation>
+                <rotate axis="z" angle="45" />
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="solar" length_s="1" length_t="1"/>
+            <children>
+                <componentref id="X-planet-ring" />
+            </children>
+        </component>
+        <component id="X-planet-ring-2">
+            <transformation>
+                <rotate axis="z" angle="-45" />
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="solar" length_s="1" length_t="1"/>
+            <children>
+                <componentref id="X-planet-ring" />
+            </children>
+        </component>
+        <component id="X-planet">
+            <transformation>
+
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="none" length_s="1" length_t="1"/>
+            <children>
+                <componentref id="X-planet-sphere" />
+                <componentref id="X-planet-ring-1" />
+                <componentref id="X-planet-ring-2" />
+            </children>
+        </component>
+        <!-- PLANETS END -->
 
         <!-- LASER GUN START-->
         <component id="lg-connector">
