@@ -539,6 +539,8 @@
         </component>
         <component id="space_station">
             <transformation>
+                <rotate axis="y" angle="-90"/>
+                <translate x="-30" y="0" z="10" />
             </transformation>
             <materials>
                 <material id="whiteMaterial" />
@@ -2242,6 +2244,7 @@
                 <componentref id="background-planets" />
                 <componentref id="X-fleet-position" />
                 <componentref id="Y-fleet-position" />
+                <componentref id="space_station"/>
             </children>
         </component>
         <!-- SCENE END -->
