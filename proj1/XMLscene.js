@@ -1,4 +1,3 @@
-
 /**
  * XMLscene class, representing the scene that is to be rendered.
  */
@@ -38,8 +37,9 @@ class XMLscene extends CGFscene {
     this.viewsIDs = {};
   }
 
-  addViews() {
-    this.currentView = Object.keys(this.viewsList)[0];
+  addViews(defaultCamera) {
+    this.currentView = defaultCamera ? this.viewsIDs[defaultCamera] : Object.keys(this.viewsList)[0];
+    console.log(this.currentView);
     this.interface.gui
       .add(this, 'currentView', this.viewsIDs)
       .name('Views')
@@ -47,9 +47,9 @@ class XMLscene extends CGFscene {
   }
 
   onSelectedView() {
+    console.log(this.currentView);
     this.camera = this.viewsList[this.currentView];
     this.interface.setActiveCamera(this.camera);
-
   }
 
   /**
@@ -130,7 +130,7 @@ class XMLscene extends CGFscene {
   }
 
   checkKeys() {
-    if (this.gui.isKeyPressed("KeyM")) {
+    if (this.gui.isKeyPressed('KeyM')) {
       this.graph.updateMaterial();
     }
   }

@@ -14,6 +14,14 @@
             <from x="0" y="0" z="0" />
             <to x="10" y="0" z="0" />
         </perspective>
+        <perspective id="xPlanetCamera" near="5" far="1000" angle="45">
+            <from x="-70" y="0" z="0" />
+            <to x="-50" y="0" z="0" />
+        </perspective>
+        <perspective id="yPlanetCamera" near="5" far="1000" angle="45">
+            <from x="70" y="0" z="0" />
+            <to x="50" y="0" z="0" />
+        </perspective>
         <perspective id="dinerCamera" near="5" far="1000" angle="45">
             <from x="0" y="8" z="-15" />
             <to x="0" y="-10" z="-50" />

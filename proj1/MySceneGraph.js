@@ -216,7 +216,9 @@ class MySceneGraph {
       this.scene.viewsList.push(this.perspectives[key]);
     });
 
-    this.scene.addViews();
+    const defaultCamera = this.reader.getString(viewsNode, 'default');
+
+    this.scene.addViews(defaultCamera);
     this.scene.onSelectedView();
     return null;
   }
