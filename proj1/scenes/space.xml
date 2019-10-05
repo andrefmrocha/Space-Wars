@@ -540,7 +540,7 @@
         <component id="space_station">
             <transformation>
                 <rotate axis="y" angle="-90"/>
-                <translate x="-30" y="0" z="10" />
+                <translate x="-30" y="0" z="0" />
             </transformation>
             <materials>
                 <material id="whiteMaterial" />
@@ -1881,7 +1881,7 @@
         <component id="X-laser">
             <transformation>
                 <translate x="0" y="-4.1" z="0" />
-                <scale x="0.5" y="0.5" z="1" />
+                <scale x="2" y="2" z="4" />
             </transformation>
             <materials>
                 <material id="red" />
