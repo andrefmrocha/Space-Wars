@@ -59,6 +59,11 @@ serialInclude([
   'MyTorus.js',
   'parser/PrimitivesParser.js',
   'parser/ViewsParser.js',
+  'parser/TextureParser.js',
+  'parser/MaterialsParser.js',
+  'parser/TransformationParser.js',
+  'parser/ComponentParser.js',
+  'parser/ParserUtils.js',
 
   (main = function() {
     // Standard application, scene and interface setup
