@@ -30,19 +30,19 @@ class MyTriangle extends CGFobject {
     this.indices = [0, 1, 2];
 
     /* Normals */
-    let v12 = [this.x2 - this.x1, this.y2 - this.y1, this.z2 - this.z1];
-    let v13 = [this.x3 - this.x1, this.y3 - this.y1, this.z3 - this.z1];
+    const v12 = [this.x2 - this.x1, this.y2 - this.y1, this.z2 - this.z1];
+    const v13 = [this.x3 - this.x1, this.y3 - this.y1, this.z3 - this.z1];
 
-    let cross_p = [
+    const cross_p = [
       v12[1] * v13[2] - v12[2] * v13[1],
       -(v12[0] * v13[2] - v12[2] * v13[0]),
       v12[0] * v13[1] - v12[1] * v13[0]
     ];
-    let magnitude = Math.sqrt(Math.pow(cross_p[0], 2) + Math.pow(cross_p[1], 2) + Math.pow(cross_p[2], 2));
+    const magnitude = Math.sqrt(Math.pow(cross_p[0], 2) + Math.pow(cross_p[1], 2) + Math.pow(cross_p[2], 2));
 
-    let normalx = cross_p[0] / magnitude;
-    let normaly = cross_p[1] / magnitude;
-    let normalz = cross_p[2] / magnitude;
+    const normalx = cross_p[0] / magnitude;
+    const normaly = cross_p[1] / magnitude;
+    const normalz = cross_p[2] / magnitude;
     this.normals = [normalx, normaly, normalz, normalx, normaly, normalz, normalx, normaly, normalz];
 
     /* Texture coordinates */
