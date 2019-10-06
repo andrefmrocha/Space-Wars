@@ -163,7 +163,7 @@ class MySceneGraph {
 
       //Parse primitives block
       this.primitives = [];
-      if ((error =  primitiveParsers.parsePrimitives(nodes[index], this.primitives, this)) != null) return error;
+      if ((error = primitiveParsers.parsePrimitives(nodes[index], this.primitives, this)) != null) return error;
     }
 
     // <components>
@@ -397,6 +397,7 @@ class MySceneGraph {
    * Displays the scene, processing each node, starting in the root node.
    */
   displayScene() {
+    console.log(this.components);
     this.displayComponent(this.components[this.idRoot], null, null, 1, 1);
   }
 
@@ -439,7 +440,13 @@ class MySceneGraph {
       }
 
       component.children.forEach(child => {
-        this.displayComponent(child, cMaterial, cTexture, cLengthS, cLengthT);
+        this.displayComponent(
+          typeof child === 'string' ? this.components[child] : child,
+          cMaterial,
+          cTexture,
+          cLengthS,
+          cLengthT
+        );
       });
 
       this.scene.popMatrix();

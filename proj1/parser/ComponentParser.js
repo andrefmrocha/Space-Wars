@@ -68,6 +68,7 @@ const componentParser = {
       if(currentComponent.texture && currentComponent.materials.length != 0 && currentComponent.children.length != 0)
         sceneGraph.components[componentID] = currentComponent;
     }
+
   },
   parseComponentTexture: (textureRef, textures) => {
     const lengthS = parserUtils.reader.getFloat(textureRef, 'length_s');
@@ -105,7 +106,7 @@ const componentParser = {
   parseComponentChildren: (componentChildren, components) => {
     const componentsChildren = [];
     for (let i = 0; i < componentChildren.length; i++) {
-      componentsChildren.push(components[parserUtils.reader.getString(componentChildren[i], 'id')]);
+      componentsChildren.push(parserUtils.reader.getString(componentChildren[i], 'id'));
     }
     return componentsChildren;
   },
