@@ -96,7 +96,10 @@
     </materials>
 
     <transformations>
-    
+        <transformation id="Y-fleet-transform">
+            <translate x="80" y="0" z="0" />
+            <rotate axis="y" angle="-90" />
+        </transformation>
     </transformations>
 
     <primitives>
@@ -2223,8 +2226,7 @@
         </component>                     
         <component id="Y-fleet-position">
             <transformation>
-                <translate x="80" y="0" z="0" />
-                <rotate axis="y" angle="-90" />
+                <transformationref id="Y-fleet-transform"/>
             </transformation>
             <materials>
                 <material id="whiteMaterial" />

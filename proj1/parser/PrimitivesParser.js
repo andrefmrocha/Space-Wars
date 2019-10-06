@@ -9,10 +9,9 @@ const primitiveParsers = {
   parsePrimitives: (primitivesNode, primitives, sceneGraph) => {
     var children = primitivesNode.children;
 
-    var grandChildren = [];
 
     // Any number of primitives.
-    for (var i = 0; i < children.length; i++) {
+    for (let i = 0; i < children.length; i++) {
       if (children[i].nodeName != 'primitive') {
         sceneGraph.onXMLMinorError('unknown tag <' + children[i].nodeName + '>');
         continue;
@@ -26,7 +25,7 @@ const primitiveParsers = {
       if (primitives[primitiveId] != null)
         return 'ID must be unique for each primitive (conflict: ID = ' + primitiveId + ')';
 
-      grandChildren = children[i].children;
+      const grandChildren = children[i].children;
 
       // Validate the primitive type
       if (
@@ -93,6 +92,8 @@ const primitiveParsers = {
           console.warn('Unkown primitive!');
       }
     }
+    
+    if(Object.keys(primitives).length == 0) return 'No valid primitives found!';
     return null;
   },
   parseRectangle: (component, scene, primitiveId, sceneGraph) => {

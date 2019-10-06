@@ -65,7 +65,8 @@ const componentParser = {
         )
       );
 
-      sceneGraph.components[componentID] = currentComponent;
+      if(currentComponent.texture && currentComponent.materials.length != 0 && currentComponent.children.length != 0)
+        sceneGraph.components[componentID] = currentComponent;
     }
   },
   parseComponentTexture: (textureRef, textures) => {

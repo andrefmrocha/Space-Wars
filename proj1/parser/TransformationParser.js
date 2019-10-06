@@ -2,10 +2,9 @@ const transformationParser = {
   parseTransformations: (transformationsNode, transformations, sceneGraph) => {
     const children = transformationsNode.children;
 
-    const grandChildren = [];
 
     // Any number of transformations.
-    for (var i = 0; i < children.length; i++) {
+    for (let i = 0; i < children.length; i++) {
       if (children[i].nodeName != 'transformation') {
         sceneGraph.onXMLMinorError('unknown tag <' + children[i].nodeName + '>');
         continue;
@@ -19,14 +18,18 @@ const transformationParser = {
       if (transformations[transformationID] != null)
         return 'ID must be unique for each transformation (conflict: ID = ' + transformationID + ')';
 
-      grandChildren = children[i].children;
-      // Specifications for the current transformation.
-      transformations[transformationID] = transformationParser.parseTransformation(
-        grandChildren,
-        transformationID,
-        sceneGraph
-      );
+      const grandChildren = children[i].children;
+      if(grandChildren.length != 0){
+        // Specifications for the current transformation.
+        transformations[transformationID] = transformationParser.parseTransformation(
+          grandChildren,
+          transformationID,
+          sceneGraph
+        ); 
+      }
     }
+
+    if(Object.keys(transformations).length == 0) return 'No transformations found!';
 
     return null;
   },
@@ -34,10 +37,10 @@ const transformationParser = {
     let transfMatrix = mat4.create();
     mat4.identity(transfMatrix);
 
-    for (var j = 0; j < transformationChildren.length; j++) {
+    for (let j = 0; j < transformationChildren.length; j++) {
       switch (transformationChildren[j].nodeName) {
         case 'translate':
-          var coordinates = parserUtils.parseCoordinates3D(
+          const coordinates = parserUtils.parseCoordinates3D(
             transformationChildren[j],
             'translate transformation for ID ' + transformationID
           );
