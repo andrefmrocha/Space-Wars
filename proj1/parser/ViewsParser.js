@@ -56,7 +56,7 @@ const viewsParser = {
       if(from === errorMessage || to === errorMessage || up === errorMessage)
           sceneGraph.onXMLError(errorMessage);
       else
-        sceneGraph.perspectives[id] = new CGFCameraOrtho(left, right, bottom, top, near, far, from, to, up);
+        sceneGraph.perspectives[id] = new CGFcameraOrtho(left, right, bottom, top, near, far, from, to, up);
     }
   }
 };
