@@ -2,7 +2,6 @@ const transformationParser = {
   parseTransformations: (transformationsNode, transformations, sceneGraph) => {
     const children = transformationsNode.children;
 
-
     // Any number of transformations.
     for (let i = 0; i < children.length; i++) {
       if (children[i].nodeName != 'transformation') {
@@ -12,7 +11,7 @@ const transformationParser = {
 
       // Get id of the current transformation.
       const transformationID =  parserUtils.reader.getString(children[i], 'id');
-      if (transformationID == null) return 'no ID defined for transformation';
+      if (!transformationID) return 'no ID defined for transformation';
 
       // Checks for repeated IDs.
       if (transformations[transformationID] != null)

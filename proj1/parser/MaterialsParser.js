@@ -11,7 +11,7 @@ const materialsParser = {
 
       // Get id of the current material.
       const materialID = parserUtils.reader.getString(children[i], 'id');
-      if (materialID == null) return 'no ID defined for material';
+      if (!materialID) return 'no ID defined for material';
 
       // Checks for repeated IDs.
       if (materials[materialID] != null) return 'ID must be unique for each light (conflict: ID = ' + materialID + ')';

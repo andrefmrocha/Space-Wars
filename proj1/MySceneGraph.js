@@ -22,7 +22,7 @@ class MySceneGraph {
 
   constructor(filename, scene) {
     this.DEGREE_TO_RAD = Math.PI / 180;
-    this.loadedOk = null;
+    this.loadedOk = true;
 
     // Establish bidirectional references between scene and graph.
     this.scene = scene;
@@ -262,6 +262,7 @@ class MySceneGraph {
    * @param {lights block element} lightsNode
    */
   parseLights(lightsNode) {
+
     var children = lightsNode.children;
 
     this.lights = [];
@@ -428,8 +429,7 @@ class MySceneGraph {
       }
       this.assignChildReferences(component.children[index]);
     });
-  }
-  
+  }  
 
   /**
    * @method displayComponent
@@ -441,6 +441,10 @@ class MySceneGraph {
    * @param  {number} pLengthT - Length_t inherited from the Parent
    */
   displayComponent(component, pMaterial, pTexture, pLengthS, pLengthT) {
+
+    if (!component) this.onXMLError("Tried to display null component");
+    if (!material) this.onXMLError("Null material on component")
+
     // if primitive
     if (component instanceof CGFobject) {
       // materials and texture
