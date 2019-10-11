@@ -1494,6 +1494,7 @@
             </transformation>
             <materials>
                 <material id="whiteMaterial" />
+                <material id="red" />
             </materials>
             <texture id="inherit" length_s="1" length_t="1"/>
             <children>
@@ -1745,6 +1746,7 @@
             </transformation>
             <materials>
                 <material id="whiteMaterial" />
+                <material id="ion_blue" />
             </materials>
             <texture id="inherit" length_s="1" length_t="1"/>
             <children>

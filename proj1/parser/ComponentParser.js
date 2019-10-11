@@ -98,7 +98,7 @@ const componentParser = {
     for (let i = 0; i < materialsNode.length; i++) {
       const materialID = parserUtils.reader.getString(materialsNode[i], 'id');
       componentMaterials.push(
-        materialID === 'inherit' ? componentMaterials.push(materialID) : materials[materialID]
+        materialID === 'inherit' ? materialID : materials[materialID]
       );
     }
     return componentMaterials;
