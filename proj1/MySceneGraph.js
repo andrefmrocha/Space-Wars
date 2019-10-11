@@ -62,6 +62,8 @@ class MySceneGraph {
       return;
     }
 
+    this.assignChildReferences(this.components[this.idRoot]);
+
     this.loadedOk = true;
 
     /* As the graph loaded ok, signal the scene so that any additional
@@ -398,7 +400,42 @@ class MySceneGraph {
   }
 
   /**
+   * @method assignChildReferences
+   * Substitutes all references of a child ID by its corresponding object
+   * @param  {object} component - Reference to the component to apply method
+   */
+  assignChildReferences(component) {
+    
+    if(component === null) {
+      console.log("Null component reference");
+      return;
+    }
+
+    if (component instanceof CGFobject) return;
+    
+    component.children.forEach((child, index) => {
+
+      if (child === null) {
+        console.log("Null child reference");
+        return;
+      }
+
+      if (typeof child === 'string') {
+        component.children[index] = this.components[child];
+      }
+      this.assignChildReferences(component.children[index]);
+    });
+  }
+  
+
+  /**
+   * @method displayComponent
    * Displays a component and all its children recursively
+   * @param  {object} component - Reference to the component to display
+   * @param  {object} pMaterial - Reference to the Material inherited from the Parent
+   * @param  {object} pTexture - Referente to the Texture inherited from the Parent
+   * @param  {number} pLengthS - Length_s inherited from the Parent
+   * @param  {number} pLengthT - Length_t inherited from the Parent
    */
   displayComponent(component, pMaterial, pTexture, pLengthS, pLengthT) {
     // if primitive
@@ -437,7 +474,7 @@ class MySceneGraph {
 
       component.children.forEach(child => {
         this.displayComponent(
-          typeof child === 'string' ? this.components[child] : child,
+          child,
           cMaterial,
           cTexture,
           cLengthS,

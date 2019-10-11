@@ -56,7 +56,8 @@ class MyRectangle extends CGFobject {
   /**
    * @method updateTexCoords
    * Updates the list of texture coordinates of the rectangle
-   * @param {Array} coords - Array of texture coordinates
+   * @param {number} length_s - Texture length in the u axis
+   * @param {number} length_t - Texture length in the v axis
    */
   updateTexCoords(length_s, length_t) {
     const a = this.x2 - this.x1;

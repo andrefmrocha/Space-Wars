@@ -1,5 +1,11 @@
 class MySphere extends CGFobject {
-
+    /**
+     * @method constructor
+     * @param  {object} scene - Reference to a MyScene object.
+     * @param  {number} radius - Radius of the sphere
+     * @param  {number} slices - Number of slices around Z axis
+     * @param  {number} stacks - Number of stacks along Z axis, from the center to a pole
+     */
     constructor(scene, radius, slices, stacks) {
         super(scene);
 
@@ -10,6 +16,10 @@ class MySphere extends CGFobject {
 		this.initBuffers();
     }
 
+    /**
+     * @method initBuffers
+     * Initializes the sphere buffers
+     */
     initBuffers() {
 		this.vertices = [];
 		this.indices = [];
@@ -44,8 +54,8 @@ class MySphere extends CGFobject {
                 this.normals.push(x,y,z);
 
                 /* Texture coordinates */
-                const u = 1 - (longNum / this.longBands);
-                const v = 1 - (latNum / this.latBands);
+                const u = longNum / this.longBands;
+                const v = latNum / this.latBands;
                 this.texCoords.push(u, v);
 
                 theta += thetaInc;

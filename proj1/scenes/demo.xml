@@ -1,9 +1,9 @@
 <lxs>
-    <scene root="demoRoot" axis_length="5"/>
+    <scene root="cylinderTest" axis_length="5"/>
 
     <views default="defaultCamera">
         <perspective id="defaultCamera" near="5" far="500" angle="45">
-            <from x="10" y="10" z="10" />
+            <from x="6" y="6" z="6" />
             <to x="0" y="-2" z="0" />
         </perspective>
         <perspective id="testCamera" near="5" far="500" angle="30">
@@ -27,15 +27,15 @@
     </lights>
 
     <textures>
-        <texture id="demoTexture" file="scenes/images/vidral.jpg" />
+        <texture id="demoTexture" file="scenes/images/texture_test.jpg" />
     </textures>
 
     <materials>
         <material id="demoMaterial" shininess="10">
             <emission r="0.0" g="0.0" b="0.0" a="1.0" />
-            <ambient r="1.0" g="0.0" b="0.0" a="1.0" />
-            <diffuse r="0.6" g="0.0" b="0.0" a="1.0" />
-            <specular r="0.6" g="0.0" b="0.0" a="1.0" />
+            <ambient r="1.0" g="1.0" b="1.0" a="1.0" />
+            <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
+            <specular r="1.0" g="1.0" b="1.0" a="1.0" />
         </material>
         <material id="demoMaterial2" shininess="10">
             <emission r="0.0" g="0.0" b="0.0" a="1.0" />
@@ -56,7 +56,7 @@
     <primitives>
         <primitive id="demoTriangle">
             <!-- <rectangle x1="-0.5" y1="-1" x2="0.5" y2="1" /> -->
-            <triangle x1="-3" y1="0" z1="0" x2="3" y2="0" z2="0" x3="0" y3="3" z3="0" />
+            <triangle x1="-1.5" y1="0" z1="0" x2="1.5" y2="0" z2="0" x3="0" y3="3" z3="0" />
             <!-- <torus inner="1" outer="3" slices="10" loops="10"/> -->
             <!-- <cylinder base="1" top="0.5" height="4" slices="10" stacks="10"/> -->
             <!-- <sphere radius="1" slices="10" stacks="10"/> -->
@@ -66,6 +66,12 @@
         </primitive>
         <primitive id="demoSphere">
             <sphere radius="1" slices="10" stacks="10"/>
+        </primitive>
+        <primitive id="demoCylinder">
+            <cylinder base="1" top="1" height="3" slices="10" stacks="10"/>
+        </primitive>
+        <primitive id="demoTorus">
+            <torus inner="1" outer="3" slices="10" loops="10"/>
         </primitive>
     </primitives>
 
@@ -83,6 +89,66 @@
                 <primitiveref id="demoTriangle" />
             </children>
         </component>
+        <component id="cylinderTest">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="demoMaterial2" />
+            </materials>
+            <texture id="demoTexture" length_s="1" length_t="1"/>
+            <children>
+                <primitiveref id="demoCylinder" />
+            </children>
+        </component>
+
         
+        <component id="sphereTest">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="demoMaterial2" />
+            </materials>
+            <texture id="demoTexture" length_s="1" length_t="1"/>
+            <children>
+                <primitiveref id="demoSphere" />
+            </children>
+        </component>
+
+        <component id="triangleTest">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="demoMaterial2" />
+            </materials>
+            <texture id="demoTexture" length_s="3" length_t="3"/>
+            <children>
+                <primitiveref id="demoTriangle" />
+            </children>
+        </component>
+        
+        <component id="rectangleTest">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="demoMaterial2" />
+            </materials>
+            <texture id="demoTexture" length_s="4" length_t="4"/>
+            <children>
+                <primitiveref id="demoRectangle" />
+            </children>
+        </component>
+
+        <component id="torusTest">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="demoMaterial2" />
+            </materials>
+            <texture id="demoTexture" length_s="4" length_t="4"/>
+            <children>
+                <primitiveref id="demoTorus" />
+            </children>
+        </component>
+
     </components>
 </lxs>
