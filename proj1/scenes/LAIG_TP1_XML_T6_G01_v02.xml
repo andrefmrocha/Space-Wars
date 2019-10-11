@@ -149,6 +149,23 @@
     </primitives>
 
     <components>
+                              
+        <component id="scene">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="starfield" length_s="1" length_t="1"/>
+            <children>
+                <componentref id="skybox" />
+                <componentref id="background-planets" />
+                <componentref id="X-fleet-position" />
+                <componentref id="Y-fleet-position" />
+                <componentref id="space_station"/>
+            </children>
+        </component>
+
         <component id="pyramid_component">
             <transformation>
                 <rotate axis="y" angle="45"/>
@@ -2238,22 +2255,7 @@
             <children>
                 <componentref id="Y-fleet" />
             </children>
-        </component>                           
-        <component id="scene">
-            <transformation>
-            </transformation>
-            <materials>
-                <material id="whiteMaterial" />
-            </materials>
-            <texture id="starfield" length_s="1" length_t="1"/>
-            <children>
-                <componentref id="skybox" />
-                <componentref id="background-planets" />
-                <componentref id="X-fleet-position" />
-                <componentref id="Y-fleet-position" />
-                <componentref id="space_station"/>
-            </children>
-        </component>
+        </component> 
         <!-- SCENE END -->
     </components>
 </lxs>
