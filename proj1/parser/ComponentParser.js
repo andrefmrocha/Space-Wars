@@ -32,7 +32,6 @@ const componentParser = {
       const childrenIndex = nodeNames.indexOf('children');
 
       const currentComponent = {};
-      sceneGraph.onXMLMinorError('To do: Parse components.');
 
       // Transformations
       currentComponent.transformation = componentParser.parseComponentTransformations(
@@ -50,7 +49,7 @@ const componentParser = {
       // Texture
       currentComponent.texture =
         textureIndex != -1
-          ? componentParser.parseComponentTexture(grandChildren[textureIndex], sceneGraph.textures)
+          ? componentParser.parseComponentTexture(grandChildren[textureIndex], sceneGraph.textures, sceneGraph)
           : null;
 
       // Children
@@ -65,16 +64,30 @@ const componentParser = {
         )
       );
 
-      if(currentComponent.texture && currentComponent.materials.length != 0 && currentComponent.children.length != 0)
+      if (currentComponent.texture && currentComponent.materials.length != 0 && currentComponent.children.length != 0)
         sceneGraph.components[componentID] = currentComponent;
     }
-
   },
-  parseComponentTexture: (textureRef, textures) => {
-    const lengthS = parserUtils.reader.getFloat(textureRef, 'length_s');
-    const lengthT = parserUtils.reader.getFloat(textureRef, 'length_t');
+  parseComponentTexture: (textureRef, textures, sceneGraph) => {
     const textureID = parserUtils.reader.getString(textureRef, 'id');
-    const texture = textureID == 'inherit' || textureID == 'none' ? textureID : textures[textureID];
+    if (textureID == 'inherit' || textureID == 'none') {
+      if (
+        parserUtils.reader.hasAttribute(textureRef, 'length_s') &&
+        parserUtils.reader.hasAttribute(textureRef, 'length_t')
+      )
+        sceneGraph.onXMLMinorError('length_s and lengh_t should not be defined!');
+      return {
+        texture: textureID ? textureID : null
+      };
+    }
+    const texture = textures[textureID];
+    const lengthS = parserUtils.reader.hasAttribute(textureRef, 'length_s')
+      ? parserUtils.reader.getFloat(textureRef, 'length_s')
+      : null;
+    const lengthT = parserUtils.reader.hasAttribute(textureRef, 'length_t')
+      ? parserUtils.reader.getFloat(textureRef, 'length_t')
+      : null;
+    if (!lengthS || !lengthT) sceneGraph.onXMLMinorError('length_s and lengh_t must be defined!');
     return {
       lengthS: lengthS ? lengthS : 1,
       lengthT: lengthT ? lengthT : 1,
@@ -97,9 +110,7 @@ const componentParser = {
     const componentMaterials = [];
     for (let i = 0; i < materialsNode.length; i++) {
       const materialID = parserUtils.reader.getString(materialsNode[i], 'id');
-      componentMaterials.push(
-        materialID === 'inherit' ? componentMaterials.push(materialID) : materials[materialID]
-      );
+      componentMaterials.push(materialID === 'inherit' ? componentMaterials.push(materialID) : materials[materialID]);
     }
     return componentMaterials;
   },

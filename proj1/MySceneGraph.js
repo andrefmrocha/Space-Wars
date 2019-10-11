@@ -22,7 +22,7 @@ class MySceneGraph {
 
   constructor(filename, scene) {
     this.DEGREE_TO_RAD = Math.PI / 180;
-    this.loadedOk = null;
+    this.loadedOk = true;
 
     // Establish bidirectional references between scene and graph.
     this.scene = scene;
@@ -37,6 +37,7 @@ class MySceneGraph {
     this.axisCoords['x'] = [1, 0, 0];
     this.axisCoords['y'] = [0, 1, 0];
     this.axisCoords['z'] = [0, 0, 1];
+
 
     /*
      * Read the contents of the xml file, and refer to this class for loading and error handlers.
@@ -204,7 +205,6 @@ class MySceneGraph {
    * @param {view block element} viewsNode
    */
   parseView(viewsNode) {
-    this.onXMLMinorError('To do: Parse views and create cameras.');
     this.perspectives = {};
     viewsParser.parsePerspectiveViews(viewsNode.getElementsByTagName('perspective'), this);
     viewsParser.parseOrthoViews(viewsNode.getElementsByTagName('ortho'), this);
@@ -292,17 +292,14 @@ class MySceneGraph {
       if (this.lights[lightId] != null) return 'ID must be unique for each light (conflict: ID = ' + lightId + ')';
 
       // Light enable/disable
-      var enableLight = true;
       var aux = parserUtils.reader.getBoolean(children[i], 'enabled');
       if (!(aux != null && !isNaN(aux) && (aux == true || aux == false)))
         this.onXMLMinorError(
           "unable to parse value component of the 'enable light' field for ID = " + lightId + "; assuming 'value = 1'"
         );
 
-      enableLight = aux || 1;
-
       //Add enabled boolean and type name to light info
-      global.push(enableLight);
+      global.push(aux ? aux : false);
       global.push(children[i].nodeName);
 
       grandChildren = children[i].children;
@@ -359,7 +356,7 @@ class MySceneGraph {
 
     if (numLights == 0) return 'at least one light must be defined';
     else if (numLights > 8) this.onXMLMinorError('too many lights defined; WebGL imposes a limit of 8 lights');
-
+    
     this.log('Parsed lights');
     return null;
   }

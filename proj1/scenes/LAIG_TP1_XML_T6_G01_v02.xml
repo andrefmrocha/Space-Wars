@@ -41,6 +41,13 @@
             <specular r="1.0" g="1.0" b="1.0" a="1.0" />
             <attenuation constant="0" linear="1" quadratic="0" />  
         </omni>
+        <omni id="secondLight" enabled="0">
+            <location x="100" y="0" z="0" w="1.0" />
+            <ambient r="0" g="0" b="0" a="1.0" />
+            <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
+            <specular r="1.0" g="1.0" b="1.0" a="1.0" />
+            <attenuation constant="0" linear="1" quadratic="0" />  
+        </omni>
     </lights>
 
     <textures>
@@ -156,7 +163,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="inherit" length_s="1" length_t="1"/>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id="triangle" />
             </children>
@@ -169,7 +176,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="inherit" length_s="1" length_t="1"/>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id="rectangle" />
             </children>
@@ -181,7 +188,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="inherit" length_s="1" length_t="1"/>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id="rectangle" />
             </children>
@@ -194,7 +201,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="inherit" length_s="1" length_t="1"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="cube_side_1" />
             </children>
@@ -207,7 +214,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="inherit" length_s="1" length_t="1"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="cube_side_1" />
             </children>
@@ -220,7 +227,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="inherit" length_s="1" length_t="1"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="cube_side_1" />
             </children>
@@ -233,7 +240,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="inherit" length_s="1" length_t="1"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="cube_side_1" />
             </children>
@@ -246,7 +253,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="inherit" length_s="1" length_t="1"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="cube_side_1" />
             </children>
@@ -257,7 +264,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="inherit" length_s="1" length_t="1"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="cube_side_1" />
                 <componentref id="cube_side_2" />
@@ -274,7 +281,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="inherit" length_s="1" length_t="1"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="cube" />
             </children>
@@ -287,7 +294,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="inherit" length_s="1" length_t="1"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="cube" />
             </children>
@@ -327,7 +334,7 @@
             <materials>
                 <material id="red" />
             </materials>
-            <texture id="none" length_s="1" length_t="1"/>
+            <texture id="none"/>
             <children>
                 <primitiveref id="laser-cylinder" />
             </children>
@@ -340,7 +347,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="inherit" length_s="1" length_t="1"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="pyramid_component" />
             </children>
@@ -352,7 +359,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="inherit" length_s="1" length_t="1"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="pyramid_component" />
             </children>
@@ -364,7 +371,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="inherit" length_s="1" length_t="1"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="pyramid_component" />
             </children>
@@ -376,7 +383,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="inherit" length_s="1" length_t="1"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="pyramid_component" />
             </children>
@@ -387,7 +394,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="inherit" length_s="1" length_t="1"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="pyramid_side_1" />
                 <componentref id="pyramid_side_2" />
@@ -418,7 +425,7 @@
             <materials>
                 <material id="red" />
             </materials>
-            <texture id="none" length_s="1" length_t="1"/>
+            <texture id="none"/>
             <children>
                 <componentref id="space-laser" />
             </children>
@@ -430,7 +437,7 @@
             <materials>
                 <material id="red" />
             </materials>
-            <texture id="none" length_s="1" length_t="1"/>
+            <texture id="none"/>
             <children>
                 <componentref id="roof_neon" />
             </children>
@@ -442,7 +449,7 @@
             <materials>
                 <material id="red" />
             </materials>
-            <texture id="none" length_s="1" length_t="1"/>
+            <texture id="none"/>
             <children>
                 <componentref id="roof_neon" />
             </children>
@@ -454,7 +461,7 @@
             <materials>
                 <material id="red" />
             </materials>
-            <texture id="none" length_s="1" length_t="1"/>
+            <texture id="none"/>
             <children>
                 <componentref id="roof_neon" />
             </children>
@@ -590,7 +597,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="none" length_s="1" length_t="1"/>
+            <texture id="none"/>
             <children>
                 <componentref id="wormhole-circle" />
                 <componentref id="wormhole-ring" />
@@ -618,7 +625,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="inherit" length_s="1" length_t="1"/>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id="torus" />
             </children>
@@ -631,7 +638,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="inherit" length_s="1" length_t="1"/>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id="sphere" />
             </children>
@@ -666,7 +673,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="none" length_s="1" length_t="1"/>
+            <texture id="none"/>
             <children>
                 <componentref id="saturn-sphere" />
                 <componentref id="saturn-ring" />
@@ -692,7 +699,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="inherit" length_s="1" length_t="1"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="ring-planet-ring" />
             </children>
@@ -728,7 +735,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="none" length_s="1" length_t="1"/>
+            <texture id="none"/>
             <children>
                 <componentref id="X-planet-sphere" />
                 <componentref id="X-planet-ring-1" />
@@ -756,7 +763,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="inherit" length_s="1" length_t="1"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="ring-planet-ring" />
             </children>
@@ -804,7 +811,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="none" length_s="1" length_t="1"/>
+            <texture id="none"/>
             <children>
                 <componentref id="Y-planet-sphere" />
                 <componentref id="Y-planet-ring-1" />
@@ -904,7 +911,7 @@
             <materials>
                 <material id="darkred" />
             </materials>
-            <texture id="none" length_s="1" length_t="1"/>
+            <texture id="none"/>
             <children>
                 <componentref id="saturn" />
             </children>
@@ -941,7 +948,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="none" length_s="1" length_t="1"/>
+            <texture id="none"/>
             <children>
                 <componentref id="saturn" />
             </children>
@@ -953,7 +960,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="none" length_s="1" length_t="1"/>
+            <texture id="none"/>
             <children>
                 <componentref id="planet-1" />
                 <componentref id="planet-2" />
@@ -991,7 +998,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="inherit" length_s="1" length_t="1"/>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id="cylinder" />
             </children>
@@ -1004,7 +1011,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="inherit" length_s="1" length_t="1"/>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id="lg-gun-cylinder-conn" />
             </children>
@@ -1017,7 +1024,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="inherit" length_s="1" length_t="1"/>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id="cylinder" />
             </children>
@@ -1030,7 +1037,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="inherit" length_s="1" length_t="1"/>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id="lg-gun-cylinder-conn" />
             </children>
@@ -1043,7 +1050,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="inherit" length_s="1" length_t="1"/>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id="torus" />
             </children>
@@ -1055,7 +1062,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit" length_s="1" length_t="1"/>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id="torus" />
             </children>
@@ -1067,7 +1074,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit" length_s="1" length_t="1"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="lg-gun-ring" />
             </children>
@@ -1079,7 +1086,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit" length_s="1" length_t="1"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="lg-gun-ring" />
             </children>
@@ -1091,7 +1098,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit" length_s="1" length_t="1"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="lg-gun-ring" />
             </children>
@@ -1102,7 +1109,7 @@
             <materials>
                 <material id="darkred" />
             </materials>
-            <texture id="none" length_s="1" length_t="1"/>
+            <texture id="none"/>
             <children>
                 <componentref id="lg-gun-ring-1" />
                 <componentref id="lg-gun-ring-2" />
@@ -1128,7 +1135,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="inherit" length_s="1" length_t="1"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="lg-gun-charge" />
             </children>
@@ -1140,7 +1147,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="inherit" length_s="1" length_t="1"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="lg-gun-charge" />
             </children>
@@ -1152,7 +1159,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="inherit" length_s="1" length_t="1"/>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id="sphere" />
             </children>
@@ -1165,7 +1172,7 @@
             <materials>
                 <material id="darkred" />
             </materials>
-            <texture id="none" length_s="1" length_t="1"/>
+            <texture id="none"/>
             <children>
                 <primitiveref id="torus0.4" />
             </children>
@@ -1177,7 +1184,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="inherit" length_s="1" length_t="1"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="lg-gun-connector" />
                 <componentref id="lg-gun-base" />
@@ -1214,7 +1221,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="inherit" length_s="1" length_t="1"/>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id="sphere" />
             </children>
@@ -1227,7 +1234,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="inherit" length_s="1" length_t="1"/>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id="torus0.4" />
             </children>
@@ -1240,7 +1247,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit" length_s="1" length_t="1"/>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id="torus0.4" />
             </children>
@@ -1252,7 +1259,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit" length_s="1" length_t="1"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="ic-gun-tube" />
             </children>
@@ -1264,7 +1271,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit" length_s="1" length_t="1"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="ic-gun-tube" />
             </children>
@@ -1276,7 +1283,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit" length_s="1" length_t="1"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="ic-gun-tube" />
             </children>
@@ -1288,7 +1295,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit" length_s="1" length_t="1"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="ic-gun-tube" />
             </children>
@@ -1330,7 +1337,7 @@
             <materials>
                 <material id="ion_blue" />
             </materials>
-            <texture id="none" length_s="1" length_t="1"/>
+            <texture id="none"/>
             <children>
                 <primitiveref id="torus0.3" />
             </children>
@@ -1343,7 +1350,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="inherit" length_s="1" length_t="1"/>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id="Y-spaceship-torus" />
             </children>
@@ -1355,7 +1362,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="inherit" length_s="1" length_t="1"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="ic-gun-connector" />
                 <componentref id="ic-gun-base" />
@@ -1401,7 +1408,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="inherit" length_s="1" length_t="1"/>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id="cone" />
             </children>
@@ -1414,7 +1421,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="inherit" length_s="1" length_t="1"/>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id="X-spaceship-arm-base" />
             </children>
@@ -1469,7 +1476,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="inherit" length_s="1" length_t="1"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="X-spaceship-arm" />
             </children>
@@ -1482,7 +1489,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="inherit" length_s="1" length_t="1"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="X-spaceship-arm" />
             </children>
@@ -1495,7 +1502,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="inherit" length_s="1" length_t="1"/>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id="sphere" />
             </children>
@@ -1520,7 +1527,7 @@
             <materials>
                 <material id="red" />
             </materials>
-            <texture id="inherit" length_s="1" length_t="1"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="X-spaceship-ring" />
             </children>
@@ -1532,7 +1539,7 @@
             <materials>
                 <material id="red" />
             </materials>
-            <texture id="inherit" length_s="1" length_t="1"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="X-spaceship-ring" />
             </children>
@@ -1545,7 +1552,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="inherit" length_s="1" length_t="1"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="laser-gun" />
             </children>
@@ -1579,7 +1586,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="inherit" length_s="1" length_t="1"/>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id="cylinder" />
             </children>
@@ -1603,7 +1610,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="inherit" length_s="1" length_t="1"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="Y-spaceship-arm-sphere" />
             </children>
@@ -1615,7 +1622,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="inherit" length_s="1" length_t="1"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="Y-spaceship-arm-sphere" />
             </children>
@@ -1626,7 +1633,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="inherit" length_s="1" length_t="1"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="Y-spaceship-arm-connector" />
                 <componentref id="Y-spaceship-arm-sphere-right" />
@@ -1641,7 +1648,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="inherit" length_s="1" length_t="1"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="Y-spaceship-arm" />
             </children>
@@ -1654,7 +1661,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="inherit" length_s="1" length_t="1"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="Y-spaceship-arm" />
             </children>
@@ -1667,7 +1674,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="inherit" length_s="1" length_t="1"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="Y-spaceship-arm" />
             </children>
@@ -1680,7 +1687,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit" length_s="1" length_t="1"/>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id="cylinder" />
             </children>
@@ -1693,7 +1700,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit" length_s="1" length_t="1"/>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id="cylinder" />
             </children>
@@ -1706,7 +1713,7 @@
             <materials>
                 <material id="inherit" />
             </materials>
-            <texture id="inherit" length_s="1" length_t="1"/>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id="cylinder" />
             </children>
@@ -1746,7 +1753,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="inherit" length_s="1" length_t="1"/>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id="Y-spaceship-torus" />
             </children>
@@ -1761,7 +1768,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="inherit" length_s="1" length_t="1"/>
+            <texture id="inherit"/>
             <children>
                 <componentref id="ion-cannon" />
             </children>
@@ -1795,7 +1802,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="inherit" length_s="1" length_t="1"/>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id="square" />
             </children>
@@ -1808,7 +1815,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="inherit" length_s="1" length_t="1"/>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id="square" />
             </children>
@@ -1820,7 +1827,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="inherit" length_s="1" length_t="1"/>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id="square" />
             </children>
@@ -1833,7 +1840,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="inherit" length_s="1" length_t="1"/>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id="square" />
             </children>
@@ -1846,7 +1853,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="inherit" length_s="1" length_t="1"/>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id="square" />
             </children>
@@ -1859,7 +1866,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="inherit" length_s="1" length_t="1"/>
+            <texture id="inherit"/>
             <children>
                 <primitiveref id="square" />
             </children>
@@ -1892,7 +1899,7 @@
             <materials>
                 <material id="red" />
             </materials>
-            <texture id="none" length_s="1" length_t="1"/>
+            <texture id="none"/>
             <children>
                 <componentref id="space-laser" />
             </children>
@@ -1904,7 +1911,7 @@
             <materials>
                 <material id="red" />
             </materials>
-            <texture id="none" length_s="1" length_t="1"/>
+            <texture id="none"/>
             <children>
                 <componentref id="X-laser" />
             </children>
@@ -1916,7 +1923,7 @@
             <materials>
                 <material id="red" />
             </materials>
-            <texture id="none" length_s="1" length_t="1"/>
+            <texture id="none"/>
             <children>
                 <componentref id="X-laser" />
             </children>
@@ -1928,7 +1935,7 @@
             <materials>
                 <material id="red" />
             </materials>
-            <texture id="none" length_s="1" length_t="1"/>
+            <texture id="none"/>
             <children>
                 <componentref id="X-laser" />
             </children>
@@ -1940,7 +1947,7 @@
             <materials>
                 <material id="red" />
             </materials>
-            <texture id="none" length_s="1" length_t="1"/>
+            <texture id="none"/>
             <children>
                 <componentref id="X-laser" />
             </children>
@@ -1951,7 +1958,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="none" length_s="1" length_t="1"/>
+            <texture id="none"/>
             <children>
                 <componentref id="X-planet" />
             </children>
@@ -1963,7 +1970,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="none" length_s="1" length_t="1"/>
+            <texture id="none"/>
             <children>
                 <componentref id="X-spaceship" />
                 <componentref id="X-laser-leaving" />
@@ -1978,7 +1985,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="none" length_s="1" length_t="1"/>
+            <texture id="none"/>
             <children>
                 <componentref id="X-spaceship" />
                 <componentref id="X-laser-near" />
@@ -1993,7 +2000,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="none" length_s="1" length_t="1"/>
+            <texture id="none"/>
             <children>
                 <componentref id="X-spaceship" />
                 <componentref id="X-laser-leaving" />
@@ -2007,7 +2014,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="none" length_s="1" length_t="1"/>
+            <texture id="none"/>
             <children>
                 <componentref id="X-spaceship" />
                 <componentref id="X-laser-leaving" />
@@ -2022,7 +2029,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="none" length_s="1" length_t="1"/>
+            <texture id="none"/>
             <children>
                 <componentref id="X-spaceship" />
                 <componentref id="X-laser-far" />
@@ -2036,7 +2043,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="none" length_s="1" length_t="1"/>
+            <texture id="none"/>
             <children>
                 <componentref id="X-planet-position" />
                 <componentref id="X-spaceship-1" />
@@ -2057,7 +2064,7 @@
             <materials>
                 <material id="red" />
             </materials>
-            <texture id="none" length_s="1" length_t="1"/>
+            <texture id="none"/>
             <children>
                 <componentref id="ion-blast" />
             </children>
@@ -2069,7 +2076,7 @@
             <materials>
                 <material id="red" />
             </materials>
-            <texture id="none" length_s="1" length_t="1"/>
+            <texture id="none"/>
             <children>
                 <componentref id="Y-blast" />
             </children>
@@ -2081,7 +2088,7 @@
             <materials>
                 <material id="red" />
             </materials>
-            <texture id="none" length_s="1" length_t="1"/>
+            <texture id="none"/>
             <children>
                 <componentref id="Y-blast" />
             </children>
@@ -2093,7 +2100,7 @@
             <materials>
                 <material id="red" />
             </materials>
-            <texture id="none" length_s="1" length_t="1"/>
+            <texture id="none"/>
             <children>
                 <componentref id="Y-blast" />
             </children>
@@ -2105,7 +2112,7 @@
             <materials>
                 <material id="red" />
             </materials>
-            <texture id="none" length_s="1" length_t="1"/>
+            <texture id="none"/>
             <children>
                 <componentref id="Y-blast" />
             </children>
@@ -2116,7 +2123,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="none" length_s="1" length_t="1"/>
+            <texture id="none"/>
             <children>
                 <componentref id="Y-planet" />
             </children>
@@ -2128,7 +2135,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="none" length_s="1" length_t="1"/>
+            <texture id="none"/>
             <children>
                 <componentref id="Y-spaceship" />
                 <componentref id="Y-blast-leaving" />
@@ -2142,7 +2149,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="none" length_s="1" length_t="1"/>
+            <texture id="none"/>
             <children>
                 <componentref id="Y-spaceship" />
                 <componentref id="Y-blast-leaving" />
@@ -2157,7 +2164,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="none" length_s="1" length_t="1"/>
+            <texture id="none"/>
             <children>
                 <componentref id="Y-spaceship" />
                 <componentref id="Y-blast-near" />
@@ -2171,7 +2178,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="none" length_s="1" length_t="1"/>
+            <texture id="none"/>
             <children>
                 <componentref id="Y-spaceship" />
                 <componentref id="Y-blast-near" />
@@ -2186,7 +2193,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="none" length_s="1" length_t="1"/>
+            <texture id="none"/>
             <children>
                 <componentref id="Y-spaceship" />
                 <componentref id="Y-blast-near" />
@@ -2199,7 +2206,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="none" length_s="1" length_t="1"/>
+            <texture id="none"/>
             <children>
                 <componentref id="Y-planet-position" />
                 <componentref id="Y-spaceship-1" />
@@ -2220,7 +2227,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="none" length_s="1" length_t="1"/>
+            <texture id="none"/>
             <children>
                 <componentref id="X-fleet" />
             </children>
@@ -2232,7 +2239,7 @@
             <materials>
                 <material id="whiteMaterial" />
             </materials>
-            <texture id="none" length_s="1" length_t="1"/>
+            <texture id="none"/>
             <children>
                 <componentref id="Y-fleet" />
             </children>

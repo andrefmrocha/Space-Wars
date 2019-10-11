@@ -41,11 +41,12 @@ const primitiveParsers = {
 
       // Specifications for the current primitive.
       const primitiveType = grandChildren[0].nodeName;
+      let primitive;
 
       // Retrieves the primitive coordinates.
       switch (primitiveType) {
         case 'rectangle':
-          primitives[primitiveId] = primitiveParsers.parseRectangle(
+          primitive = primitiveParsers.parseRectangle(
             grandChildren[0],
             sceneGraph.scene,
             primitiveId,
@@ -54,7 +55,7 @@ const primitiveParsers = {
           break;
 
         case 'cylinder':
-          primitives[primitiveId] = primitiveParsers.parseCylinder(
+          primitive = primitiveParsers.parseCylinder(
             grandChildren[0],
             sceneGraph.scene,
             primitiveId,
@@ -63,7 +64,7 @@ const primitiveParsers = {
           break;
 
         case 'sphere':
-          primitives[primitiveId] = primitiveParsers.parseSphere(
+          primitive = primitiveParsers.parseSphere(
             grandChildren[0],
             sceneGraph.scene,
             primitiveId,
@@ -72,7 +73,7 @@ const primitiveParsers = {
           break;
 
         case 'torus':
-          primitives[primitiveId] = primitiveParsers.parseTorus(
+          primitive = primitiveParsers.parseTorus(
             grandChildren[0],
             sceneGraph.scene,
             primitiveId,
@@ -81,7 +82,7 @@ const primitiveParsers = {
           break;
 
         case 'triangle':
-          primitives[primitiveId] = primitiveParsers.parseTriangle(
+          primitive = primitiveParsers.parseTriangle(
             grandChildren[0],
             sceneGraph.scene,
             primitiveId,
@@ -91,6 +92,7 @@ const primitiveParsers = {
         default:
           console.warn('Unkown primitive!');
       }
+      if (primitive && sceneGraph.loadedOk) primitives[primitiveId] = primitive;
     }
     
     if(Object.keys(primitives).length == 0) return 'No valid primitives found!';

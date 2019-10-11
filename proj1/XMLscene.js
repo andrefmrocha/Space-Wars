@@ -60,36 +60,56 @@ class XMLscene extends CGFscene {
    * Initializes the scene lights with the values read from the XML file.
    */
   initLights() {
-    var i = 0;
-    // Lights index.
-
     // Reads the lights from the scene graph.
-    for (var key in this.graph.lights) {
-      if (i >= 8) break; // Only eight lights allowed by WebGL.
+    this.lightsState={};
+    Object.keys(this.graph.lights).forEach((key, index) => {
+      if (index < 8) { // Only eight lights allowed by WebGL.
+        const light = this.graph.lights[key];
 
-      if (this.graph.lights.hasOwnProperty(key)) {
-        var light = this.graph.lights[key];
-
-        this.lights[i].setPosition(light[2][0], light[2][1], light[2][2], light[2][3]);
-        this.lights[i].setAmbient(light[3][0], light[3][1], light[3][2], light[3][3]);
-        this.lights[i].setDiffuse(light[4][0], light[4][1], light[4][2], light[4][3]);
-        this.lights[i].setSpecular(light[5][0], light[5][1], light[5][2], light[5][3]);
+        this.lights[index].setPosition(light[2][0], light[2][1], light[2][2], light[2][3]);
+        this.lights[index].setAmbient(light[3][0], light[3][1], light[3][2], light[3][3]);
+        this.lights[index].setDiffuse(light[4][0], light[4][1], light[4][2], light[4][3]);
+        this.lights[index].setSpecular(light[5][0], light[5][1], light[5][2], light[5][3]);
 
         if (light[1] == 'spot') {
-          this.lights[i].setSpotCutOff(light[6]);
-          this.lights[i].setSpotExponent(light[7]);
-          this.lights[i].setSpotDirection(light[8][0], light[8][1], light[8][2]);
+          this.lights[index].setSpotCutOff(light[6]);
+          this.lights[index].setSpotExponent(light[7]);
+          this.lights[index].setSpotDirection(light[8][0], light[8][1], light[8][2]);
         }
 
-        this.lights[i].setVisible(true);
-        if (light[0]) this.lights[i].enable();
-        else this.lights[i].disable();
+        this.lights[index].setVisible(true);
+        if (light[0]) this.lights[index].enable();
+        else this.lights[index].disable();
 
-        this.lights[i].update();
-
-        i++;
+        this.lights[index].update();
+        this.lightsState[key] = {
+          isEnabled: light[0],
+          lightIndex: index
+        };
       }
-    }
+
+    });
+
+    this.addLightsToInterface();
+  }
+
+  addLightsToInterface(){
+    console.log(this.lightsState);
+    Object.keys(this.lightsState).forEach(key => {
+      this.interface.gui.add(this.lightsState[key], 'isEnabled').name(key);
+    });
+  }
+
+  updateLights(){
+    Object.keys(this.lightsState).forEach(key => {
+      const currentLightState = this.lightsState[key];
+      const currentLight = this.lights[currentLightState.lightIndex];
+      if(currentLightState.isEnabled)
+        currentLight.enable();
+      else
+        currentLight.disable();  
+      currentLight.update();  
+    })
   }
 
   setDefaultAppearance() {
@@ -149,17 +169,13 @@ class XMLscene extends CGFscene {
 
     // Apply transformations corresponding to the camera position relative to the origin
     this.applyViewMatrix();
-
+    
     this.pushMatrix();
     this.axis.display();
-
-    for (var i = 0; i < this.lights.length; i++) {
-      this.lights[i].setVisible(true);
-      this.lights[i].enable();
-    }
-
+    
     if (this.sceneInited) {
       // Draw axis
+      this.updateLights(); 
       this.setDefaultAppearance();
 
       // Displays the scene (MySceneGraph function).
