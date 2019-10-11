@@ -1,5 +1,13 @@
 class MyCylinder extends CGFobject {
-
+	/**
+     * @method constructor
+     * @param  {object} scene - Reference to a MyScene object.
+     * @param  {number} height - Height of the cylinder along the z axis
+     * @param  {number} base - Radius of the base
+     * @param  {number} top - Radius of the top
+     * @param  {number} slices - Number of division in rotation
+     * @param  {number} stacks - Number of divisions in height
+     */
 	constructor(scene, height, base, top, slices, stacks) {
 		super(scene);
 		this.height = height;
@@ -10,7 +18,16 @@ class MyCylinder extends CGFobject {
 		this.initBuffers();
 	}
 
-	initSide() {
+	/**
+     * @method initBuffers
+     * Initializes the cylinder buffers
+     */
+	initBuffers() {
+		this.vertices = [];
+		this.indices = [];
+		this.normals = [];
+		this.texCoords = [];
+		
 		/*
 			sizePerStack - z increment by division along the z axis
 			radius - radius of current side division, resulting from interpolating base and top
@@ -45,8 +62,8 @@ class MyCylinder extends CGFobject {
 				this.normals.push(x/normalMagn, y/normalMagn, normalz);
 
 				/* Texture coordinates */
-				const u = radiusDiv / this.slices;
-				const v = sideDiv / this.stacks;
+				const u = 1 - (radiusDiv / this.slices);
+				const v = 1 - (sideDiv / this.stacks);
 				this.texCoords.push(u, v);
 
 				theta += thetaInc;
@@ -64,63 +81,6 @@ class MyCylinder extends CGFobject {
 				this.indices.push(second, second + 1, first + 1);
 			}
 		}
-	}
-
-	initBases() {
-
-		/* Base and top outer vertices */
-		let theta = 0;
-		const thetaInc = 2 * MutationEvent.PI / this.slices;
-		for (let radiusDiv = 0; radiusDiv <= this.slices; radiusDiv++) {
-
-			/* Vertices coordinates */
-			const x = Math.sin(theta);
-			const y = Math.cos(theta);
-			this.vertices.push(x * this.base, y * this.base, 0);
-			this.vertices.push(x * this.top, y * this.top, this.height);
-
-			/* Normals */
-			this.normals.push(0, 0, -1);
-			this.normals.push(0, 0, 1);
-
-			/* Texture coordinates */
-			this.texCoords.push(-x/2 + 0.5, -y/2 + 0.5);
-			this.texCoords.push(x/2 + 0.5, -y/2 + 0.5);
-
-			theta += thetaInc;
-		}
-
-		/* Center vertices */
-		this.vertices.push(0, 0, 0);
-		this.vertices.push(0, 0, this.height);
-
-		this.normals.push(0,0,-1);
-		this.normals.push(0,0,1);
-
-		this.texCoords.push(0.5, 0.5);
-		this.texCoords.push(0.5, 0.5);
-		
-		/* Indexes */
-		const vertexCount = (this.slices+1) * (this.stacks+1);
-		const centerBase = vertexCount + this.slices*2;
-		const centerTop = centerBase+1;
-		for (let radiusDiv = 0; radiusDiv < this.slices; radiusDiv++) {
-			const indexBase = vertexCount + radiusDiv*2;			
-			const indexTop = vertexCount + radiusDiv*2 + 1;
-
-			this.indices.push(indexBase, indexBase+2, centerBase);
-			this.indices.push(indexTop, centerTop, indexTop+2);
-		}
-	}
-
-	initBuffers() {
-		this.vertices = [];
-		this.indices = [];
-		this.normals = [];
-		this.texCoords = [];
-
-		this.initSide();
-		//this.initBases();
 
         this.primitiveType = this.scene.gl.TRIANGLES;
         this.initGLBuffers();

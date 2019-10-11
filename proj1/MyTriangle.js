@@ -1,4 +1,18 @@
-class MyTriangle extends CGFobject {
+class MyTriangle extends CGFobject {  
+  
+  /**
+   * @method constructor
+   * @param  {object} scene - Reference to MyScene object
+   * @param  {number} x1 - X coordinate of vertex 1
+   * @param  {number} y1 - Y coordinate of vertex 1
+   * @param  {number} z1 - Z coordinate of vertex 1
+   * @param  {number} x2 - X coordinate of vertex 2
+   * @param  {number} y2 - Y coordinate of vertex 2
+   * @param  {number} z2 - Z coordinate of vertex 2
+   * @param  {number} x3 - X coordinate of vertex 3
+   * @param  {number} y3 - Y coordinate of vertex 3
+   * @param  {number} z3 - Z coordinate of vertex 3
+   */
   constructor(scene, x1, y1, z1, x2, y2, z2, x3, y3, z3) {
     super(scene);
 
@@ -22,6 +36,10 @@ class MyTriangle extends CGFobject {
     this.initBuffers();
   }
 
+  /**
+   * @method initBuffers
+   * Initializes the triangle buffers
+   */
   initBuffers() {
     /* Vertices */
     this.vertices = [this.x1, this.y1, this.z1, this.x2, this.y2, this.z2, this.x3, this.y3, this.z3];
@@ -56,6 +74,13 @@ class MyTriangle extends CGFobject {
     this.initGLBuffers();
   }
 
+  
+  /**
+   * @method updateTexCoords
+   * Updates the list of texture coordinates of the triangle
+   * @param {number} length_s - Texture length in the u axis
+   * @param {number} length_t - Texture length in the v axis
+   */
   updateTexCoords(length_s, length_t) {
     this.texCoords = [
       0, 1, 
