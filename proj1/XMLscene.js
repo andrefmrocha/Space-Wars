@@ -94,7 +94,6 @@ class XMLscene extends CGFscene {
   }
 
   addLightsToInterface(){
-    console.log(this.lightsState);
     Object.keys(this.lightsState).forEach(key => {
       this.interface.gui.add(this.lightsState[key], 'isEnabled').name(key);
     });

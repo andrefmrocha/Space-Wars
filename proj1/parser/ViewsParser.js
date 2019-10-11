@@ -1,4 +1,8 @@
 const viewsParser = {
+  /**
+   * @param  {XMLCollection Object} perspectiveNodes
+   * @param  {MySceneGraph} sceneGraph
+   */
   parsePerspectiveViews: (perspectiveNodes, sceneGraph) => {
     for (let i = 0; i < perspectiveNodes.length; i++) {
       const id = parserUtils.reader.getString(perspectiveNodes[i], 'id');
@@ -10,24 +14,20 @@ const viewsParser = {
       let from, to;
       for (let j = 0; j < perspectiveChildren.length; j++) {
         if (perspectiveChildren[j].nodeName == 'from') {
-          from = parserUtils.parseCoordinates3D(
-            perspectiveChildren[j],
-            errorMessage
-          );
+          from = parserUtils.parseCoordinates3D(perspectiveChildren[j], errorMessage);
         } else if (perspectiveChildren[j].nodeName == 'to') {
-          to = parserUtils.parseCoordinates3D(
-            perspectiveChildren[j],
-            errorMessage
-          );
+          to = parserUtils.parseCoordinates3D(perspectiveChildren[j], errorMessage);
         }
       }
-      if(from === errorMessage || to === errorMessage)
-          sceneGraph.onXMLError(errorMessage);
-      else
-          sceneGraph.perspectives[id] = new CGFcamera(angle, near, far, from, to);
-      
+      if (from === errorMessage || to === errorMessage) sceneGraph.onXMLError(errorMessage);
+      else sceneGraph.perspectives[id] = new CGFcamera(angle, near, far, from, to);
     }
   },
+
+  /**
+   * @param  {XMLCollection Object} orthoNodes
+   * @param  {MySceneGraph} sceneGraph
+   */
   parseOrthoViews: (orthoNodes, sceneGraph) => {
     for (let i = 0; i < orthoNodes.length; i++) {
       const id = parserUtils.reader.getString(orthoNodes[i], 'id');
@@ -42,10 +42,7 @@ const viewsParser = {
       let from, to, up;
       for (let j = 0; j < orthoChildren.length; j++) {
         if (orthoChildren[j].nodeName == 'from') {
-          from = parserUtils.parseCoordinates3D(
-            orthoChildren[j],
-            errorMessage
-          );
+          from = parserUtils.parseCoordinates3D(orthoChildren[j], errorMessage);
         } else if (orthoChildren[j].nodeName == 'to') {
           to = parserUtils.parseCoordinates3D(orthoChildren[j], errorMessage);
         } else if (orthoChildren[j].nodeName == 'up') {
@@ -53,10 +50,8 @@ const viewsParser = {
         }
       }
       up = up ? up : [0, 1, 0];
-      if(from === errorMessage || to === errorMessage || up === errorMessage)
-          sceneGraph.onXMLError(errorMessage);
-      else
-        sceneGraph.perspectives[id] = new CGFcameraOrtho(left, right, bottom, top, near, far, from, to, up);
+      if (from === errorMessage || to === errorMessage || up === errorMessage) sceneGraph.onXMLError(errorMessage);
+      else sceneGraph.perspectives[id] = new CGFcameraOrtho(left, right, bottom, top, near, far, from, to, up);
     }
   }
 };

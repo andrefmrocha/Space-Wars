@@ -1,4 +1,11 @@
 
+/**
+ * @param  {XMLCollection Object} primitive
+ * @param  {string} attribute
+ * @param  {string} errorMessage
+ * @param  {MySceneGraph} sceneGraph
+ */
+
 function getPrimitiveInformation(primitive, attribute, errorMessage, sceneGraph) {
   const attributeValue = parserUtils.reader.getFloat(primitive, attribute);
 
@@ -6,9 +13,13 @@ function getPrimitiveInformation(primitive, attribute, errorMessage, sceneGraph)
   else return attributeValue;
 }
 const primitiveParsers = {
+  /**
+   * @param  {XMLCollection Object} primitivesNode
+   * @param  {Object} primitives
+   * @param  {MySceneGraph} sceneGraph
+   */
   parsePrimitives: (primitivesNode, primitives, sceneGraph) => {
     var children = primitivesNode.children;
-
 
     // Any number of primitives.
     for (let i = 0; i < children.length; i++) {
@@ -46,58 +57,40 @@ const primitiveParsers = {
       // Retrieves the primitive coordinates.
       switch (primitiveType) {
         case 'rectangle':
-          primitive = primitiveParsers.parseRectangle(
-            grandChildren[0],
-            sceneGraph.scene,
-            primitiveId,
-            sceneGraph
-          );
+          primitive = primitiveParsers.parseRectangle(grandChildren[0], sceneGraph.scene, primitiveId, sceneGraph);
           break;
 
         case 'cylinder':
-          primitive = primitiveParsers.parseCylinder(
-            grandChildren[0],
-            sceneGraph.scene,
-            primitiveId,
-            sceneGraph
-          );
+          primitive = primitiveParsers.parseCylinder(grandChildren[0], sceneGraph.scene, primitiveId, sceneGraph);
           break;
 
         case 'sphere':
-          primitive = primitiveParsers.parseSphere(
-            grandChildren[0],
-            sceneGraph.scene,
-            primitiveId,
-            sceneGraph
-          );
+          primitive = primitiveParsers.parseSphere(grandChildren[0], sceneGraph.scene, primitiveId, sceneGraph);
           break;
 
         case 'torus':
-          primitive = primitiveParsers.parseTorus(
-            grandChildren[0],
-            sceneGraph.scene,
-            primitiveId,
-            sceneGraph
-          );
+          primitive = primitiveParsers.parseTorus(grandChildren[0], sceneGraph.scene, primitiveId, sceneGraph);
           break;
 
         case 'triangle':
-          primitive = primitiveParsers.parseTriangle(
-            grandChildren[0],
-            sceneGraph.scene,
-            primitiveId,
-            sceneGraph
-          );
+          primitive = primitiveParsers.parseTriangle(grandChildren[0], sceneGraph.scene, primitiveId, sceneGraph);
           break;
         default:
           console.warn('Unkown primitive!');
       }
       if (primitive && sceneGraph.loadedOk) primitives[primitiveId] = primitive;
     }
-    
-    if(Object.keys(primitives).length == 0) return 'No valid primitives found!';
+
+    if (Object.keys(primitives).length == 0) return 'No valid primitives found!';
     return null;
   },
+
+  /**
+   * @param  {XMLCollection Object} component
+   * @param  {MyScene} scene
+   * @param  {string} primitiveId
+   * @param  {MySceneGraph} sceneGraph
+   */
   parseRectangle: (component, scene, primitiveId, sceneGraph) => {
     // x1
     const x1 = getPrimitiveInformation(
@@ -134,6 +127,12 @@ const primitiveParsers = {
     return new MyRectangle(scene, primitiveId, x1, x2, y1, y2);
   },
 
+  /**
+   * @param  {XMLCollection Object} component
+   * @param  {MyScene} scene
+   * @param  {string} primitiveId
+   * @param  {MySceneGraph} sceneGraph
+   */
   parseCylinder: (component, scene, primitiveId, sceneGraph) => {
     const base = getPrimitiveInformation(
       component,
@@ -166,6 +165,13 @@ const primitiveParsers = {
     );
     return new MyCylinder(scene, height, base, top, cylinderSlices, cylinderStacks);
   },
+
+  /**
+   * @param  {XMLCollection Object} component
+   * @param  {MyScene} scene
+   * @param  {string} primitiveId
+   * @param  {MySceneGraph} sceneGraph
+   */
   parseSphere: (component, scene, primitiveId, sceneGraph) => {
     const sphereStacks = getPrimitiveInformation(
       component,
@@ -190,6 +196,12 @@ const primitiveParsers = {
     return new MySphere(scene, sphereRadius, sphereSlices, sphereStacks);
   },
 
+  /**
+   * @param  {XMLCollection Object} component
+   * @param  {MyScene} scene
+   * @param  {string} primitiveId
+   * @param  {MySceneGraph} sceneGraph
+   */
   parseTorus: (component, scene, primitiveId, sceneGraph) => {
     const torusSlices = getPrimitiveInformation(
       component,
@@ -221,6 +233,12 @@ const primitiveParsers = {
     return new MyTorus(scene, torusInner, torusOuter, torusSlices, torusLoops);
   },
 
+  /**
+   * @param  {XMLCollection Object} component
+   * @param  {MyScene} scene
+   * @param  {string} primitiveId
+   * @param  {MySceneGraph} sceneGraph
+   */
   parseTriangle: (component, scene, primitiveId, sceneGraph) => {
     const triX1 = getPrimitiveInformation(
       component,

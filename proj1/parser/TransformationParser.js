@@ -1,7 +1,11 @@
 const transformationParser = {
+  /**
+   * @param  {XMLCollection Object} transformationsNode
+   * @param  {Object} transformations
+   * @param  {MySceneGraph} sceneGraph
+   */
   parseTransformations: (transformationsNode, transformations, sceneGraph) => {
     const children = transformationsNode.children;
-
 
     // Any number of transformations.
     for (let i = 0; i < children.length; i++) {
@@ -11,7 +15,7 @@ const transformationParser = {
       }
 
       // Get id of the current transformation.
-      const transformationID =  parserUtils.reader.getString(children[i], 'id');
+      const transformationID = parserUtils.reader.getString(children[i], 'id');
       if (transformationID == null) return 'no ID defined for transformation';
 
       // Checks for repeated IDs.
@@ -19,21 +23,22 @@ const transformationParser = {
         return 'ID must be unique for each transformation (conflict: ID = ' + transformationID + ')';
 
       const grandChildren = children[i].children;
-      if(grandChildren.length != 0){
+      if (grandChildren.length != 0) {
         // Specifications for the current transformation.
-        transformations[transformationID] = transformationParser.parseTransformation(
-          grandChildren,
-          transformationID,
-          sceneGraph
-        ); 
+        transformations[transformationID] = transformationParser.parseTransformation(grandChildren, transformationID);
       }
     }
 
-    if(Object.keys(transformations).length == 0) return 'No transformations found!';
+    if (Object.keys(transformations).length == 0) return 'No transformations found!';
 
     return null;
   },
-  parseTransformation: (transformationChildren, transformationID, sceneGraph) => {
+
+  /**
+   * @param  {XMLCollection Object} transformationChildren
+   * @param  {string} transformationID
+   */
+  parseTransformation: (transformationChildren, transformationID) => {
     let transfMatrix = mat4.create();
     mat4.identity(transfMatrix);
 
@@ -65,6 +70,9 @@ const transformationParser = {
     return transfMatrix;
   },
 
+  /**
+   * @param  {XMLCollection Object} rotate
+   */
   parseRotation: rotate => {
     const axis = parserUtils.reader.getString(rotate, 'axis');
     const angle = parserUtils.reader.getFloat(rotate, 'angle');

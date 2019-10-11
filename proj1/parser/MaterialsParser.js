@@ -1,4 +1,10 @@
 const materialsParser = {
+
+  /**
+   * @param  {XMLCollection Object} materialsNode
+   * @param  {Object} materials
+   * @param  {MySceneGraph} sceneGraph
+   */
   parseMaterials: (materialsNode, materials, sceneGraph) => {
     const children = materialsNode.children;
 
@@ -25,6 +31,10 @@ const materialsParser = {
     return null;
   },
 
+  /**
+   * @param  {XMLCollection Object} materialNode
+   * @param  {MySceneGraph} sceneGraph
+   */
   parseMaterial: (materialNode, sceneGraph) => {
     const children = materialNode.children;
     const nodeNames = [];
@@ -52,6 +62,10 @@ const materialsParser = {
     return appearance;
   },
 
+  
+  /**
+   * @param  {XMLCollection Object} component
+   */
   parseMaterialColors: (component) => {
     const colors = {};
     colors.red = parserUtils.reader.getFloat(component, 'r');
