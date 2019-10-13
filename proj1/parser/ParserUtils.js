@@ -62,5 +62,16 @@ const parserUtils = {
     if (!(a != null && !isNaN(a) && a >= 0 && a <= 1)) return 'unable to parse A component of the ' + messageError;
 
     return [r, g, b, a];
+  },
+
+  parseAttenuation:(node) => {
+    const constant = parserUtils.reader.getFloat(node, 'constant');
+    const linear = parserUtils.reader.getFloat(node, 'linear');
+    const quadratic = parserUtils.reader.getFloat(node, 'quadratic');
+    return {
+      constant,
+      linear,
+      quadratic
+    }
   }
 };

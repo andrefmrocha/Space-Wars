@@ -282,8 +282,8 @@ class MySceneGraph {
         this.onXMLMinorError('unknown tag <' + children[i].nodeName + '>');
         continue;
       } else {
-        attributeNames.push(...['location', 'ambient', 'diffuse', 'specular']);
-        attributeTypes.push(...['position', 'color', 'color', 'color']);
+        attributeNames.push(...['location', 'ambient', 'diffuse', 'specular', 'attenuation']);
+        attributeTypes.push(...['position', 'color', 'color', 'color', 'attenuation']);
       }
 
       // Get id of the current light.
@@ -318,6 +318,9 @@ class MySceneGraph {
         if (attributeIndex != -1) {
           if (attributeTypes[j] == 'position')
             var aux = parserUtils.parseCoordinates4D(grandChildren[attributeIndex], 'light position for ID' + lightId);
+          else if (attributeTypes[j] == 'attenuation'){
+            global.push(parserUtils.parseAttenuation(grandChildren[attributeIndex]));
+          }
           else
             var aux = parserUtils.parseColor(
               grandChildren[attributeIndex],
@@ -327,7 +330,7 @@ class MySceneGraph {
           if (!Array.isArray(aux)) return aux;
 
           global.push(aux);
-        } else return 'light ' + attributeNames[i] + ' undefined for ID = ' + lightId;
+        } else return 'light ' + attributeNames[j] + ' undefined for ID = ' + lightId;
       }
 
       // Gets the additional attributes of the spot light

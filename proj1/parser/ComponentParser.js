@@ -4,7 +4,6 @@ const componentParser = {
    * @param  {MySceneGraph} sceneGraph
    */
   parseComponents: (componentsNode, sceneGraph) => {
-    console.log(componentsNode);
     const children = componentsNode.children;
 
     sceneGraph.components = {};

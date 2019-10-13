@@ -66,15 +66,20 @@ class XMLscene extends CGFscene {
       if (index < 8) { // Only eight lights allowed by WebGL.
         const light = this.graph.lights[key];
 
+        const attenuation = light[6];
         this.lights[index].setPosition(light[2][0], light[2][1], light[2][2], light[2][3]);
         this.lights[index].setAmbient(light[3][0], light[3][1], light[3][2], light[3][3]);
         this.lights[index].setDiffuse(light[4][0], light[4][1], light[4][2], light[4][3]);
         this.lights[index].setSpecular(light[5][0], light[5][1], light[5][2], light[5][3]);
+        console.log(light);
+        if (attenuation.constant) this.lights[index].setConstantAttenuation(attenuation.constant);
+        if (attenuation.linear) this.lights[index].setLinearAttenuation(attenuation.linear);
+        if (attenuation.quadratic) this.lights[index].setQuadraticAttenuation(attenuation.quadratic);
 
         if (light[1] == 'spot') {
-          this.lights[index].setSpotCutOff(light[6]);
-          this.lights[index].setSpotExponent(light[7]);
-          this.lights[index].setSpotDirection(light[8][0], light[8][1], light[8][2]);
+          this.lights[index].setSpotCutOff(light[7]);
+          this.lights[index].setSpotExponent(light[8]);
+          this.lights[index].setSpotDirection(light[9][0], light[9][1], light[9][2]);
         }
 
         this.lights[index].setVisible(true);
