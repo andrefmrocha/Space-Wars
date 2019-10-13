@@ -54,15 +54,15 @@ class MyCylinder extends CGFobject {
 			for (let radiusDiv = 0; radiusDiv <= this.slices; radiusDiv++) {
 
 				/* Vertices coordinates */
-				const x = Math.sin(theta);
-				const y = Math.cos(theta);
+				const x = Math.cos(theta);
+				const y = Math.sin(theta);
 				this.vertices.push(x * radius, y * radius, z)
 
 				/* Normals */
 				this.normals.push(x/normalMagn, y/normalMagn, normalz);
 
 				/* Texture coordinates */
-				const u = 1 - (radiusDiv / this.slices);
+				const u = radiusDiv / this.slices;
 				const v = 1 - (sideDiv / this.stacks);
 				this.texCoords.push(u, v);
 
@@ -77,8 +77,8 @@ class MyCylinder extends CGFobject {
 				const first = sideDiv * sideDivVertices + radiusDiv;
 				const second = first + sideDivVertices;
 
-				this.indices.push(first, second, first + 1);
-				this.indices.push(second, second + 1, first + 1);
+				this.indices.push(first, first + 1, second);
+				this.indices.push(second, first + 1, second + 1);
 			}
 		}
 
