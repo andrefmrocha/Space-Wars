@@ -71,7 +71,6 @@ class XMLscene extends CGFscene {
         this.lights[index].setAmbient(light[3][0], light[3][1], light[3][2], light[3][3]);
         this.lights[index].setDiffuse(light[4][0], light[4][1], light[4][2], light[4][3]);
         this.lights[index].setSpecular(light[5][0], light[5][1], light[5][2], light[5][3]);
-        console.log(light);
         if (attenuation.constant) this.lights[index].setConstantAttenuation(attenuation.constant);
         if (attenuation.linear) this.lights[index].setLinearAttenuation(attenuation.linear);
         if (attenuation.quadratic) this.lights[index].setQuadraticAttenuation(attenuation.quadratic);

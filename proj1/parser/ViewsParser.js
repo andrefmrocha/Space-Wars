@@ -8,7 +8,7 @@ const viewsParser = {
       const id = parserUtils.reader.getString(perspectiveNodes[i], 'id');
       const near = parserUtils.reader.getFloat(perspectiveNodes[i], 'near');
       const far = parserUtils.reader.getFloat(perspectiveNodes[i], 'far');
-      const angle = parserUtils.reader.getFloat(perspectiveNodes[i], 'angle');
+      const angle = parserUtils.reader.getFloat(perspectiveNodes[i], 'angle') * DEGREE_TO_RAD;
       const perspectiveChildren = perspectiveNodes[i].children;
       const errorMessage = `Error parsing of from object of perspective of ${id}`;
       let from, to;
