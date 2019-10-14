@@ -12,6 +12,7 @@ function getPrimitiveInformation(primitive, attribute, errorMessage, sceneGraph)
   if (!(attributeValue != null && !isNaN(attributeValue))) sceneGraph.onXMLError(errorMessage);
   else return attributeValue;
 }
+
 const primitiveParsers = {
   /**
    * @param  {XMLCollection Object} primitivesNode
@@ -30,7 +31,7 @@ const primitiveParsers = {
 
       // Get id of the current primitive.
       var primitiveId = parserUtils.reader.getString(children[i], 'id');
-      if (primitiveId == null) return 'no ID defined for texture';
+      if (!primitiveId) return 'no ID defined for texture';
 
       // Checks for repeated IDs.
       if (primitives[primitiveId] != null)

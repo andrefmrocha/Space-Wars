@@ -187,7 +187,7 @@ class MySceneGraph {
   parseScene(sceneNode) {
     // Get root of the scene.
     var root = parserUtils.reader.getString(sceneNode, 'root');
-    if (root == null) return 'no root defined for scene';
+    if (!root) return 'no root defined for scene';
 
     this.idRoot = root;
 
@@ -221,6 +221,7 @@ class MySceneGraph {
     });
 
     const defaultCamera = parserUtils.reader.getString(viewsNode, 'default');
+    if (!defaultCamera) this.onXMLError('default camera not specified');
 
     this.scene.addViews(defaultCamera);
     this.scene.onSelectedView();
@@ -244,6 +245,10 @@ class MySceneGraph {
     var ambientIndex = nodeNames.indexOf('ambient');
     var backgroundIndex = nodeNames.indexOf('background');
 
+    if (ambientIndex == -1 || backgroundIndex == -1) {
+      this.onXMLError('Missing child on globals');
+    }
+
     var color = parserUtils.parseColor(children[ambientIndex], 'ambient');
     if (!Array.isArray(color)) return color;
     else this.ambient = color;
@@ -262,6 +267,7 @@ class MySceneGraph {
    * @param {lights block element} lightsNode
    */
   parseLights(lightsNode) {
+
     var children = lightsNode.children;
 
     this.lights = [];
@@ -399,7 +405,10 @@ class MySceneGraph {
    * Displays the scene, processing each node, starting in the root node.
    */
   displayScene() {
-    this.displayComponent(this.components[this.idRoot], null, null, 1, 1);
+
+    const rootComp = this.components[this.idRoot];
+    const rootMat = rootComp.materials[this.materialSwitch % rootComp.materials.length];
+    this.displayComponent(rootComp, rootMat, null, 1, 1);
   }
 
   /**
@@ -428,8 +437,7 @@ class MySceneGraph {
       }
       this.assignChildReferences(component.children[index]);
     });
-  }
-  
+  }  
 
   /**
    * @method displayComponent
@@ -441,6 +449,10 @@ class MySceneGraph {
    * @param  {number} pLengthT - Length_t inherited from the Parent
    */
   displayComponent(component, pMaterial, pTexture, pLengthS, pLengthT) {
+
+    if (!component) this.onXMLError("Tried to display null component");
+    if (!pMaterial) this.onXMLError("Null material on component")
+
     // if primitive
     if (component instanceof CGFobject) {
       // materials and texture

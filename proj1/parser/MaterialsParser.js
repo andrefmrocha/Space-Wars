@@ -17,7 +17,7 @@ const materialsParser = {
 
       // Get id of the current material.
       const materialID = parserUtils.reader.getString(children[i], 'id');
-      if (materialID == null) return 'no ID defined for material';
+      if (!materialID) return 'no ID defined for material';
 
       // Checks for repeated IDs.
       if (materials[materialID] != null) return 'ID must be unique for each light (conflict: ID = ' + materialID + ')';
@@ -72,6 +72,8 @@ const materialsParser = {
     colors.green = parserUtils.reader.getFloat(component, 'g');
     colors.blue = parserUtils.reader.getFloat(component, 'b');
     colors.alpha = parserUtils.reader.getFloat(component, 'a');
+
+    if(colors.red == null || colors.green == null || colors.blue == null|| colors.alpha == null) console.error("missing a color component in material");
     return colors;
   }
 };

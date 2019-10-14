@@ -10,7 +10,10 @@ const viewsParser = {
       const far = parserUtils.reader.getFloat(perspectiveNodes[i], 'far');
       const angle = parserUtils.reader.getFloat(perspectiveNodes[i], 'angle') * DEGREE_TO_RAD;
       const perspectiveChildren = perspectiveNodes[i].children;
+
       const errorMessage = `Error parsing of from object of perspective of ${id}`;
+      if(!id || near == null || far == null || angle == null) return errorMessage;
+
       let from, to;
       for (let j = 0; j < perspectiveChildren.length; j++) {
         if (perspectiveChildren[j].nodeName == 'from') {
@@ -38,7 +41,10 @@ const viewsParser = {
       const top = parserUtils.reader.getFloat(orthoNodes[i], 'top');
       const bottom = parserUtils.reader.getFloat(orthoNodes[i], 'bottom');
       const orthoChildren = orthoNodes[i].children;
-      const errorMessage = `Error parsing of from object of perspective of ${id}`;
+
+      const errorMessage = `Error parsing of from object of perspective of ${id}`;      
+      if(!id || near == null || far == null || left == null || right == null || top == null || bottom == null) return errorMessage;
+      
       let from, to, up;
       for (let j = 0; j < orthoChildren.length; j++) {
         if (orthoChildren[j].nodeName == 'from') {
