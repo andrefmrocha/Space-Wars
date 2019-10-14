@@ -67,22 +67,23 @@ const transformationParser = {
   parseRotation: rotate => {
     const axis = parserUtils.reader.getString(rotate, 'axis');
     const angle = parserUtils.reader.getFloat(rotate, 'angle');
+
+    if(!axis || angle == null) console.error("missing rotation value");
+
     let axisVec;
-    if (angle && axis) {
-      switch (axis) {
-        case 'x':
-          axisVec = [1, 0, 0];
-          break;
-        case 'y':
-          axisVec = [0, 1, 0];
-          break;
-        case 'z':
-          axisVec = [0, 0, 1];
-          break;
-        default:
-          axisVec = [0, 0, 0];
-          break;
-      }
+    switch (axis) {
+      case 'x':
+        axisVec = [1, 0, 0];
+        break;
+      case 'y':
+        axisVec = [0, 1, 0];
+        break;
+      case 'z':
+        axisVec = [0, 0, 1];
+        break;
+      default:
+        axisVec = [0, 0, 0];
+        break;
     }
     return {
       angle: this.DEGREE_TO_RAD * angle,

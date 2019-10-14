@@ -186,7 +186,7 @@ class MySceneGraph {
   parseScene(sceneNode) {
     // Get root of the scene.
     var root = parserUtils.reader.getString(sceneNode, 'root');
-    if (root == null) return 'no root defined for scene';
+    if (!root) return 'no root defined for scene';
 
     this.idRoot = root;
 
@@ -206,7 +206,6 @@ class MySceneGraph {
    * @param {view block element} viewsNode
    */
   parseView(viewsNode) {
-    this.onXMLMinorError('To do: Parse views and create cameras.');
     this.perspectives = {};
     viewsParser.parsePerspectiveViews(viewsNode.getElementsByTagName('perspective'), this);
     viewsParser.parseOrthoViews(viewsNode.getElementsByTagName('ortho'), this);
@@ -221,6 +220,7 @@ class MySceneGraph {
     });
 
     const defaultCamera = parserUtils.reader.getString(viewsNode, 'default');
+    if (!defaultCamera) this.onXMLError('default camera not specified');
 
     this.scene.addViews(defaultCamera);
     this.scene.onSelectedView();
@@ -243,6 +243,10 @@ class MySceneGraph {
 
     var ambientIndex = nodeNames.indexOf('ambient');
     var backgroundIndex = nodeNames.indexOf('background');
+
+    if (ambientIndex == -1 || backgroundIndex == -1) {
+      this.onXMLError('Missing child on globals');
+    }
 
     var color = parserUtils.parseColor(children[ambientIndex], 'ambient');
     if (!Array.isArray(color)) return color;

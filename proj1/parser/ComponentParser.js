@@ -87,7 +87,7 @@ const componentParser = {
     const lengthS = parserUtils.reader.getFloat(textureRef, 'length_s');
     const lengthT = parserUtils.reader.getFloat(textureRef, 'length_t');
     const textureID = parserUtils.reader.getString(textureRef, 'id');
-    if (!textureID) return null;
+    if (!textureID) console.error("missing texture id");
 
     const texture = textureID == 'inherit' || textureID == 'none' ? textureID : textures[textureID];
     return {
@@ -104,7 +104,7 @@ const componentParser = {
     const primitiveRefIndex = transformationChildren.indexOf('transformationref');
     if (primitiveRefIndex != -1) {
       const transformationID = parserUtils.reader.getString(componentTransformation[primitiveRefIndex], 'id');
-      if (!transformationID) return null;
+      if (!transformationID) console.error("missing transformation id");
 
       return transformations[transformationID];
     }
@@ -115,7 +115,7 @@ const componentParser = {
     const componentMaterials = [];
     for (let i = 0; i < materialsNode.length; i++) {
       const materialID = parserUtils.reader.getString(materialsNode[i], 'id');
-      if (!materialID) return null;
+      if (!materialID) console.error("missing material id");
 
       componentMaterials.push(materialID === 'inherit' ? materialID : materials[materialID]);
     }
@@ -125,7 +125,7 @@ const componentParser = {
     const componentsChildren = [];
     for (let i = 0; i < componentChildren.length; i++) {
       const childID = parserUtils.reader.getString(componentChildren[i], 'id');
-      if (!childID) return null;
+      if (!childID) console.error("missing component child id");
 
       componentsChildren.push(childID);
     }
@@ -136,7 +136,7 @@ const componentParser = {
     const components = [];
     for (let i = 0; i < primitiveChildren.length; i++) {
       const childID = parserUtils.reader.getString(primitiveChildren[i], 'id');
-      if (!childID) return null;
+      if (!childID) console.error("missing primitive child id");
 
       components.push(primitives[childID]);
     }

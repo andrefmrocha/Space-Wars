@@ -4,7 +4,7 @@ const textureParser = {
     for (let i = 0; i < childrenNodes.length; i++) {
       const id = parserUtils.reader.getString(childrenNodes[i], 'id');
       const file = parserUtils.reader.getString(childrenNodes[i], 'file');
-      if (!(id && file)) {
+      if (!id || !file) {
         return 'no id or file defined for texture'
       }
       textures[id] = new CGFtexture(scene, file);

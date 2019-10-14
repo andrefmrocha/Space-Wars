@@ -58,6 +58,8 @@ const materialsParser = {
     colors.green = parserUtils.reader.getFloat(component, 'g');
     colors.blue = parserUtils.reader.getFloat(component, 'b');
     colors.alpha = parserUtils.reader.getFloat(component, 'a');
+
+    if(colors.red == null || colors.green == null || colors.blue == null|| colors.alpha == null) console.error("missing a color component in material");
     return colors;
   }
 };
