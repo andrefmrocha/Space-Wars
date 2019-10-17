@@ -35,18 +35,19 @@ class XMLscene extends CGFscene {
     this.setUpdatePeriod(1000/30); // 30 fps
     this.viewsList = [];
     this.viewsIDs = {};
+    this.views = {};
   }
 
   addViews(defaultCamera) {
-    this.currentView = defaultCamera ? this.viewsIDs[defaultCamera] : Object.keys(this.viewsList)[0];
+    this.currentView = defaultCamera ? defaultCamera : Object.keys(this.views)[0];
     this.interface.gui
-      .add(this, 'currentView', this.viewsIDs)
+      .add(this, 'currentView', Object.keys(this.views))
       .name('Views')
       .onChange(this.onSelectedView.bind(this));
   }
 
   onSelectedView() {
-    this.camera = this.viewsList[this.currentView];
+    this.camera = this.views[this.currentView];
     this.interface.setActiveCamera(this.camera);
   }
 
