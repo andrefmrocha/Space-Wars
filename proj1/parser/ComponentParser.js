@@ -71,16 +71,17 @@ const componentParser = {
         )
       );
 
-      if (
-        currentComponent.texture &&
-        currentComponent.materials &&
-        currentComponent.materials.length != 0 &&
-        currentComponent.children &&
-        currentComponent.children.length != 0
-      )
-        sceneGraph.components[componentID] = currentComponent;
+      if(!currentComponent.texture) {
+        sceneGraph.onXMLError("Component parser, missing texture");
+      }
+      else if (!currentComponent.materials || currentComponent.materials.length == 0) {
+        sceneGraph.onXMLError("Component parser, missing materials");
+      }
+      else if (!currentComponent.children || currentComponent.children.length == 0) {
+        sceneGraph.onXMLError("Component parser, missing children");
+      }
       else {
-        sceneGraph.onXMLError("Component parser");
+        sceneGraph.components[componentID] = currentComponent;
       }
     }
   },

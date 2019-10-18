@@ -561,11 +561,7 @@
             </materials>
             <texture id="space_rocks" length_s="2" length_t="2"/>
             <children>
-                <componentref id="pyramid_side_1" />
-                <componentref id="pyramid_side_2" />
-                <componentref id="pyramid_side_3" />
-                <componentref id="pyramid_side_4" />
-                <componentref id="x_z_square" />
+                <componentref id="pyramid" />"
             </children>
         </component>
         <component id="space_station">
@@ -583,43 +579,7 @@
                 <componentref id="diner" />
             </children>
         </component>
-        <component id="wormhole-circle">
-            <transformation>
-                <scale x="10" y="4" z="0.2" />
-            </transformation>
-            <materials>
-                <material id="whiteMaterial" />
-            </materials>
-            <texture id="stargate" length_s="1" length_t="1"/>
-            <children>
-                <primitiveref id="sphere" />
-            </children>
-        </component>
-        <component id="wormhole-ring">
-            <transformation>
-                <scale x="5" y="5" z="3" />
-            </transformation>
-            <materials>
-                <material id="whiteMaterial" />
-            </materials>
-            <texture id="saturn-ring" length_s="1" length_t="1"/>
-            <children>
-                <primitiveref id="torus" />
-            </children>
-        </component>
-        <component id="wormhole">
-            <transformation>
-
-            </transformation>
-            <materials>
-                <material id="whiteMaterial" />
-            </materials>
-            <texture id="none"/>
-            <children>
-                <componentref id="wormhole-circle" />
-                <componentref id="wormhole-ring" />
-            </children>
-        </component>
+        
         <component id="ion-blast">
             <transformation>
                 <scale x="0.5" y="0.5" z="0.2" />
