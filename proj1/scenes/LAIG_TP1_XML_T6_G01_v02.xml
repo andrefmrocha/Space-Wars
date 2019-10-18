@@ -80,6 +80,7 @@
         <texture id="neptune" file="scenes/images/neptune.jpg" />
         <texture id="cosmos" file="scenes/images/cosmos.jpg" />
         <texture id="starfield" file="scenes/images/starfield.jpg" />
+        <texture id="glass" file="scenes/images/glass.jpg" />
     </textures>
 
     <materials>
@@ -90,13 +91,13 @@
             <specular r="1" g="1" b="1" a="1.0" />
         </material>
         <material id="red" shininess="10">
-            <emission r="0.2" g="0.0" b="0.0" a="1.0" />
+            <emission r="0" g="0.0" b="0.0" a="1.0" />
             <ambient r="0.7" g="0" b="0" a="1.0" />
             <diffuse r="0.7" g="0.0" b="0.0" a="1.0" />
             <specular r="0.7" g="0.0" b="0.0" a="1.0" />
         </material>
         <material id="darkred" shininess="10">
-            <emission r="0.1" g="0.0" b="0.0" a="1.0" />
+            <emission r="0" g="0.0" b="0.0" a="1.0" />
             <ambient r="0.7" g="0" b="0" a="1.0" />
             <diffuse r="0.39" g="0.0" b="0.0" a="1.0" />
             <specular r="0.39" g="0.0" b="0.0" a="1.0" />
@@ -108,7 +109,7 @@
             <specular r="1" g="1" b="1" a="1.0" />
         </material>
         <material id="ion_blue" shininess="10">
-            <emission r="0" g="0.1" b="0.2" a="1.0" />
+            <emission r="0" g="0.3" b="0.5" a="1.0" />
             <ambient r="0.137" g="0.6" b="0.94" a="1" />
             <diffuse r="0.137" g="0.81" b="0.94" a="1.0" />
             <specular r="0.137" g="0.81" b="0.94" a="1.0" />
@@ -190,7 +191,7 @@
                 <rotate axis="y" angle="45"/>
             </transformation>
             <materials>
-                <material id="whiteMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -203,7 +204,7 @@
                 <rotate axis="x" angle="90" />
             </transformation>
             <materials>
-                <material id="whiteMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -215,7 +216,7 @@
                 <rotate axis="x" angle="90" />
             </transformation>
             <materials>
-                <material id="whiteMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -228,7 +229,7 @@
                 <rotate axis="x" angle="-90" />
             </transformation>
             <materials>
-                <material id="whiteMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -241,7 +242,7 @@
                 <rotate axis="x" angle="90" />
             </transformation>
             <materials>
-                <material id="whiteMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -254,7 +255,7 @@
                 <rotate axis="z" angle="90" />
             </transformation>
             <materials>
-                <material id="whiteMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -267,7 +268,7 @@
                 <rotate axis="z" angle="-90" />
             </transformation>
             <materials>
-                <material id="whiteMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -280,7 +281,7 @@
                 <rotate axis="z" angle="-180" />
             </transformation>
             <materials>
-                <material id="whiteMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -291,7 +292,7 @@
             <transformation>
             </transformation>
             <materials>
-                <material id="whiteMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -374,7 +375,7 @@
             <transformation>
             </transformation>
             <materials>
-                <material id="whiteMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -386,7 +387,7 @@
                 <rotate axis="y" angle="90"/>
             </transformation>
             <materials>
-                <material id="whiteMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -398,7 +399,7 @@
                 <rotate axis="y" angle="180"/>
             </transformation>
             <materials>
-                <material id="whiteMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -410,7 +411,7 @@
                 <rotate axis="y" angle="270"/>
             </transformation>
             <materials>
-                <material id="whiteMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -421,7 +422,7 @@
             <transformation>
             </transformation>
             <materials>
-                <material id="whiteMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -501,7 +502,7 @@
                 <scale x="5" y="2" z="7" />
             </transformation>
             <materials>
-                <material id="whiteMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="steel" length_s="1" length_t="1"/>
             <children>
@@ -518,9 +519,9 @@
                 <translate x="-4.8" y="0.5" z="0" />
             </transformation>
             <materials>
-                <material id="whiteMaterial" />
+                <material id="inherit" />
             </materials>
-            <texture id="stargate" length_s="2" length_t="2"/>
+            <texture id="glass" length_s="2" length_t="2"/>
             <children>
                 <componentref id="cube" />
             </children>
@@ -530,9 +531,9 @@
                 <translate x="0" y="0" z="2.5" />
             </transformation>
             <materials>
-                <material id="whiteMaterial" />
+                <material id="inherit" />
             </materials>
-            <texture id="stargate" length_s="2" length_t="2"/>
+            <texture id="glass" length_s="2" length_t="2"/>
             <children>
                 <componentref id="diner_window_1" />
             </children>
@@ -542,9 +543,9 @@
                 <translate x="0" y="0" z="-2.5" />
             </transformation>
             <materials>
-                <material id="whiteMaterial" />
+                <material id="inherit" />
             </materials>
-            <texture id="stargate" length_s="2" length_t="2"/>
+            <texture id="glass" length_s="2" length_t="2"/>
             <children>
                 <componentref id="diner_window_1" />
             </children>
@@ -554,6 +555,8 @@
             </transformation>
             <materials>
                 <material id="whiteMaterial" />
+                <material id="red" />
+                <material id="ion_blue" />
             </materials>
             <texture id="steel" length_s="1" length_t="1"/>
             <children>
@@ -1395,7 +1398,7 @@
                 <scale x="1" y="1" z="2" />
             </transformation>
             <materials>
-                <material id="whiteMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -1408,7 +1411,7 @@
                 <scale x="1" y="1" z="0.5" />
             </transformation>
             <materials>
-                <material id="whiteMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -1422,7 +1425,7 @@
                 <scale x="0.2" y="0.2" z="1" />
             </transformation>
             <materials>
-                <material id="whiteMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="X_spaceship_hull" length_s="1" length_t="1"/>
             <children>
@@ -1447,7 +1450,7 @@
                 <translate x="0" y="0" z="1.5" /> <!-- 0.5 from cone base + 1 from arm connector -->
             </transformation>
             <materials>
-                <material id="whiteMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="X_spaceship_hull" length_s="1" length_t="1"/>
             <children>
@@ -1463,7 +1466,7 @@
                 <rotate axis="y" angle="-90" />
             </transformation>
             <materials>
-                <material id="whiteMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -1476,7 +1479,7 @@
                 <rotate axis="y" angle="90" />
             </transformation>
             <materials>
-                <material id="whiteMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -1489,8 +1492,7 @@
                 <rotate axis="x" angle="90" />
             </transformation>
             <materials>
-                <material id="whiteMaterial" />
-                <material id="red" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -1540,7 +1542,7 @@
                 <scale x="0.5" y="0.5" z="0.5" />
             </transformation>
             <materials>
-                <material id="whiteMaterial" />
+                <material id="inherit" />
             </materials>
             <texture id="inherit"/>
             <children>
@@ -1553,6 +1555,7 @@
             </transformation>
             <materials>
                 <material id="whiteMaterial" />
+                <material id="red" />
             </materials>
             <texture id="X_spaceship_hull" length_s="1" length_t="1"/>
             <children>
