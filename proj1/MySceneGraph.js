@@ -61,10 +61,8 @@ class MySceneGraph {
       this.onXMLError(error);
       return;
     }
-
+    
     this.assignChildReferences(this.components[this.idRoot]);
-
-    this.loadedOk = true;
 
     /* As the graph loaded ok, signal the scene so that any additional
      initialization depending on the graph can take place
@@ -402,6 +400,7 @@ class MySceneGraph {
    * Displays the scene, processing each node, starting in the root node.
    */
   displayScene() {
+    if(!this.loadedOk) return;
 
     const rootComp = this.components[this.idRoot];
     const rootMat = rootComp.materials[this.materialSwitch % rootComp.materials.length];
@@ -411,30 +410,34 @@ class MySceneGraph {
   /**
    * @method assignChildReferences
    * Substitutes all references of a child ID by its corresponding object
+   * Checks for loops in the graph
    * @param  {object} component - Reference to the component to apply method
    */
   assignChildReferences(component) {
     
     if(component === null) {
-      console.log("Null component reference");
+      console.error("Null component reference");
       return;
     }
 
     if (component instanceof CGFobject) return;
-    
-    component.children.forEach((child, index) => {
 
-      if (child === null) {
-        console.log("Null child reference");
-        return;
-      }
+    if (component.visited) {
+      this.onXMLError("There is a loop in the graph");
+      return;
+    }
+    
+    component.visited = true;    
+    component.children.forEach((child, index) => {
 
       if (typeof child === 'string') {
         component.children[index] = this.components[child];
       }
+
       this.assignChildReferences(component.children[index]);
     });
-  }  
+    component.visited = false;
+  }
 
   /**
    * @method displayComponent
