@@ -48,7 +48,6 @@ class XMLscene extends CGFscene {
 
   onSelectedView() {
     this.camera = this.views[this.currentView];
-    console.log(this.camera);
     this.interface.setActiveCamera(this.camera);
   }
 
@@ -149,11 +148,10 @@ class XMLscene extends CGFscene {
   }
 
   update(t) {
-    this.checkKeys();
   }
 
-  checkKeys() {
-    if (this.gui.isKeyPressed('KeyM')) {
+  checkKeys(eventCode) {
+    if (eventCode == "KeyM") {
       this.graph.updateMaterial();
     }
   }
