@@ -17,7 +17,7 @@ const componentParser = {
 
       // Get id of the current component.
       const componentID = parserUtils.reader.getString(children[i], 'id');
-      if (componentID == null) return 'no ID defined for componentID';
+      if (!componentID) return 'no ID defined for componentID';
 
       // Checks for repeated IDs.
       if (sceneGraph.components[componentID] != null)
@@ -35,12 +35,16 @@ const componentParser = {
       const textureIndex = nodeNames.indexOf('texture');
       const childrenIndex = nodeNames.indexOf('children');
 
+      if (transformationIndex == -1) onXMLError('Missing transformation tag on component');
+      if (materialsIndex == -1) onXMLError('Missing materials tag on component');
+      if (textureIndex == -1) onXMLError('Missing texture tag on component');
+      if (childrenIndex == -1) onXMLError('Missing children tag on component');
+
       const currentComponent = {};
 
       // Transformations
       currentComponent.transformation = componentParser.parseComponentTransformations(
         grandChildren[transformationIndex].children,
-        sceneGraph.transformations,
         sceneGraph
       );
 
@@ -51,10 +55,10 @@ const componentParser = {
       );
 
       // Texture
-      currentComponent.texture =
-        textureIndex != -1
-          ? componentParser.parseComponentTexture(grandChildren[textureIndex], sceneGraph.textures, sceneGraph)
-          : null;
+      currentComponent.texture = componentParser.parseComponentTexture(
+        grandChildren[textureIndex],
+        sceneGraph
+      );
 
       // Children
       currentComponent.children = componentParser.parsePrimitiveChildren(
@@ -67,8 +71,17 @@ const componentParser = {
         )
       );
 
-      if (currentComponent.texture && currentComponent.materials.length != 0 && currentComponent.children.length != 0)
+      if (
+        currentComponent.texture &&
+        currentComponent.materials &&
+        currentComponent.materials.length != 0 &&
+        currentComponent.children &&
+        currentComponent.children.length != 0
+      )
         sceneGraph.components[componentID] = currentComponent;
+      else {
+        sceneGraph.onXMLError("Component parser");
+      }
     }
   },
   /**
@@ -76,8 +89,11 @@ const componentParser = {
    * @param  {object} textures
    * @param  {MySceneGraph} sceneGraph
    */
-  parseComponentTexture: (textureRef, textures, sceneGraph) => {
+  parseComponentTexture: (textureRef, sceneGraph) => {
+    const textures = sceneGraph.textures; 
     const textureID = parserUtils.reader.getString(textureRef, 'id');
+    if (!textureID) console.error("missing texture ID");
+
     if (textureID == 'inherit' || textureID == 'none') {
       if (
         parserUtils.reader.hasAttribute(textureRef, 'length_s') &&
@@ -108,14 +124,18 @@ const componentParser = {
    * @param  {Object} transformations
    * @param  {MySceneGraph} sceneGraph
    */
-  parseComponentTransformations: (componentTransformation, transformations, sceneGraph) => {
+  parseComponentTransformations: (componentTransformation, sceneGraph) => {
+    const transformations = sceneGraph.transformations;
     const transformationChildren = [];
     for (var j = 0; j < componentTransformation.length; j++) {
       transformationChildren.push(componentTransformation[j].nodeName);
     }
     const primitiveRefIndex = transformationChildren.indexOf('transformationref');
     if (primitiveRefIndex != -1) {
-      return transformations[parserUtils.reader.getString(componentTransformation[primitiveRefIndex], 'id')];
+      const transformationID = parserUtils.reader.getString(componentTransformation[primitiveRefIndex], 'id');
+      if (!transformationID) console.error("missing transformation id");
+
+      return transformations[transformationID];
     }
     return transformationParser.parseTransformation(componentTransformation, transformations, sceneGraph);
   },
@@ -129,9 +149,9 @@ const componentParser = {
     const componentMaterials = [];
     for (let i = 0; i < materialsNode.length; i++) {
       const materialID = parserUtils.reader.getString(materialsNode[i], 'id');
-      componentMaterials.push(
-        materialID === 'inherit' ? materialID : materials[materialID]
-      );
+      if (!materialID) console.error("missing material id");
+
+      componentMaterials.push(materialID === 'inherit' ? materialID : materials[materialID]);
     }
     return componentMaterials;
   },
@@ -143,7 +163,10 @@ const componentParser = {
   parseComponentChildren: (componentChildren) => {
     const componentsChildren = [];
     for (let i = 0; i < componentChildren.length; i++) {
-      componentsChildren.push(parserUtils.reader.getString(componentChildren[i], 'id'));
+      const childID = parserUtils.reader.getString(componentChildren[i], 'id');
+      if (!childID) console.error("missing component child id");
+
+      componentsChildren.push(childID);
     }
     return componentsChildren;
   },
@@ -155,8 +178,10 @@ const componentParser = {
   parsePrimitiveChildren: (primitiveChildren, primitives) => {
     const components = [];
     for (let i = 0; i < primitiveChildren.length; i++) {
-      const primitive = primitives[parserUtils.reader.getString(primitiveChildren[i], 'id')];
-      components.push(primitive);
+      const childID = parserUtils.reader.getString(primitiveChildren[i], 'id');
+      if (!childID) console.error("missing primitive child id");
+
+      components.push(primitives[childID]);
     }
     return components;
   }
