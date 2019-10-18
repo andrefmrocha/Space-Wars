@@ -148,11 +148,10 @@ class XMLscene extends CGFscene {
   }
 
   update(t) {
-    this.checkKeys();
   }
 
-  checkKeys() {
-    if (this.gui.isKeyPressed('KeyM')) {
+  checkKeys(eventCode) {
+    if (eventCode == "KeyM") {
       this.graph.updateMaterial();
     }
   }
