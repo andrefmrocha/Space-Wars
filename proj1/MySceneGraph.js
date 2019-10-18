@@ -213,10 +213,7 @@ class MySceneGraph {
       return 'No perspectives found!';
     }
 
-    Object.keys(this.perspectives).forEach((key, index) => {
-      this.scene.viewsIDs[key] = index;
-      this.scene.viewsList.push(this.perspectives[key]);
-    });
+    this.scene.views = this.perspectives;
 
     const defaultCamera = parserUtils.reader.getString(viewsNode, 'default');
     if (!defaultCamera) this.onXMLError('default camera not specified');
