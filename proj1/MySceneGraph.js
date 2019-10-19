@@ -414,9 +414,9 @@ class MySceneGraph {
    * @param  {object} component - Reference to the component to apply method
    */
   assignChildReferences(component) {
-    
-    if(component === null) {
-      console.error("Null component reference");
+
+    if(!component) {
+      this.onXMLError("Null component reference");
       return;
     }
 
@@ -431,9 +431,9 @@ class MySceneGraph {
     component.children.forEach((child, index) => {
 
       if (typeof child === 'string') {
+        if(!this.components[child]) this.onXMLError(`${child} not found`);
         component.children[index] = this.components[child];
       }
-
       this.assignChildReferences(component.children[index]);
     });
     component.visited = false;
