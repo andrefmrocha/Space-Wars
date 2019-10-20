@@ -77,9 +77,9 @@ class XMLscene extends CGFscene {
         if (attenuation.quadratic) this.lights[index].setQuadraticAttenuation(attenuation.quadratic);
 
         if (light[1] == 'spot') {
-          this.lights[index].setSpotCutOff(light[7]);
-          this.lights[index].setSpotExponent(light[8]);
-          this.lights[index].setSpotDirection(light[9][0], light[9][1], light[9][2]);
+          this.lights[index].setSpotCutOff(light[8]);
+          this.lights[index].setSpotExponent(light[9]);
+          this.lights[index].setSpotDirection(light[10][0], light[10][1], light[10][2]);
         }
 
         this.lights[index].setVisible(true);

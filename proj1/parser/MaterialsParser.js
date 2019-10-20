@@ -19,9 +19,14 @@ const materialsParser = {
       const materialID = parserUtils.reader.getString(children[i], 'id');
       if (!materialID) return 'no ID defined for material';
 
+      const shininess = parserUtils.reader.getFloat(children[i], 'shininess');
+      if(!shininess) return `No shininess on material ${shininess}`;
+      
+      
       // Checks for repeated IDs.
       if (materials[materialID] != null) return 'ID must be unique for each light (conflict: ID = ' + materialID + ')';
       const material = materialsParser.parseMaterial(children[i], sceneGraph);
+      material.setShininess(shininess);
       if (material) materials[materialID] = material;
     }
 
