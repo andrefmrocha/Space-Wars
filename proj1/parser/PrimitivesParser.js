@@ -427,7 +427,7 @@ const primitiveParsers = {
     if(xx == null || yy == null || zz == null)
       sceneGraph.onXMLError('unable to parse control point of primitive with id = ' + primitiveId);
 
-    return {x: xx, y: yy, z: zz};
+    return [xx, yy, zz];
   },
 
   /**
