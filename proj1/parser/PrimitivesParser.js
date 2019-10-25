@@ -405,6 +405,9 @@ const primitiveParsers = {
       controlPoints.push(primitiveParsers.parseControlPoint(component.children[i]));
     }
 
+    if (controlPoints.length != nPointsU*nPointsV)
+      sceneGraph.onXMLError('number of control points defined does not match nPointsU*nPointsV, for primitive id = ' + primitiveId);
+
     console.log(`Parsed patch with values ${nPointsU}, ${nPointsV}, ${nPartsU}, ${nPartsV}`);
     return null;
     //return new MyPatch(scene, nPointsU, nPointsV, nPartsU, nPartsV, controlPoints);
