@@ -71,6 +71,12 @@ const componentParser = {
         )
       );
 
+      currentComponent.animations = componentParser.parseAnimationChildren(
+        grandChildren[childrenIndex].getElementsByTagName('animationref'),
+        sceneGraph
+      );
+
+
       if(!currentComponent.texture) {
         sceneGraph.onXMLError("Component parser, missing texture");
       }
@@ -185,5 +191,15 @@ const componentParser = {
       components.push(primitives[childID]);
     }
     return components;
+  },
+
+  parseAnimationChildren: (animationsNode, sceneGraph) => {
+    if(animationsNode.length > 1) sceneGraph.onXMLMinorError('Found two animation references!');
+    if(animationsNode.length > 0){
+      const currentAnimation = animationsNode[0];
+      const id = parserUtils.reader.getString(currentAnimation, 'id');
+      if(!id) sceneGraph.onXMLError('No id on animation ref');
+      return sceneGraph.animations[id];
+    }
   }
-};
+}

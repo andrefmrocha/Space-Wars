@@ -123,6 +123,16 @@
         </transformation>
     </transformations>
 
+    <animations>
+        <animation id="test-animation">
+            <keyframe instant="10">
+                <translate x="500" y="2.0" z="2.0" />
+                <rotate angle_x="90" angle_y="0" angle_z="0" />
+                <scale x="2" y="2" z="2" />
+            </keyframe>
+        </animation>
+    </animations>
+
     <primitives>
         <primitive id="triangle">
             <triangle x1="0" y1="0" z1="1" x2="1" y2="0" z2="0" x3="0" y3="1" z3="0" />
@@ -559,6 +569,7 @@
                 <material id="ion_blue" />
             </materials>
             <texture id="steel" length_s="1" length_t="1"/>
+            <animationref id="test-animation" />
             <children>
                 <componentref id="roof_diner" />
                 <componentref id="base_diner" />

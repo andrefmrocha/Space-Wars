@@ -64,6 +64,9 @@ serialInclude([
   'parser/TransformationParser.js',
   'parser/ComponentParser.js',
   'parser/ParserUtils.js',
+  'parser/AnimationsParser.js',
+  'animation/Animation.js',
+  'animation/KeyframeAnimation.js',
 
   (main = function() {
     // Standard application, scene and interface setup
