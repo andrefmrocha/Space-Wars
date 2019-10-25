@@ -74,6 +74,18 @@
         <primitive id="demoTorus">
             <torus inner="1" outer="3" slices="10" loops="10"/>
         </primitive>
+        <primitive id="plane">
+            <plane npartsU="2" npartsV="2"/>
+        </primitive>
+        <primitive id="patch">
+            <patch npointsU="1" npointsV="2" npartsU="2" npartsV="2">
+                <controlpoint xx="0" yy="1" zz="2" />
+                <controlpoint xx="1" yy="2" zz="3" />
+            </patch>
+        </primitive>
+        <primitive id="cylinder2">
+            <cylinder2 base="1" top="1" height="3" slices="10" stacks="10"/>
+        </primitive>
     </primitives>
 
     <components>
