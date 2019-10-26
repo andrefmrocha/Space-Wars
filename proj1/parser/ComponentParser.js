@@ -34,6 +34,7 @@ const componentParser = {
       const materialsIndex = nodeNames.indexOf('materials');
       const textureIndex = nodeNames.indexOf('texture');
       const childrenIndex = nodeNames.indexOf('children');
+      const animationIndex = nodeNames.indexOf('animationref');
 
       if (transformationIndex == -1) onXMLError('Missing transformation tag on component');
       if (materialsIndex == -1) onXMLError('Missing materials tag on component');
@@ -71,10 +72,12 @@ const componentParser = {
         )
       );
 
-      currentComponent.animations = componentParser.parseAnimationChildren(
-        grandChildren[childrenIndex].getElementsByTagName('animationref'),
-        sceneGraph
-      );
+      if(animationIndex != -1){
+        currentComponent.animation = componentParser.parseAnimationChildren(
+          grandChildren[animationIndex],
+          sceneGraph
+        );
+      }
 
 
       if(!currentComponent.texture) {
@@ -194,12 +197,8 @@ const componentParser = {
   },
 
   parseAnimationChildren: (animationsNode, sceneGraph) => {
-    if(animationsNode.length > 1) sceneGraph.onXMLMinorError('Found two animation references!');
-    if(animationsNode.length > 0){
-      const currentAnimation = animationsNode[0];
-      const id = parserUtils.reader.getString(currentAnimation, 'id');
-      if(!id) sceneGraph.onXMLError('No id on animation ref');
-      return sceneGraph.animations[id];
-    }
+    const id = parserUtils.reader.getString(animationsNode, 'id');
+    if(!id) sceneGraph.onXMLError('No id on animation ref');
+    return sceneGraph.animations[id];
   }
 }
