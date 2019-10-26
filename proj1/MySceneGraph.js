@@ -68,6 +68,11 @@ class MySceneGraph {
     /* As the graph loaded ok, signal the scene so that any additional
      initialization depending on the graph can take place
     */
+    const initialTime = Date.now();
+    Object.keys(this.animations).forEach((key) =>{
+      this.animations[key].initialTime = initialTime; 
+    })
+
     this.scene.onGraphLoaded();
   }
 

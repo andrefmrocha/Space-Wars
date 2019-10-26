@@ -125,9 +125,14 @@
 
     <animations>
         <animation id="test-animation">
+            <keyframe instant="5">
+                <translate x="50" y="0.0" z="0.0" />
+                <rotate angle_x="0" angle_y="90" angle_z="0" />
+                <scale x="2" y="2" z="2" />
+            </keyframe>
             <keyframe instant="10">
-                <translate x="500" y="2.0" z="2.0" />
-                <rotate angle_x="90" angle_y="0" angle_z="0" />
+                <translate x="50" y="5.0" z="0.0" />
+                <rotate angle_x="90" angle_y="90" angle_z="0" />
                 <scale x="2" y="2" z="2" />
             </keyframe>
         </animation>
