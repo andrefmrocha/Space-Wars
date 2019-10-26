@@ -473,8 +473,6 @@ const primitiveParsers = {
       sceneGraph
     );
 
-    console.log(`Parsed cylinder2 with values ${base}, ${top}, ${height}, ${cylinderSlices}, ${cylinderStacks}`);
-    return null;
-    //return new MyCylinder2(scene, height, base, top, cylinderSlices, cylinderStacks);
+    return new MyCylinder2(scene, base, top, height, cylinderSlices, cylinderStacks);
   }
 };

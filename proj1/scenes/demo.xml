@@ -69,7 +69,7 @@
             <sphere radius="1" slices="10" stacks="10"/>
         </primitive>
         <primitive id="demoCylinder">
-            <cylinder base="1" top="1" height="3" slices="10" stacks="10"/>
+            <cylinder base="1" top="3" height="3" slices="10" stacks="10"/>
         </primitive>
         <primitive id="demoTorus">
             <torus inner="1" outer="3" slices="10" loops="10"/>
@@ -132,7 +132,7 @@
             </patch>
         </primitive>
         <primitive id="cylinder2">
-            <cylinder2 base="1" top="1" height="3" slices="10" stacks="10"/>
+            <cylinder2 base="1" top="3" height="3" slices="10" stacks="10"/>
         </primitive>
     </primitives>
 
@@ -225,7 +225,6 @@
 
         <component id="planeTest">
             <transformation>
-                <scale x="2" y="1" z="2" />
             </transformation>
             <materials>
                 <material id="demoMaterial" />
@@ -233,6 +232,32 @@
             <texture id="demoTexture" length_s="2" length_t="2"/>
             <children>
                 <primitiveref id="plane" />
+            </children>
+        </component>
+
+        <component id="cylinder2Test">
+            <transformation>
+                <translate x="5" y="0" z="0" />
+            </transformation>
+            <materials>
+                <material id="demoMaterial2" />
+            </materials>
+            <texture id="demoTexture" length_s="2" length_t="2"/>
+            <children>
+                <primitiveref id="cylinder2" />
+            </children>
+        </component>
+        
+        <component id="cylindersCompare">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="demoMaterial2" />
+            </materials>
+            <texture id="demoTexture" length_s="2" length_t="2"/>
+            <children>
+                <componentref id="cylinder2Test" />
+                <componentref id="cylinderTest" />
             </children>
         </component>
 
