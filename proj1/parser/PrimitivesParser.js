@@ -359,10 +359,8 @@ const primitiveParsers = {
       'unable to parse npartsV of the primitive with ID = ' + primitiveId,
       sceneGraph
     );
-
-    console.log(`Parsed plane with values ${nPartsU}, ${nPartsV}`);
-    return null;
-    //return new MyPlane(scene, nPartsU, nPartsV);
+    
+    return new MyPlane(scene, nPartsU, nPartsV);
   },
 
   /**

@@ -1,5 +1,5 @@
 <lxs>
-    <scene root="patchTest" axis_length="5"/>
+    <scene root="planeTest" axis_length="5"/>
 
     <views default="defaultCamera">
         <perspective id="defaultCamera" near="5" far="500" angle="45">
@@ -28,7 +28,7 @@
     </lights>
 
     <textures>
-        <texture id="demoTexture" file="scenes/images/texture_test.jpg" />
+        <texture id="demoTexture" file="scenes/images/cosmos.jpg" />
     </textures>
 
     <materials>
@@ -220,6 +220,19 @@
             <texture id="demoTexture" length_s="4" length_t="4"/>
             <children>
                 <primitiveref id="patch4" />
+            </children>
+        </component>
+
+        <component id="planeTest">
+            <transformation>
+                <scale x="2" y="1" z="2" />
+            </transformation>
+            <materials>
+                <material id="demoMaterial" />
+            </materials>
+            <texture id="demoTexture" length_s="2" length_t="2"/>
+            <children>
+                <primitiveref id="plane" />
             </children>
         </component>
 
