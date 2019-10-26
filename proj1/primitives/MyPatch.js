@@ -1,16 +1,23 @@
 class MyPatch extends CGFobject {
 
-    constructor(scene, nPointsU, nPointsV, nPartsU, nPartsV) {
+    constructor(scene, nPointsU, nPointsV, nPartsU, nPartsV, controlVertices) {
         super(scene);
-        this.nPointsU = nPointsU;
-        this.nPointsV = nPointsV;
+        this.degree1 = nPointsU-1;
+        this.degree2 = nPointsV-1;
         this.nPartsU = nPartsU;
         this.nPartsV = nPartsV;
-        this.initBuffers();
+        this.controlVertices = controlVertices;
+
+        this.initPatch();
     }
 
-    initBuffers() {
+    initPatch() {
+        let nurbsSurface = new CGFnurbsSurface(this.degree1, this.degree2, this.controlVertices);
 
-        
+        this.nurbsObj = new CGFnurbsObject(this.scene, this.nPartsU, this.nPartsV, nurbsSurface);        
+    }
+
+    display() {
+        this.nurbsObj.display();
     }
 }
