@@ -36,6 +36,7 @@ class XMLscene extends CGFscene {
     this.viewsList = [];
     this.viewsIDs = {};
     this.views = {};
+    this.time = Date.now();
   }
 
   addViews(defaultCamera) {
@@ -147,7 +148,11 @@ class XMLscene extends CGFscene {
     this.sceneInited = true;
   }
 
-  update(t) {
+  update(currTime) {
+    if(this.sceneInited){
+      const currentInstant = currTime - this.time;
+      this.graph.updateComponentAnimations(currentInstant);
+    }
   }
 
   checkKeys(eventCode) {

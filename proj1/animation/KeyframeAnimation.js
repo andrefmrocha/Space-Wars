@@ -7,9 +7,8 @@ class KeyframeAnimation extends Animation {
         this.currentAnimation = mat4.create();
     }
 
-    update() {
+    update(currentInstant) {
         this.clearMatrix();
-        const currentInstant = Date.now() - this.initialTime;
         if (this.animationFinished(currentInstant))
             this.executeLastFrame();
         else
