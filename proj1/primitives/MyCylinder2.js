@@ -31,38 +31,19 @@ class MyCylinder2 extends CGFobject {
             [ // V = 0,1
                 [-this.base, 0, 0, 1 ],	
                 [-this.top, 0, this.height, 1 ]      
-            ],
-            // U = 4
-            [ // V = 0,1
-                [-this.base, 0, 0, 1 ],	
-                [-this.top, 0, this.height, 1 ]     
-            ],
-            // U = 5
-            [ // V = 0,1
-                [-this.base, -this.base/0.75, 0, 1 ],	
-                [-this.top, -this.top/0.75, this.height, 1 ]      
-            ],
-            // U = 6
-            [ // V = 0,1
-                [this.base, -this.base/0.75, 0, 1 ],	
-                [this.top, -this.top/0.75, this.height, 1 ]      
-            ],
-            // U = 7
-            [ // V = 0,1
-                [this.base, 0, 0, 1 ],	
-                [this.top, 0, this.height, 1 ]      
             ]
         ];
-        let nurbsSurface = new CGFnurbsSurface(7, 1, controlVertices);
+        let nurbsSurface = new CGFnurbsSurface(3, 1, controlVertices);
 
-        this.nurbsObj = new CGFnurbsObject(this.scene, this.slices, this.stacks, nurbsSurface);  
-        
-        // TODO problem with number of slices. Since a control point is repeated, it divides itself strangely around this duplicate. 
-        // Maybe do something with simetry?
-        
+        this.nurbsObj = new CGFnurbsObject(this.scene, Math.floor(this.slices/2), this.stacks, nurbsSurface);         
     }
 
     display() {
         this.nurbsObj.display();
+
+        this.scene.pushMatrix();
+        this.scene.rotate(Math.PI, 0, 0, 1);
+        this.nurbsObj.display();
+        this.scene.popMatrix();
     }
 }
