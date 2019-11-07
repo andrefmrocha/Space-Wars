@@ -4,6 +4,17 @@ class KeyframeAnimation extends Animation {
         super();
         this.scene = scene;
         this.keyframes = keyframes;
+        this.keyframes.forEach((keyframe, index) => {
+            const lastKeyframe = index > 0 ? this.keyframes[index - 1] : {
+                scale: [1, 1, 1],
+                instant: 0
+            };
+            const n = ((keyframe.instant - lastKeyframe.instant)/1000) * 30;
+            this.keyframes[index].n = n;
+            this.keyframes[index].r = keyframe.scale.map((coord, index) =>{
+                return Math.pow((coord/lastKeyframe.scale[index]), 1/n);
+            });
+        });
         this.currentAnimation = mat4.create();
     }
 
@@ -26,6 +37,13 @@ class KeyframeAnimation extends Animation {
 
                 const time = 1 - ((nextKeyFrame.instant - currentInstant) /
                     (nextKeyFrame.instant - keyframe.instant));
+                
+                const scale = keyframe.scale.map((coord, index)=>{
+                    const r = nextKeyFrame.r[index];
+                    const nextCoord = nextKeyFrame.scale[index];
+                    const k = time * nextKeyFrame.n;
+                    return ((coord - nextCoord) + 1) * Math.pow(r, k);
+                });
                 const translationX = (nextKeyFrame.translate[0] - keyframe.translate[0]) * time;
                 const translationY = (nextKeyFrame.translate[1] - keyframe.translate[1]) * time;
                 const translationZ = (nextKeyFrame.translate[2] - keyframe.translate[2]) * time;
@@ -40,7 +58,7 @@ class KeyframeAnimation extends Animation {
 
                 this.translate([translationX, translationY, translationZ]);
                 this.rotate({ angleX, angleY, angleZ });
-                this.scale([scalingX, scalingY, scalingZ]);
+                this.scale(scale);
                 break;
             } else if (keyframe.instant > currentInstant && i == 0) {
                 const time = 1 - ((keyframe.instant - currentInstant) /
@@ -53,13 +71,18 @@ class KeyframeAnimation extends Animation {
                 const angleY = (keyframe.rotation.angleY - 0) * time;
                 const angleZ = (keyframe.rotation.angleZ - 0) * time;
 
+                const scale = keyframe.scale.map((_, index) => {
+                    const r = keyframe.r[index];
+                    const k = time * keyframe.n;
+                    return 1 * Math.pow(r, k);
+                });
 
                 const scalingX = 1 + (keyframe.scale[0] - 1) * time;
                 const scalingY = 1 + (keyframe.scale[1] - 1) * time;
                 const scalingZ = 1 + (keyframe.scale[2] - 1) * time;
                 this.translate([translationX, translationY, translationZ]);
                 this.rotate({ angleX, angleY, angleZ });
-                this.scale([scalingX, scalingY, scalingZ]);
+                this.scale(scale);
                 break;
             } else {
                 this.translate(keyframe.translate);
