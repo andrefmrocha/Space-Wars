@@ -1,5 +1,5 @@
 <lxs>
-    <scene root="triangleTest" axis_length="5"/>
+    <scene root="cylindersCompare" axis_length="5"/>
 
     <views default="defaultCamera">
         <perspective id="defaultCamera" near="5" far="500" angle="45">
@@ -13,7 +13,7 @@
     </views>
 
     <globals>
-        <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
+        <ambient r="0.5" g="0.5" b="0.5" a="1.0" />
         <background r="0.0" g="0.0" b="0.0" a="1.0" />
     </globals>
 
@@ -28,7 +28,8 @@
     </lights>
 
     <textures>
-        <texture id="demoTexture" file="scenes/images/texture_test.jpg" />
+        <texture id="demoTexture" file="scenes/images/cosmos.jpg" />
+        <texture id="neon" file="scenes/images/neon-sign.jpg" />
     </textures>
 
     <materials>
@@ -69,10 +70,70 @@
             <sphere radius="1" slices="10" stacks="10"/>
         </primitive>
         <primitive id="demoCylinder">
-            <cylinder base="1" top="1" height="3" slices="10" stacks="10"/>
+            <cylinder base="1" top="3" height="3" slices="9" stacks="9"/>
         </primitive>
         <primitive id="demoTorus">
             <torus inner="1" outer="3" slices="10" loops="10"/>
+        </primitive>
+        <primitive id="plane">
+            <plane npartsU="2" npartsV="2"/>
+        </primitive>
+        <primitive id="patch1">
+            <patch npointsU="2" npointsV="2" npartsU="20" npartsV="20">
+                <controlpoint xx="-2" yy="-2" zz="0" />
+                <controlpoint xx="-2" yy="2" zz="0" />
+                <controlpoint xx="2" yy="-2" zz="0" />
+                <controlpoint xx="2" yy="2" zz="0" />
+            </patch>
+        </primitive>
+        <primitive id="patch2">
+            <patch npointsU="3" npointsV="2" npartsU="20" npartsV="20">
+                <controlpoint xx="-1.5" yy="-1.5" zz="0" />
+                <controlpoint xx="-1.5" yy="1.5" zz="0" />
+                <controlpoint xx="0" yy="-1.5" zz="3" />
+                <controlpoint xx="0" yy="1.5" zz="3" />
+                <controlpoint xx="1.5" yy="-1.5" zz="0" />
+                <controlpoint xx="1.5" yy="1.5" zz="0" />
+            </patch>
+        </primitive>
+        <primitive id="patch3">
+            <patch npointsU="3" npointsV="4" npartsU="20" npartsV="20">
+                <controlpoint xx="-1.5" yy="-1.5" zz="0" />
+                <controlpoint xx="-2" yy="-2" zz="2" />
+                <controlpoint xx="-2" yy="2" zz="2" />
+                <controlpoint xx="-1.5" yy="1.5" zz="0" />
+
+                <controlpoint xx="0" yy="0" zz="3" />
+                <controlpoint xx="0" yy="-2" zz="3" />
+                <controlpoint xx="0" yy="2" zz="3" />
+                <controlpoint xx="0" yy="0" zz="3" />
+
+                <controlpoint xx="1.5" yy="-1.5" zz="0" />
+                <controlpoint xx="2" yy="-2" zz="2" />
+                <controlpoint xx="2" yy="2" zz="2" />
+                <controlpoint xx="1.5" yy="1.5" zz="0" />
+            </patch>
+        </primitive>
+        <primitive id="patch4">
+            <patch npointsU="3" npointsV="4" npartsU="20" npartsV="20">
+                <controlpoint xx="-2" yy="-2" zz="1" />
+                <controlpoint xx="-2" yy="-1" zz="-2" />
+                <controlpoint xx="-2" yy="1" zz="5" />
+                <controlpoint xx="-2" yy="2" zz="-1" />
+
+                <controlpoint xx="0" yy="-2" zz="0" />
+                <controlpoint xx="0" yy="-1" zz="-1" />
+                <controlpoint xx="0" yy="1" zz="1.5" />
+                <controlpoint xx="0" yy="2" zz="0" />
+
+                <controlpoint xx="2" yy="-2" zz="-1" />
+                <controlpoint xx="2" yy="-1" zz="2" />
+                <controlpoint xx="2" yy="1" zz="-5" />
+                <controlpoint xx="2" yy="2" zz="1" />
+            </patch>
+        </primitive>
+        <primitive id="cylinder2">
+            <cylinder2 base="1" top="3" height="3" slices="9" stacks="9"/>
         </primitive>
     </primitives>
 
@@ -96,7 +157,7 @@
             <materials>
                 <material id="demoMaterial2" />
             </materials>
-            <texture id="demoTexture" length_s="1" length_t="1"/>
+            <texture id="neon" length_s="1" length_t="1"/>
             <children>
                 <primitiveref id="demoCylinder" />
             </children>
@@ -148,6 +209,56 @@
             <texture id="demoTexture" length_s="4" length_t="4"/>
             <children>
                 <primitiveref id="demoTorus" />
+            </children>
+        </component>
+
+        <component id="patchTest">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="demoMaterial" />
+            </materials>
+            <texture id="demoTexture" length_s="4" length_t="4"/>
+            <children>
+                <primitiveref id="patch4" />
+            </children>
+        </component>
+
+        <component id="planeTest">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="demoMaterial" />
+            </materials>
+            <texture id="demoTexture" length_s="2" length_t="2"/>
+            <children>
+                <primitiveref id="plane" />
+            </children>
+        </component>
+
+        <component id="cylinder2Test">
+            <transformation>
+                <translate x="7" y="0" z="0" />
+            </transformation>
+            <materials>
+                <material id="demoMaterial2" />
+            </materials>
+            <texture id="neon" length_s="2" length_t="2"/>
+            <children>
+                <primitiveref id="cylinder2" />
+            </children>
+        </component>
+        
+        <component id="cylindersCompare">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="demoMaterial2" />
+            </materials>
+            <texture id="demoTexture" length_s="2" length_t="2"/>
+            <children>
+                <componentref id="cylinder2Test" />
+                <componentref id="cylinderTest" />
             </children>
         </component>
 
