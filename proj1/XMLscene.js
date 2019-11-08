@@ -205,7 +205,6 @@ class XMLscene extends CGFscene {
   }
 
   display() {
-    this.gl.disable(this.gl.DEPTH_TEST);
 
     this.securityCameraTexture.attachToFrameBuffer();
     this.render(this.secondaryCamera);
@@ -213,8 +212,8 @@ class XMLscene extends CGFscene {
 
     this.render(this.sceneCamera);
 
-    this.securityCamera.display(this.securityCameraTexture);
-    
+    this.gl.disable(this.gl.DEPTH_TEST);
+    this.securityCamera.display(this.securityCameraTexture);    
     this.gl.enable(this.gl.DEPTH_TEST);
   }
 }
