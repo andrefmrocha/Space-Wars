@@ -11,6 +11,10 @@ const animationsParser = {
 
             const animationID = parserUtils.reader.getString(children[i], 'id');
 
+            const isLoop = parserUtils.reader.hasAttribute(children[i], 'isLoop');
+
+            console.log(isLoop);
+
             if (!animationID) return 'no ID defined for animation!';
 
 
@@ -18,7 +22,7 @@ const animationsParser = {
                 return `ID must be unique for each animation (conflict: ID =  ${animationID})`;
 
             const keyframes = animationsParser.parseKeyframes(children[i], sceneGraph, animationID);
-            sceneGraph.animations[animationID] = new KeyframeAnimation(sceneGraph.scene, keyframes);
+            sceneGraph.animations[animationID] = new KeyframeAnimation(sceneGraph.scene, keyframes, isLoop);
         }
     },
 

@@ -136,6 +136,13 @@
                 <scale x="2" y="2" z="2" />
             </keyframe>
         </animation>
+        <animation id="rotate-ship" isLoop="isLoop">
+            <keyframe instant="2">
+                <translate x="0" y="0.0" z="0.0" />
+                <rotate angle_x="0" angle_y="0" angle_z="360" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
+        </animation>
     </animations>
 
     <primitives>
@@ -1643,6 +1650,7 @@
                 <material id="whiteMaterial" />
             </materials>
             <texture id="inherit"/>
+            <animationref id="rotate-ship" />
             <children>
                 <componentref id="Y-spaceship-arm-connector" />
                 <componentref id="Y-spaceship-arm-sphere-right" />
@@ -1764,6 +1772,7 @@
                 <material id="ion_blue" />
             </materials>
             <texture id="inherit"/>
+            <animationref id="rotate-ship"/>
             <children>
                 <primitiveref id="Y-spaceship-torus" />
             </children>

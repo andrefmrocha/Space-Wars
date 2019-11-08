@@ -1,7 +1,8 @@
 class KeyframeAnimation extends Animation {
 
-    constructor(scene, keyframes) {
+    constructor(scene, keyframes, isLoop) {
         super();
+        this.isLoop = isLoop;
         this.scene = scene;
         this.keyframes = keyframes;
         this.keyframes.forEach((keyframe, index) => {
@@ -20,10 +21,11 @@ class KeyframeAnimation extends Animation {
 
     update(currentInstant) {
         this.clearMatrix();
-        if (this.animationFinished(currentInstant))
+        const instant = currentInstant - this.initialTime;
+        if (this.animationFinished(instant, currentInstant))
             this.executeLastFrame();
         else
-            this.executeAnimation(currentInstant);
+            this.executeAnimation(instant);
     }
 
     executeAnimation(currentInstant) {
@@ -122,8 +124,13 @@ class KeyframeAnimation extends Animation {
         this.currentAnimation = mat4.scale(this.currentAnimation, this.currentAnimation, coords);
     }
 
-    animationFinished(currentInstant) {
-        return this.keyframes[this.keyframes.length - 1].instant < currentInstant;
+    animationFinished(instant, currentInstant) {
+        if (this.keyframes[this.keyframes.length - 1].instant < instant && this.isLoop){
+            this.initialTime = currentInstant;
+            return false;
+        }
+            
+        return this.keyframes[this.keyframes.length - 1].instant < instant;
     }
 
     clearMatrix() {
