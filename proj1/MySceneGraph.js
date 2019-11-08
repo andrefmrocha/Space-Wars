@@ -39,7 +39,6 @@ class MySceneGraph {
     this.axisCoords['y'] = [0, 1, 0];
     this.axisCoords['z'] = [0, 0, 1];
 
-
     /*
      * Read the contents of the xml file, and refer to this class for loading and error handlers.
      * After the file is read, the reader calls onXMLReady on this object.
@@ -68,9 +67,8 @@ class MySceneGraph {
     /* As the graph loaded ok, signal the scene so that any additional
      initialization depending on the graph can take place
     */
-    const initialTime = Date.now();
     Object.keys(this.animations).forEach((key) =>{
-      this.animations[key].initialTime = initialTime; 
+      this.animations[key].initialTime = 0; 
     })
 
     this.scene.onGraphLoaded();
@@ -456,6 +454,14 @@ class MySceneGraph {
     component.visited = false;
   }
 
+  updateComponentAnimations(currentInstant){
+    Object.keys(this.components).forEach((key) => {
+      const component = this.components[key];
+      if(component.animation)
+        component.animation.update(currentInstant);
+    })
+  }
+
   /**
    * @method displayComponent
    * Displays a component and all its children recursively
@@ -489,7 +495,6 @@ class MySceneGraph {
       this.scene.multMatrix(component.transformation);
       
       if(component.animation){
-        component.animation.update();
         component.animation.apply();
       }
 
