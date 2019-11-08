@@ -22,6 +22,7 @@ class XMLscene extends CGFscene {
     this.sceneInited = false;
 
     this.currentView;
+    this.securityView;
     this.initCameras();
 
     this.enableTextures(true);
@@ -43,15 +44,20 @@ class XMLscene extends CGFscene {
 
   addViews(defaultCamera) {
     this.currentView = defaultCamera ? defaultCamera : Object.keys(this.views)[0];
+    this.securityView = this.currentView;
     this.interface.gui
       .add(this, 'currentView', Object.keys(this.views))
-      .name('Views')
+      .name('Scene View')
+      .onChange(this.onSelectedView.bind(this));
+    this.interface.gui
+      .add(this, 'securityView', Object.keys(this.views))
+      .name('Security Camera')
       .onChange(this.onSelectedView.bind(this));
   }
 
   onSelectedView() {
     this.sceneCamera = this.views[this.currentView];
-    this.secondaryCamera = this.views[this.currentView];
+    this.secondaryCamera = this.views[this.securityView];
     this.interface.setActiveCamera(this.sceneCamera);
   }
 
