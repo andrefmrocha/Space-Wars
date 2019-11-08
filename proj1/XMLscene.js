@@ -36,6 +36,9 @@ class XMLscene extends CGFscene {
     this.viewsList = [];
     this.viewsIDs = {};
     this.views = {};
+
+    this.securityCameraTexture = new CGFtextureRTT(this, this.gl.canvas.width, this.gl.canvas.height);
+    this.securityCamera = new MySecurityCamera(this);
   }
 
   addViews(defaultCamera) {
@@ -47,8 +50,9 @@ class XMLscene extends CGFscene {
   }
 
   onSelectedView() {
-    this.camera = this.views[this.currentView];
-    this.interface.setActiveCamera(this.camera);
+    this.sceneCamera = this.views[this.currentView];
+    this.secondaryCamera = this.views[this.currentView];
+    this.interface.setActiveCamera(this.sceneCamera);
   }
 
   /**
@@ -56,6 +60,8 @@ class XMLscene extends CGFscene {
    */
   initCameras() {
     this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
+    this.sceneCamera = this.camera;
+    this.secondaryCamera = this.camera;
   }
   /**
    * Initializes the scene lights with the values read from the XML file.
@@ -159,12 +165,15 @@ class XMLscene extends CGFscene {
   /**
    * Displays the scene.
    */
-  display() {
+  render(renderCamera) {
     // ---- BEGIN Background, camera and axis setup
 
     // Clear image and depth buffer everytime we update the scene
     this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
     this.gl.clear(this.gl.COLOR_BUFFER_BIT | this.gl.DEPTH_BUFFER_BIT);
+
+    // Change current camera used for render
+    this.camera = renderCamera;
 
     // Initialize Model-View matrix as identity (no transformation
     this.updateProjectionMatrix();
@@ -187,5 +196,19 @@ class XMLscene extends CGFscene {
 
     this.popMatrix();
     // ---- END Background, camera and axis setup
+  }
+
+  display() {
+    this.gl.disable(this.gl.DEPTH_TEST);
+
+    this.securityCameraTexture.attachToFrameBuffer();
+    this.render(this.secondaryCamera);
+    this.securityCameraTexture.detachFromFrameBuffer();
+
+    this.render(this.sceneCamera);
+
+    this.securityCamera.display(this.securityCameraTexture);
+    
+    this.gl.enable(this.gl.DEPTH_TEST);
   }
 }
