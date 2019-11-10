@@ -6,9 +6,7 @@ varying vec2 vTexCoords;
 
 uniform sampler2D uSampler;
 
-void main() {
-	vec4 color = texture2D(uSampler, vec2(vTexCoords.x, 1.0 - vTexCoords.y));
-
+vec4 applyRadialShader(vec4 color) {
     // vector from (0.5, 0.5) to point
     vec2 cVec = vec2(vTexCoords.x-0.5, vTexCoords.y-0.5);
     float radialDist = length(cVec);
@@ -36,7 +34,13 @@ void main() {
 
     // ratio from dist(point to center) and dist(center to edge intersection)
     float radialWeight = radialDist / edgeIntersectionDist;
-    vec4 radialGradientColor = mix(color, vec4(0., 0., 0., 1.), radialWeight);
+    return mix(color, vec4(0., 0., 0., 1.), radialWeight);
+}
+
+void main() {
+	vec4 color = texture2D(uSampler, vec2(vTexCoords.x, 1.0 - vTexCoords.y));
+
+    vec4 radialGradientColor = applyRadialShader(color);
 
     gl_FragColor = radialGradientColor;
 }
