@@ -13,8 +13,6 @@ const animationsParser = {
 
             const isLoop = parserUtils.reader.hasAttribute(children[i], 'isLoop');
 
-            console.log(isLoop);
-
             if (!animationID) return 'no ID defined for animation!';
 
 

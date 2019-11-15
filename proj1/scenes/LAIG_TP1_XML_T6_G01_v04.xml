@@ -136,10 +136,36 @@
                 <scale x="2" y="2" z="2" />
             </keyframe>
         </animation>
-        <animation id="rotate-ship" isLoop="isLoop">
+        <animation id="rotate-Y-ship" isLoop="isLoop">
+            <keyframe instant="2">
+                <translate x="0" y="0.0" z="0.0" />
+                <rotate angle_x="360" angle_y="0" angle_z="0" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
+        </animation>
+        <animation id="rotate-X-ship" isLoop="isLoop">
             <keyframe instant="2">
                 <translate x="0" y="0.0" z="0.0" />
                 <rotate angle_x="0" angle_y="0" angle_z="360" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
+        </animation>
+        <animation id="scale-X-ring" isLoop="isLoop">
+            <keyframe instant="0.5">
+                <translate x="0" y="0.0" z="0.0" />
+                <rotate angle_x="0" angle_y="0" angle_z="0" />
+                <scale x="1.5" y="1.5" z="1.5" />
+            </keyframe>
+            <keyframe instant="1">
+                <translate x="0" y="0.0" z="0.0" />
+                <rotate angle_x="0" angle_y="0" angle_z="0" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
+        </animation>
+        <animation id="fire-X" isLoop="isLoop">
+            <keyframe instant="2">
+                <translate x="0" y="0.0" z="20.0" />
+                <rotate angle_x="0" angle_y="0" angle_z="0" />
                 <scale x="1" y="1" z="1" />
             </keyframe>
         </animation>
@@ -1464,6 +1490,7 @@
                 <material id="whiteMaterial" />
             </materials>
             <texture id="futuristic_red" length_s="1" length_t="1"/>
+            <animationref id="scale-X-ring" />
             <children>
                 <primitiveref id="torus" />
             </children>
@@ -1476,6 +1503,7 @@
                 <material id="inherit" />
             </materials>
             <texture id="X_spaceship_hull" length_s="1" length_t="1"/>
+            <animationref id="rotate-X-ship" />
             <children>
                 <componentref id="X-spaceship-arm-cone" />
                 <componentref id="X-spaceship-arm-cone-base" />
@@ -1650,7 +1678,6 @@
                 <material id="whiteMaterial" />
             </materials>
             <texture id="inherit"/>
-            <animationref id="rotate-ship" />
             <children>
                 <componentref id="Y-spaceship-arm-connector" />
                 <componentref id="Y-spaceship-arm-sphere-right" />
@@ -1772,7 +1799,6 @@
                 <material id="ion_blue" />
             </materials>
             <texture id="inherit"/>
-            <animationref id="rotate-ship"/>
             <children>
                 <primitiveref id="Y-spaceship-torus" />
             </children>
@@ -1792,6 +1818,24 @@
                 <componentref id="ion-cannon" />
             </children>
         </component>          
+
+        <component id="Y-spaceship-rotating">
+            <transformation>
+
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="Y_spaceship_hull" length_s="1" length_t="1"/>
+            <animationref id="rotate-Y-ship" />
+            <children>
+                <componentref id="Y-spaceship-ring" />
+                <componentref id="Y-spaceship-arm-1" />
+                <componentref id="Y-spaceship-arm-2" />
+                <componentref id="Y-spaceship-arm-3" />
+            </children>
+        </component>        
+        <!-- Y SPACESHIP END -->
         <component id="Y-spaceship">
             <transformation>
 
@@ -1801,11 +1845,8 @@
             </materials>
             <texture id="Y_spaceship_hull" length_s="1" length_t="1"/>
             <children>
-                <componentref id="Y-spaceship-ring" />
-                <componentref id="Y-spaceship-arm-1" />
-                <componentref id="Y-spaceship-arm-2" />
-                <componentref id="Y-spaceship-arm-3" />
                 <componentref id="Y-spaceship-Y" />
+                <componentref id="Y-spaceship-rotating" />
                 <componentref id="Y-spaceship-gun-ring" />
                 <componentref id="Y-spaceship-gun" />
             </children>
@@ -1919,6 +1960,7 @@
                 <material id="red" />
             </materials>
             <texture id="none"/>
+            <animationref id="fire-X"/>
             <children>
                 <componentref id="space-laser" />
             </children>
