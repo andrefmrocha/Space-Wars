@@ -10,13 +10,17 @@ class MySecurityCamera extends CGFobject {
 
     initShader() {
         this.cameraShader = new CGFshader(this.scene.gl, "shaders/camera.vert", "shaders/camera.frag");
-        this.cameraShader.setUniformsValues({uSampler: 0});
+    }
+
+    update(t) {
+        if(!this.initialTime) this.initialTime = t;
+        let timeSeconds = (t - this.initialTime)/1000;
+        this.cameraShader.setUniformsValues({time: timeSeconds/4});
     }
 
     display(rtt) {
         this.scene.pushMatrix();
         this.scene.setActiveShader(this.cameraShader);
-        
         rtt.bind();
         this.rectangle.display();
         

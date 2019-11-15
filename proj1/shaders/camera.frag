@@ -5,8 +5,9 @@ precision highp float;
 varying vec2 vTexCoords;
 
 uniform sampler2D uSampler;
+uniform float time;
 
-vec4 applyRadialShader(vec4 color) {
+vec4 applyRectangleShader(vec4 color) {
     // vector from (0.5, 0.5) to point
     vec2 cVec = vec2(vTexCoords.x-0.5, vTexCoords.y-0.5);
     float radialDist = length(cVec);
@@ -29,7 +30,7 @@ vec4 applyRadialShader(vec4 color) {
         dotProductVec = vec2(1.0, 0.0);
     }
     // distance from center to intersection at uv square
-    float vecCos = dot(dotProductVec, normalizedVec);
+    float vecCos = dot(dotProductVec, normalizedVec);   
     float edgeIntersectionDist = 0.5 / vecCos;
 
     // ratio from dist(point to center) and dist(center to edge intersection)
@@ -37,10 +38,26 @@ vec4 applyRadialShader(vec4 color) {
     return mix(color, vec4(0., 0., 0., 1.), radialWeight);
 }
 
+vec4 applyRadialShader(vec4 color) {
+    // weight is the ratio between the distance to [0.5, 0.5] and radial distance (0.5)
+    return mix(color, vec4(0., 0., 0., 1.), length(vec2(vTexCoords.x-0.5, vTexCoords.y-0.5)) / 0.5);
+}
+
+float nDivisions = 8.0;
+float divsPerLine = 2.0;
+vec4 applyHorizontalLinesShader(vec4 color) {
+    float timedTexY = vTexCoords.y + time;
+    float modVal = mod(timedTexY * nDivisions, divsPerLine);
+    float colorWeight = abs(modVal - divsPerLine/2.0) * 0.3;
+    
+    return newColor + vec4(1., 1., 1., 1.) * colorWeight;
+}
+
 void main() {
 	vec4 color = texture2D(uSampler, vec2(vTexCoords.x, 1.0 - vTexCoords.y));
 
     vec4 radialGradientColor = applyRadialShader(color);
+    vec4 horizontalLinesShaderColor = applyHorizontalLinesShader(radialGradientColor);
 
-    gl_FragColor = radialGradientColor;
+    gl_FragColor = horizontalLinesShaderColor;
 }

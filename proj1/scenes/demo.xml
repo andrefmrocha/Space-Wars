@@ -195,11 +195,12 @@
             <materials>
                 <material id="demoMaterial2" />
             </materials>
-            <texture id="demoTexture" length_s="4" length_t="4"/>
+            <texture id="neon" length_s="4" length_t="4" />
             <children>
                 <primitiveref id="demoRectangle" />
             </children>
         </component>
+
 
         <component id="torusTest">
             <transformation>

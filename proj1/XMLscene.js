@@ -160,6 +160,7 @@ class XMLscene extends CGFscene {
   }
 
   update(t) {
+    this.securityCamera.update(t);
   }
 
   checkKeys(eventCode) {
@@ -213,6 +214,8 @@ class XMLscene extends CGFscene {
     this.render(this.sceneCamera);
 
     this.gl.disable(this.gl.DEPTH_TEST);
+    this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_S, this.gl.REPEAT);
+    this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_T, this.gl.REPEAT);
     this.securityCamera.display(this.securityCameraTexture);    
     this.gl.enable(this.gl.DEPTH_TEST);
   }
