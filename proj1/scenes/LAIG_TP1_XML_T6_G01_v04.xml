@@ -124,16 +124,28 @@
     </transformations>
 
     <animations>
-        <animation id="test-animation">
-            <keyframe instant="5">
-                <translate x="50" y="0.0" z="0.0" />
-                <rotate angle_x="0" angle_y="90" angle_z="0" />
-                <scale x="2" y="2" z="2" />
+        <animation id="diner-base" isLoop="isLoop">
+            <keyframe instant="2">
+                <translate x="0" y="0.0" z="0.0" />
+                <rotate angle_x="0" angle_y="180" angle_z="0" />
+                <scale x="1" y="1" z="1" />
             </keyframe>
-            <keyframe instant="10">
-                <translate x="50" y="5.0" z="0.0" />
-                <rotate angle_x="90" angle_y="90" angle_z="0" />
-                <scale x="2" y="2" z="2" />
+            <keyframe instant="4">
+                <translate x="0" y="0" z="0.0" />
+                <rotate angle_x="0" angle_y="360" angle_z="0" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
+        </animation>
+        <animation id="diner" isLoop="isLoop">
+            <keyframe instant="2">
+                <translate x="0" y="0.0" z="0.0" />
+                <rotate angle_x="0" angle_y="-180" angle_z="0" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
+            <keyframe instant="4">
+                <translate x="0" y="0" z="0.0" />
+                <rotate angle_x="0" angle_y="-360" angle_z="0" />
+                <scale x="1" y="1" z="1" />
             </keyframe>
         </animation>
         <animation id="rotate-Y-ship" isLoop="isLoop">
@@ -166,6 +178,99 @@
             <keyframe instant="2">
                 <translate x="0" y="0.0" z="20.0" />
                 <rotate angle_x="0" angle_y="0" angle_z="0" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
+        </animation>
+        <animation id="fire-Y-leaving" isLoop="isLoop">
+            <keyframe instant="2">
+                <translate x="0" y="0.0" z="120.0" />
+                <rotate angle_x="0" angle_y="0" angle_z="0" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
+        </animation>
+        <animation id="fire-Y-near" isLoop="isLoop">
+            <keyframe instant="1">
+                <translate x="0" y="0.0" z="0.0" />
+                <rotate angle_x="0" angle_y="0" angle_z="0" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
+            <keyframe instant="3">
+                <translate x="0" y="0.0" z="120.0" />
+                <rotate angle_x="0" angle_y="0" angle_z="0" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
+        </animation>
+        <animation id="fire-Y-medium" isLoop="isLoop">
+            <keyframe instant="2">
+                <translate x="0" y="0.0" z="0.0" />
+                <rotate angle_x="0" angle_y="0" angle_z="0" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
+            <keyframe instant="4">
+                <translate x="0" y="0.0" z="100.0" />
+                <rotate angle_x="0" angle_y="0" angle_z="0" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
+        </animation>
+        <animation id="fire-Y-far" isLoop="isLoop">
+            <keyframe instant="3">
+                <translate x="0" y="0.0" z="0.0" />
+                <rotate angle_x="0" angle_y="0" angle_z="0" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
+            <keyframe instant="5">
+                <translate x="0" y="0.0" z="100.0" />
+                <rotate angle_x="0" angle_y="0" angle_z="0" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
+        </animation>
+        <animation id="fire-X-leaving" isLoop="isLoop">
+            <keyframe instant="2">
+                <translate x="0" y="0.0" z="120.0" />
+                <rotate angle_x="0" angle_y="0" angle_z="0" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
+        </animation>
+        <animation id="fire-X-near" isLoop="isLoop">
+            <keyframe instant="1">
+                <translate x="0" y="0.0" z="0.0" />
+                <rotate angle_x="0" angle_y="0" angle_z="0" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
+            <keyframe instant="3">
+                <translate x="0" y="0.0" z="120.0" />
+                <rotate angle_x="0" angle_y="0" angle_z="0" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
+        </animation>
+        <animation id="fire-X-medium" isLoop="isLoop">
+            <keyframe instant="2">
+                <translate x="0" y="0.0" z="0.0" />
+                <rotate angle_x="0" angle_y="0" angle_z="0" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
+            <keyframe instant="4">
+                <translate x="0" y="0.0" z="100.0" />
+                <rotate angle_x="0" angle_y="0" angle_z="0" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
+        </animation>
+        <animation id="fire-X-far" isLoop="isLoop">
+            <keyframe instant="3">
+                <translate x="0" y="0.0" z="0.0" />
+                <rotate angle_x="0" angle_y="0" angle_z="0" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
+            <keyframe instant="5">
+                <translate x="0" y="0.0" z="100.0" />
+                <rotate angle_x="0" angle_y="0" angle_z="0" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
+        </animation>
+        <animation id="ring-rotation" isLoop="isLoop">
+            <keyframe instant="10">
+                <translate x="0" y="0.0" z="0.0" />
+                <rotate angle_x="0" angle_y="0" angle_z="360" />
                 <scale x="1" y="1" z="1" />
             </keyframe>
         </animation>
@@ -607,7 +712,7 @@
                 <material id="ion_blue" />
             </materials>
             <texture id="steel" length_s="1" length_t="1"/>
-            <animationref id="test-animation" />
+            <animationref id="diner" />
             <children>
                 <componentref id="roof_diner" />
                 <componentref id="base_diner" />
@@ -624,6 +729,7 @@
                 <material id="whiteMaterial" />
             </materials>
             <texture id="space_rocks" length_s="2" length_t="2"/>
+            <animationref id="diner-base" />
             <children>
                 <componentref id="pyramid" />"
             </children>
@@ -667,6 +773,7 @@
                 <material id="whiteMaterial" />
             </materials>
             <texture id="inherit"/>
+            <animationref id="ring-rotation" />
             <children>
                 <primitiveref id="torus" />
             </children>
@@ -1616,6 +1723,10 @@
                 <componentref id="X-spaceship-ring-1" />
                 <componentref id="X-spaceship-ring-2" />
                 <componentref id="X-spaceship-gun" />
+                <componentref id="X-laser-far"/>
+                <componentref id="X-laser-near"/>
+                <componentref id="X-laser-medium"/>
+                <componentref id="X-laser-leaving"/>
             </children>
         </component>
         <!-- X SPACESHIP END -->
@@ -1770,6 +1881,7 @@
                 <material id="whiteMaterial" />
             </materials>
             <texture id="futuristic_blue" length_s="1" length_t="1"/>
+            <animationref id="rotate-Y-ship" />
             <children>
                 <componentref id="Y-spaceship-Y-1" />
                 <componentref id="Y-spaceship-Y-2" />
@@ -1849,6 +1961,10 @@
                 <componentref id="Y-spaceship-rotating" />
                 <componentref id="Y-spaceship-gun-ring" />
                 <componentref id="Y-spaceship-gun" />
+                <componentref id="Y-blast-near" />
+                <componentref id="Y-blast-leaving" />
+                <componentref id="Y-blast-medium" />
+                <componentref id="Y-blast-far" />
             </children>
         </component>        
         <!-- Y SPACESHIP END -->
@@ -1960,55 +2076,54 @@
                 <material id="red" />
             </materials>
             <texture id="none"/>
-            <animationref id="fire-X"/>
             <children>
                 <componentref id="space-laser" />
             </children>
         </component>
         <component id="X-laser-leaving">
             <transformation>
-                <translate x="0" y="0" z="2" />
             </transformation>
             <materials>
                 <material id="red" />
             </materials>
             <texture id="none"/>
+            <animationref id="fire-X-leaving"/>
             <children>
                 <componentref id="X-laser" />
             </children>
         </component>
         <component id="X-laser-near">
             <transformation>
-                <translate x="0" y="0" z="10" />
             </transformation>
             <materials>
                 <material id="red" />
             </materials>
             <texture id="none"/>
+            <animationref id="fire-X-near"/>
             <children>
                 <componentref id="X-laser" />
             </children>
         </component>
         <component id="X-laser-medium">
             <transformation>
-                <translate x="0" y="0" z="25" />
             </transformation>
             <materials>
                 <material id="red" />
             </materials>
             <texture id="none"/>
+            <animationref id="fire-X-medium"/>
             <children>
                 <componentref id="X-laser" />
             </children>
         </component>
         <component id="X-laser-far">
             <transformation>
-                <translate x="0" y="0" z="40" />
             </transformation>
             <materials>
                 <material id="red" />
             </materials>
             <texture id="none"/>
+            <animationref id="fire-X-far"/>
             <children>
                 <componentref id="X-laser" />
             </children>
@@ -2034,9 +2149,6 @@
             <texture id="none"/>
             <children>
                 <componentref id="X-spaceship" />
-                <componentref id="X-laser-leaving" />
-                <componentref id="X-laser-medium" />
-                <componentref id="X-laser-far" />
             </children>
         </component>  
         <component id="X-spaceship-2">
@@ -2049,9 +2161,6 @@
             <texture id="none"/>
             <children>
                 <componentref id="X-spaceship" />
-                <componentref id="X-laser-near" />
-                <componentref id="X-laser-medium" />
-                <componentref id="X-laser-far" />
             </children>
         </component>    
         <component id="X-spaceship-3">
@@ -2064,8 +2173,6 @@
             <texture id="none"/>
             <children>
                 <componentref id="X-spaceship" />
-                <componentref id="X-laser-leaving" />
-                <componentref id="X-laser-far" />
             </children>
         </component>    
         <component id="X-spaceship-4">
@@ -2078,9 +2185,6 @@
             <texture id="none"/>
             <children>
                 <componentref id="X-spaceship" />
-                <componentref id="X-laser-leaving" />
-                <componentref id="X-laser-near" />
-                <componentref id="X-laser-far" />
             </children>
         </component>    
         <component id="X-spaceship-5">
@@ -2093,9 +2197,6 @@
             <texture id="none"/>
             <children>
                 <componentref id="X-spaceship" />
-                <componentref id="X-laser-far" />
-                <componentref id="X-laser-near" />
-                <componentref id="X-laser-far" />
             </children>
         </component>                     
         <component id="X-fleet">
@@ -2132,48 +2233,52 @@
         </component>
         <component id="Y-blast-leaving">
             <transformation>
-                <translate x="0" y="0" z="9" />
+                <translate x="0" y="0" z="0" />
             </transformation>
             <materials>
                 <material id="red" />
             </materials>
             <texture id="none"/>
+            <animationref id="fire-Y-leaving" />
             <children>
                 <componentref id="Y-blast" />
             </children>
         </component>
         <component id="Y-blast-near">
             <transformation>
-                <translate x="0" y="0" z="15" />
+                <translate x="0" y="0" z="0" />
             </transformation>
             <materials>
                 <material id="red" />
             </materials>
             <texture id="none"/>
+            <animationref id="fire-Y-near" />
             <children>
                 <componentref id="Y-blast" />
             </children>
         </component>
         <component id="Y-blast-medium">
             <transformation>
-                <translate x="0" y="0" z="25" />
+                <translate x="0" y="0" z="0" />
             </transformation>
             <materials>
                 <material id="red" />
             </materials>
             <texture id="none"/>
+            <animationref id="fire-Y-medium" />
             <children>
                 <componentref id="Y-blast" />
             </children>
         </component>
         <component id="Y-blast-far">
             <transformation>
-                <translate x="0" y="0" z="40" />
+                <translate x="0" y="0" z="0" />
             </transformation>
             <materials>
                 <material id="red" />
             </materials>
             <texture id="none"/>
+            <animationref id="fire-Y-far" />
             <children>
                 <componentref id="Y-blast" />
             </children>
@@ -2199,8 +2304,6 @@
             <texture id="none"/>
             <children>
                 <componentref id="Y-spaceship" />
-                <componentref id="Y-blast-leaving" />
-                <componentref id="Y-blast-far" />
             </children>
         </component>  
         <component id="Y-spaceship-2">
@@ -2213,9 +2316,6 @@
             <texture id="none"/>
             <children>
                 <componentref id="Y-spaceship" />
-                <componentref id="Y-blast-leaving" />
-                <componentref id="Y-blast-medium" />
-                <componentref id="Y-blast-far" />
             </children>
         </component>    
         <component id="Y-spaceship-3">
@@ -2228,8 +2328,6 @@
             <texture id="none"/>
             <children>
                 <componentref id="Y-spaceship" />
-                <componentref id="Y-blast-near" />
-                <componentref id="Y-blast-far" />
             </children>
         </component>    
         <component id="Y-spaceship-4">
@@ -2242,9 +2340,6 @@
             <texture id="none"/>
             <children>
                 <componentref id="Y-spaceship" />
-                <componentref id="Y-blast-near" />
-                <componentref id="Y-blast-medium" />
-                <componentref id="Y-blast-far" />
             </children>
         </component>    
         <component id="Y-spaceship-5">
@@ -2257,8 +2352,6 @@
             <texture id="none"/>
             <children>
                 <componentref id="Y-spaceship" />
-                <componentref id="Y-blast-near" />
-                <componentref id="Y-blast-far" />
             </children>
         </component>                      
         <component id="Y-fleet">
