@@ -50,7 +50,7 @@ vec4 applyHorizontalLinesShader(vec4 color) {
     float modVal = mod(timedTexY * nDivisions, divsPerLine);
     float colorWeight = abs(modVal - divsPerLine/2.0) * 0.3;
     
-    return newColor + vec4(1., 1., 1., 1.) * colorWeight;
+    return color + vec4(1., 1., 1., 1.) * colorWeight;
 }
 
 void main() {
