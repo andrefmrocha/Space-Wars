@@ -81,6 +81,8 @@
         <texture id="cosmos" file="scenes/images/cosmos.jpg" />
         <texture id="starfield" file="scenes/images/starfield.jpg" />
         <texture id="glass" file="scenes/images/glass.jpg" />
+        <texture id="switzerland" file="scenes/images/switzerland.gif" />
+        <texture id="explosion" file="scenes/images/explosion.jpg" />
     </textures>
 
     <materials>
@@ -306,6 +308,75 @@
         </primitive>
         <primitive id="lg-gun-cylinder-conn">
             <cylinder base="1" top="0.8" height="1" slices="30" stacks="5"/>
+        </primitive>
+        <primitive id="flag_patch_front">
+            <patch npointsU="5" npointsV="2" npartsU="12" npartsV="12">
+                <controlpoint xx="-3" yy="-2" zz="0" />
+                <controlpoint xx="-3" yy="2" zz="0" />
+
+                <controlpoint xx="-1" yy="-2" zz="2" />
+                <controlpoint xx="-1" yy="2" zz="2" />
+
+                <controlpoint xx="0" yy="-2" zz="0" />
+                <controlpoint xx="0" yy="2" zz="0" />
+
+                <controlpoint xx="2" yy="-2" zz="-1" />
+                <controlpoint xx="2" yy="2" zz="-1" />
+
+                <controlpoint xx="3" yy="-2" zz="0" />
+                <controlpoint xx="3" yy="2" zz="0" />
+            </patch>
+        </primitive>
+        <primitive id="flag_patch_back">
+            <patch npointsU="5" npointsV="2" npartsU="12" npartsV="12">
+                <controlpoint xx="-3" yy="-2" zz="0" />
+                <controlpoint xx="-3" yy="2" zz="0" />
+
+                <controlpoint xx="-2" yy="-2" zz="1" />
+                <controlpoint xx="-2" yy="2" zz="1" />
+
+                <controlpoint xx="0" yy="-2" zz="0" />
+                <controlpoint xx="0" yy="2" zz="0" />
+
+                <controlpoint xx="1" yy="-2" zz="-2" />
+                <controlpoint xx="1" yy="2" zz="-2" />
+
+                <controlpoint xx="3" yy="-2" zz="0" />
+                <controlpoint xx="3" yy="2" zz="0" />
+            </patch>
+        </primitive>
+        <primitive id="nurbs_cylinder">
+            <cylinder2 base="1" top="1" height="1" slices="10" stacks="10"/>
+        </primitive>
+        <primitive id="explosion_high">
+            <patch npointsU="3" npointsV="3" npartsU="20" npartsV="20">
+                <controlpoint xx="1" yy="0" zz="-1" />
+                <controlpoint xx="1" yy="0" zz="0" />
+                <controlpoint xx="1" yy="0" zz="1" />
+                
+                <controlpoint xx="0" yy="0" zz="-1" />
+                <controlpoint xx="0" yy="30" zz="0" />
+                <controlpoint xx="0" yy="0" zz="1" />
+                
+                <controlpoint xx="-1" yy="0" zz="-1" />
+                <controlpoint xx="-1" yy="0" zz="0" />
+                <controlpoint xx="-1" yy="0" zz="1" />
+            </patch>
+        </primitive>
+        <primitive id="explosion_low">
+            <patch npointsU="3" npointsV="3" npartsU="20" npartsV="20">
+                <controlpoint xx="1" yy="0" zz="-1" />
+                <controlpoint xx="1" yy="0" zz="0" />
+                <controlpoint xx="1" yy="0" zz="1" />
+                
+                <controlpoint xx="0" yy="0" zz="-1" />
+                <controlpoint xx="0" yy="5" zz="0" />
+                <controlpoint xx="0" yy="0" zz="1" />
+                
+                <controlpoint xx="-1" yy="0" zz="-1" />
+                <controlpoint xx="-1" yy="0" zz="0" />
+                <controlpoint xx="-1" yy="0" zz="1" />
+            </patch>
         </primitive>
     </primitives>
 
@@ -720,6 +791,62 @@
                 <componentref id="pyramid" />"
             </children>
         </component>
+        
+        <component id="flag_stick">
+            <transformation>
+                <scale x="0.3" y="15" z="0.3" />
+                <rotate axis="x" angle="90"/>
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="steel" length_s="1" length_t="1" />
+            <children>
+                <primitiveref id="nurbs_cylinder" />
+            </children>
+        </component>
+       <component id="diner_flag">
+            <transformation>
+                <translate x="3" y="-2" z="0" /> 
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="switzerland" length_s="1" length_t="1" />
+            <children>
+                <primitiveref id="flag_patch_front" />
+            </children>
+        </component>
+       <component id="diner_flag_back">
+            <transformation>
+                <translate x="3" y="-2" z="0" /> 
+                <rotate axis="y" angle="180"/>
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="switzerland" length_s="1" length_t="1" />
+            <children>
+                <primitiveref id="flag_patch_back" />
+            </children>
+        </component>
+    
+        <component id="diner_full_flag">
+            <transformation>
+                <translate x="0" y="12" z="0" /> 
+                <translate x="2" y="0" z="-5" /> 
+                <rotate axis="y" angle="90"/>
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="none"/>
+            <children>
+                <componentref id="flag_stick" />
+                <componentref id="diner_flag" />
+                <componentref id="diner_flag_back" />
+            </children>
+        </component>
         <component id="space_station">
             <transformation>
                 <rotate axis="y" angle="-90"/>
@@ -734,6 +861,7 @@
                 <componentref id="space_rock" />
                 <componentref id="sign" />
                 <componentref id="diner" />
+                <componentref id="diner_full_flag" />
             </children>
         </component>
         
@@ -2384,7 +2512,129 @@
             <children>
                 <componentref id="Y-fleet" />
             </children>
+        </component>
+
+        <component id="explosion">
+            <transformation>
+                <scale x="3" y="3" z="3" />
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="explosion" length_s="1" length_t="1" />
+            <children>
+                <componentref id="explosion-half" />
+                <componentref id="explosion-bottom-half" />
+            </children>
+        </component>
+        <component id="explosion-bottom-half">
+            <transformation>
+                <rotate axis="x" angle="180" />
+                <rotate axis="y" angle="90" />
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="inherit"/>
+            <children>
+                <componentref id="explosion-half" />
+            </children>
+        </component>
+        <component id="explosion-half">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="inherit"/>
+            <children>
+                <componentref id="explosion-part-1" />
+                <componentref id="explosion-part-2" />
+                <componentref id="explosion-part-3" />
+                <componentref id="explosion-part-4" />
+                <componentref id="explosion-part-5" />
+                <componentref id="explosion-part-6" />
+            </children>
+        </component>
+        <component id="explosion-part-1">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="inherit"/>
+            <children>
+                <primitiveref id="explosion_high" />
+            </children>
         </component> 
+        <component id="explosion-part-2">
+            <transformation>
+                <rotate axis="y" angle="45" />
+                <rotate axis="x" angle="50" />
+                <scale x="1" y="0.7" z="1" />
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="inherit"/>
+            <children>
+                <primitiveref id="explosion_high" />
+            </children>
+        </component> 
+        <component id="explosion-part-3">
+            <transformation>
+                <scale x="2" y="2" z="2" />
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="inherit"/>
+            <children>
+                <primitiveref id="explosion_low" />
+            </children>
+        </component> 
+        <component id="explosion-part-4">
+            <transformation>
+                <rotate axis="y" angle="-60" />
+                <rotate axis="x" angle="90" />
+                <scale x="1" y="0.9" z="1" />
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="inherit"/>
+            <children>
+                <primitiveref id="explosion_high" />
+            </children>
+        </component>
+        <component id="explosion-part-5">
+            <transformation>
+                <rotate axis="y" angle="-120" />
+                <rotate axis="x" angle="50" />
+                <scale x="1" y="0.5" z="1" />
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="inherit"/>
+            <children>
+                <primitiveref id="explosion_high" />
+            </children>
+        </component>  
+        <component id="explosion-part-6">
+            <transformation>
+                <rotate axis="y" angle="120" />
+                <rotate axis="x" angle="70" />
+                <scale x="1" y="0.5" z="1" />
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="inherit"/>
+            <children>
+                <primitiveref id="explosion_high" />
+            </children>
+        </component>  
         <!-- SCENE END -->
     </components>
 </lxs>
