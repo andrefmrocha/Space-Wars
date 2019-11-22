@@ -35,7 +35,7 @@ class MyCylinder2 extends CGFobject {
         ];
         let nurbsSurface = new CGFnurbsSurface(3, 1, controlVertices);
 
-        this.nurbsObj = new CGFnurbsObject(this.scene, Math.floor(this.slices/2), this.stacks, nurbsSurface);         
+        this.nurbsObj = new CGFnurbsObject(this.scene, this.slices, this.stacks, nurbsSurface);         
     }
 
     display() {

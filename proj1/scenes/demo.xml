@@ -1,14 +1,14 @@
 <lxs>
-    <scene root="cylindersCompare" axis_length="5"/>
+    <scene root="rectangleTest" axis_length="5"/>
 
-    <views default="defaultCamera">
+    <views default="testCamera">
         <perspective id="defaultCamera" near="5" far="500" angle="45">
             <from x="6" y="6" z="6" />
             <to x="0" y="-2" z="0" />
         </perspective>
         <perspective id="testCamera" near="5" far="500" angle="30">
-            <from x="30" y="15" z="30" />
-            <to x="0" y="-2" z="0" />
+            <from x="0" y="0" z="30" />
+            <to x="0" y="0" z="0" />
         </perspective>
     </views>
 
@@ -190,15 +190,17 @@
         
         <component id="rectangleTest">
             <transformation>
+                <scale x="10" y="10" z="10" />
             </transformation>
             <materials>
                 <material id="demoMaterial2" />
             </materials>
-            <texture id="demoTexture" length_s="4" length_t="4"/>
+            <texture id="neon" length_s="4" length_t="4" />
             <children>
                 <primitiveref id="demoRectangle" />
             </children>
         </component>
+
 
         <component id="torusTest">
             <transformation>

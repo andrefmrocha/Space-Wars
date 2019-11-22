@@ -153,7 +153,7 @@ const primitiveParsers = {
       sceneGraph
     );
 
-    return new MyRectangle(scene, primitiveId, x1, x2, y1, y2);
+    return new MyRectangle(scene, x1, x2, y1, y2);
   },
 
   /**
