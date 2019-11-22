@@ -52,11 +52,14 @@ serialInclude([
   'XMLscene.js',
   'MySceneGraph.js',
   'MyInterface.js',
-  'MyRectangle.js',
-  'MyCylinder.js',
-  'MySphere.js',
-  'MyTriangle.js',
-  'MyTorus.js',
+  'primitives/MyRectangle.js',
+  'primitives/MyCylinder.js',
+  'primitives/MySphere.js',
+  'primitives/MyTriangle.js',
+  'primitives/MyTorus.js',
+  'primitives/MyPlane.js',
+  'primitives/MyPatch.js',
+  'primitives/MyCylinder2.js',
   'parser/PrimitivesParser.js',
   'parser/ViewsParser.js',
   'parser/TextureParser.js',
@@ -67,6 +70,7 @@ serialInclude([
   'parser/AnimationsParser.js',
   'animation/Animation.js',
   'animation/KeyframeAnimation.js',
+  'MySecurityCamera.js',
 
   (main = function() {
     // Standard application, scene and interface setup
