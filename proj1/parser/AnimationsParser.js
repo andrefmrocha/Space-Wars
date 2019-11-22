@@ -51,7 +51,7 @@
 
             const instant = parserUtils.reader.getFloat(keyframe, 'instant');
             
-            if (!instant) {
+            if (instant == null) {
                 sceneGraph.onXMLError(`No instant defined for ${keyframe}`);
                 return -1;
             }

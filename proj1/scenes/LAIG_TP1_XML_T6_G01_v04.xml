@@ -1,5 +1,5 @@
 <lxs>
-    <scene root="scene" axis_length="0"/>
+    <scene root="explosion" axis_length="0"/>
 
     <views default="fightSceneCamera">
         <perspective id="fightSceneCamera" near="5" far="1000" angle="60">
@@ -261,6 +261,18 @@
             <keyframe instant="10">
                 <translate x="0" y="0.0" z="0.0" />
                 <rotate angle_x="0" angle_y="0" angle_z="360" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
+        </animation>
+        <animation id="explosion-anim" isLoop="isLoop">
+            <keyframe instant="0">
+                <translate x="0" y="0.0" z="0.0" />
+                <rotate angle_x="0." angle_y="0" angle_z="0" />
+                <scale x="0" y="0" z="0" />
+            </keyframe>
+            <keyframe instant="2">
+                <translate x="0" y="0.0" z="0.0" />
+                <rotate angle_x="0" angle_y="0" angle_z="0" />
                 <scale x="1" y="1" z="1" />
             </keyframe>
         </animation>
@@ -2522,6 +2534,7 @@
                 <material id="whiteMaterial" />
             </materials>
             <texture id="explosion" length_s="1" length_t="1" />
+            <animationref id="explosion-anim" />
             <children>
                 <componentref id="explosion-half" />
                 <componentref id="explosion-bottom-half" />
