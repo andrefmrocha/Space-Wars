@@ -37,6 +37,7 @@ class XMLscene extends CGFscene {
     this.viewsList = [];
     this.viewsIDs = {};
     this.views = {};
+    this.time = Date.now();
 
     this.securityCameraTexture = new CGFtextureRTT(this, this.gl.canvas.width, this.gl.canvas.height);
     this.securityCamera = new MySecurityCamera(this);
@@ -159,8 +160,12 @@ class XMLscene extends CGFscene {
     this.sceneInited = true;
   }
 
-  update(t) {
-    this.securityCamera.update(t);
+  update(currTime) {
+    if(this.sceneInited){
+      const currentInstant = currTime - this.time;
+      this.graph.updateComponentAnimations(currentInstant);
+    }
+    this.securityCamera.update(currTime);
   }
 
   checkKeys(eventCode) {

@@ -9,8 +9,9 @@ var LIGHTS_INDEX = 3;
 var TEXTURES_INDEX = 4;
 var MATERIALS_INDEX = 5;
 var TRANSFORMATIONS_INDEX = 6;
-var PRIMITIVES_INDEX = 7;
-var COMPONENTS_INDEX = 8;
+var ANIMATIONS_INDEX = 7;
+var PRIMITIVES_INDEX = 8;
+var COMPONENTS_INDEX = 9;
 
 /**
  * MySceneGraph class, representing the scene graph.
@@ -37,7 +38,6 @@ class MySceneGraph {
     this.axisCoords['x'] = [1, 0, 0];
     this.axisCoords['y'] = [0, 1, 0];
     this.axisCoords['z'] = [0, 0, 1];
-
 
     /*
      * Read the contents of the xml file, and refer to this class for loading and error handlers.
@@ -67,6 +67,10 @@ class MySceneGraph {
     /* As the graph loaded ok, signal the scene so that any additional
      initialization depending on the graph can take place
     */
+    Object.keys(this.animations).forEach((key) =>{
+      this.animations[key].initialTime = 0; 
+    })
+
     this.scene.onGraphLoaded();
   }
 
@@ -156,6 +160,17 @@ class MySceneGraph {
       if ((error = transformationParser.parseTransformations(nodes[index], this.transformations, this)) != null)
         return error;
     }
+
+    // <animations>
+    if ((index = nodeNames.indexOf('animations')) == -1) return 'tag <animations> missing';
+    else {
+      if (index != ANIMATIONS_INDEX) this.onXMLMinorError('tag <animations> out of order');
+
+      //Parse primitives block
+      if ((error = animationsParser.parseAnimations(nodes[index], this)) != null) return error;
+    
+    }
+
 
     // <primitives>
     if ((index = nodeNames.indexOf('primitives')) == -1) return 'tag <primitives> missing';
@@ -439,6 +454,14 @@ class MySceneGraph {
     component.visited = false;
   }
 
+  updateComponentAnimations(currentInstant){
+    Object.keys(this.components).forEach((key) => {
+      const component = this.components[key];
+      if(component.animation)
+        component.animation.update(currentInstant);
+    })
+  }
+
   /**
    * @method displayComponent
    * Displays a component and all its children recursively
@@ -470,6 +493,10 @@ class MySceneGraph {
 
       // multiply transformations
       this.scene.multMatrix(component.transformation);
+      
+      if(component.animation){
+        component.animation.apply();
+      }
 
       let cMaterial = component.materials[this.materialSwitch % component.materials.length];
       if (cMaterial == 'inherit') cMaterial = pMaterial;
