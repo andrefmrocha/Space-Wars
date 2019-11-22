@@ -124,18 +124,6 @@
     </transformations>
 
     <animations>
-        <animation id="diner-base" isLoop="isLoop">
-            <keyframe instant="2">
-                <translate x="0" y="0.0" z="0.0" />
-                <rotate angle_x="0" angle_y="180" angle_z="0" />
-                <scale x="1" y="1" z="1" />
-            </keyframe>
-            <keyframe instant="4">
-                <translate x="0" y="0" z="0.0" />
-                <rotate angle_x="0" angle_y="360" angle_z="0" />
-                <scale x="1" y="1" z="1" />
-            </keyframe>
-        </animation>
         <animation id="diner" isLoop="isLoop">
             <keyframe instant="2">
                 <translate x="0" y="0.0" z="0.0" />
@@ -183,7 +171,7 @@
         </animation>
         <animation id="fire-Y-leaving" isLoop="isLoop">
             <keyframe instant="2">
-                <translate x="0" y="0.0" z="120.0" />
+                <translate x="0" y="0.0" z="200" />
                 <rotate angle_x="0" angle_y="0" angle_z="0" />
                 <scale x="1" y="1" z="1" />
             </keyframe>
@@ -195,7 +183,7 @@
                 <scale x="1" y="1" z="1" />
             </keyframe>
             <keyframe instant="3">
-                <translate x="0" y="0.0" z="120.0" />
+                <translate x="0" y="0.0" z="200" />
                 <rotate angle_x="0" angle_y="0" angle_z="0" />
                 <scale x="1" y="1" z="1" />
             </keyframe>
@@ -207,7 +195,7 @@
                 <scale x="1" y="1" z="1" />
             </keyframe>
             <keyframe instant="4">
-                <translate x="0" y="0.0" z="100.0" />
+                <translate x="0" y="0.0" z="200" />
                 <rotate angle_x="0" angle_y="0" angle_z="0" />
                 <scale x="1" y="1" z="1" />
             </keyframe>
@@ -219,14 +207,14 @@
                 <scale x="1" y="1" z="1" />
             </keyframe>
             <keyframe instant="5">
-                <translate x="0" y="0.0" z="100.0" />
+                <translate x="0" y="0.0" z="200" />
                 <rotate angle_x="0" angle_y="0" angle_z="0" />
                 <scale x="1" y="1" z="1" />
             </keyframe>
         </animation>
         <animation id="fire-X-leaving" isLoop="isLoop">
             <keyframe instant="2">
-                <translate x="0" y="0.0" z="120.0" />
+                <translate x="0" y="0.0" z="200" />
                 <rotate angle_x="0" angle_y="0" angle_z="0" />
                 <scale x="1" y="1" z="1" />
             </keyframe>
@@ -238,7 +226,7 @@
                 <scale x="1" y="1" z="1" />
             </keyframe>
             <keyframe instant="3">
-                <translate x="0" y="0.0" z="120.0" />
+                <translate x="0" y="0.0" z="200" />
                 <rotate angle_x="0" angle_y="0" angle_z="0" />
                 <scale x="1" y="1" z="1" />
             </keyframe>
@@ -250,7 +238,7 @@
                 <scale x="1" y="1" z="1" />
             </keyframe>
             <keyframe instant="4">
-                <translate x="0" y="0.0" z="100.0" />
+                <translate x="0" y="0.0" z="200" />
                 <rotate angle_x="0" angle_y="0" angle_z="0" />
                 <scale x="1" y="1" z="1" />
             </keyframe>
@@ -262,7 +250,7 @@
                 <scale x="1" y="1" z="1" />
             </keyframe>
             <keyframe instant="5">
-                <translate x="0" y="0.0" z="100.0" />
+                <translate x="0" y="0.0" z="200" />
                 <rotate angle_x="0" angle_y="0" angle_z="0" />
                 <scale x="1" y="1" z="1" />
             </keyframe>
@@ -712,7 +700,6 @@
                 <material id="ion_blue" />
             </materials>
             <texture id="steel" length_s="1" length_t="1"/>
-            <animationref id="diner" />
             <children>
                 <componentref id="roof_diner" />
                 <componentref id="base_diner" />
@@ -729,7 +716,6 @@
                 <material id="whiteMaterial" />
             </materials>
             <texture id="space_rocks" length_s="2" length_t="2"/>
-            <animationref id="diner-base" />
             <children>
                 <componentref id="pyramid" />"
             </children>
@@ -743,6 +729,7 @@
                 <material id="whiteMaterial" />
             </materials>
             <texture id="space_rocks" length_s="2" length_t="2"/>
+            <animationref id="diner" />
             <children>
                 <componentref id="space_rock" />
                 <componentref id="sign" />
