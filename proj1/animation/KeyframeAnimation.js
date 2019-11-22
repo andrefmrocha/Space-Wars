@@ -1,5 +1,12 @@
 class KeyframeAnimation extends Animation {
 
+    
+    /**
+     * Constructor for the keyframe animaation
+     * @param  {CGFscene} scene - current scene
+     * @param  {Object[]} keyframes
+     * @param  {Boolean} isLoop
+     */
     constructor(scene, keyframes, isLoop) {
         super();
         this.isLoop = isLoop;
@@ -19,6 +26,10 @@ class KeyframeAnimation extends Animation {
         this.currentAnimation = mat4.create();
     }
 
+    /**
+     * Update the current animation according to the currentInstant
+     * @param  {int} currentInstant - current instant in miliseconds
+     */
     update(currentInstant) {
         this.clearMatrix();
         if (this.animationFinished(currentInstant))
@@ -26,7 +37,11 @@ class KeyframeAnimation extends Animation {
         else
             this.executeAnimation((currentInstant - this.initialTime));
     }
-
+    /**
+     * Execute the animation according to the currentInstant in order
+     * to obtain the new animation matrix
+     * @param  {int} currentInstant - current instant in miliseconds
+     */
     executeAnimation(currentInstant) {
         for (let i = 0; i < this.keyframes.length; i++) {
             const keyframe = this.keyframes[i];
@@ -88,10 +103,20 @@ class KeyframeAnimation extends Animation {
         }
     }
 
+    /**
+     * Applies the current coordinates as a translation to the current matrix
+     * @param  {Number[]} coords - translation coordinates
+     */
     translate(coords) {
         this.currentAnimation = mat4.translate(
             this.currentAnimation, this.currentAnimation, coords);
     }
+
+
+    /**
+     * Applies the current coordinates as a rotation to the current matrix
+     * @param  {{angleX: Number, angleY: Number, angleZ: Number}} coords - rotation coordinates
+     */
     rotate(rotation) {
         this.currentAnimation = mat4.rotate(
             this.currentAnimation,
@@ -113,10 +138,17 @@ class KeyframeAnimation extends Animation {
 
     }
 
+    /**
+    * Applies the current coordinates as a scaling to the current matrix
+    * @param  {Number[]} coords - scaling coordinates
+    */
     scale(coords) {
         this.currentAnimation = mat4.scale(this.currentAnimation, this.currentAnimation, coords);
     }
-
+    /**
+     * Determines if an animation has indeed finished according to its keyframe information
+     * @param  {int} currentInstant - current instant in miliseconds
+     */
     animationFinished(currentInstant) {
         const instant = currentInstant - this.initialTime;
         if (this.keyframes[this.keyframes.length - 1].instant <= instant && this.isLoop){
@@ -127,10 +159,16 @@ class KeyframeAnimation extends Animation {
         return this.keyframes[this.keyframes.length - 1].instant < instant;
     }
 
+    
+    /**
+     * Clear the current animation matrix
+     */
     clearMatrix() {
         mat4.identity(this.currentAnimation);
     }
-
+    /**
+     * Executes the last animation matrix, creating a finished animation
+     */
     executeLastFrame() {
         this.translate(this.keyframes[this.keyframes.length - 1].translate);
         this.keyframes.forEach((keyframe, index) => {
@@ -147,6 +185,10 @@ class KeyframeAnimation extends Animation {
         this.scale(this.keyframes[this.keyframes.length - 1].scale);
     }
 
+    
+    /**
+     * Applies the current animation to the scene
+     */
     apply() {
         this.scene.multMatrix(this.currentAnimation);
     }

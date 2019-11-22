@@ -1,5 +1,14 @@
 class MyCylinder2 extends CGFobject {
 
+    /**
+    * @method constructor
+    * @param  {object} scene - Reference to a MyScene object.
+    * @param  {number} height - Height of the cylinder along the z axis
+    * @param  {number} base - Radius of the base
+    * @param  {number} top - Radius of the top
+    * @param  {number} slices - Number of division in rotation
+    * @param  {number} stacks - Number of divisions in height
+    */
     constructor(scene, base, top, height, slices, stacks) {
         super(scene);
         this.base = base;
@@ -9,7 +18,10 @@ class MyCylinder2 extends CGFobject {
         this.stacks = stacks;
         this.initCylinder();
     }
-
+    /**
+     * Inicializes the cylinder vertices and passes down said 
+     * information to a Nurbs Surface
+     */
     initCylinder() {
         let controlVertices = [	
             // U = 0	
@@ -37,7 +49,9 @@ class MyCylinder2 extends CGFobject {
 
         this.nurbsObj = new CGFnurbsObject(this.scene, this.slices, this.stacks, nurbsSurface);         
     }
-
+    /**
+     * Displays the cylinder
+     */
     display() {
         this.nurbsObj.display();
 

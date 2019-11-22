@@ -1,4 +1,9 @@
-const animationsParser = {
+    const animationsParser = {
+    /**
+     * Parses animations
+     * @param  {XMLCollection Object} animationsNode
+     * @param  {MyScene} sceneGraph
+     */
     parseAnimations: (animationsNode, sceneGraph) => {
         const children = animationsNode.children;
         sceneGraph.animations = {};
@@ -24,6 +29,13 @@ const animationsParser = {
         }
     },
 
+    
+    /**
+     * Parses all the keyframes of a specific animation
+     * @param  {XMLCollection Object} keyframeNodes
+     * @param  {MyScene} sceneGraph
+     * @param  {String} animationID
+     */
     parseKeyframes: (keyframeNodes, sceneGraph, animationID) => {
         const children = keyframeNodes.children;
         const keyframes = [];
@@ -84,6 +96,11 @@ const animationsParser = {
         return keyframes;
     },
 
+    /**
+     * Parses the rotation information
+     * @param  {XMLCollection Object} rotateNode
+     * @param  {MyScene} sceneGraph
+     */
     parseRotation: (rotateNode, sceneGraph) => {
         const angleX = parserUtils.reader.getFloat(rotateNode, 'angle_x');
         if(angleX == null){
