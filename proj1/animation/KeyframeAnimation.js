@@ -127,7 +127,7 @@ class KeyframeAnimation extends Animation {
     this.currentAnimation = mat4.scale(
       this.currentAnimation,
       this.currentAnimation,
-      coords.map(coord => (coord == 0 ? 1 : coord))
+      coords
     );
   }
   /**

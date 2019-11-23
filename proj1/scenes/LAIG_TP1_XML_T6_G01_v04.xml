@@ -1,5 +1,5 @@
 <lxs>
-    <scene root="explosion" axis_length="0"/>
+    <scene root="scene" axis_length="0"/>
 
     <views default="fightSceneCamera">
         <perspective id="fightSceneCamera" near="5" far="1000" angle="60">
@@ -264,13 +264,30 @@
                 <scale x="1" y="1" z="1" />
             </keyframe>
         </animation>
-        <animation id="explosion-anim" isLoop="isLoop">
-            <keyframe instant="0">
+        <animation id="explosion-anim-X" isLoop="isLoop">
+            <keyframe instant="0.5">
                 <translate x="0" y="0.0" z="0.0" />
-                <rotate angle_x="0." angle_y="0" angle_z="0" />
-                <scale x="0" y="0" z="0" />
+                <rotate angle_x="0" angle_y="0" angle_z="0" />
+                <scale x="3000" y="3000" z="3000" />
             </keyframe>
-            <keyframe instant="2">
+            <keyframe instant="10">
+                <translate x="0" y="0.0" z="0.0" />
+                <rotate angle_x="0" angle_y="0" angle_z="0" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
+        </animation>
+        <animation id="explosion-anim-Y" isLoop="isLoop">
+            <keyframe instant="1">
+                <translate x="0" y="0.0" z="0.0" />
+                <rotate angle_x="0" angle_y="0" angle_z="0" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
+            <keyframe instant="1.5">
+                <translate x="0" y="0.0" z="0.0" />
+                <rotate angle_x="0" angle_y="0" angle_z="0" />
+                <scale x="3000" y="3000" z="3000" />
+            </keyframe>
+            <keyframe instant="8">
                 <translate x="0" y="0.0" z="0.0" />
                 <rotate angle_x="0" angle_y="0" angle_z="0" />
                 <scale x="1" y="1" z="1" />
@@ -2264,6 +2281,7 @@
             <texture id="none"/>
             <children>
                 <componentref id="X-planet" />
+                <componentref id="X-explosions" />
             </children>
         </component>
         <component id="X-spaceship-1">
@@ -2419,6 +2437,7 @@
             <texture id="none"/>
             <children>
                 <componentref id="Y-planet" />
+                <componentref id="Y-explosions"/>
             </children>
         </component>  
         <component id="Y-spaceship-1">
@@ -2528,18 +2547,46 @@
 
         <component id="explosion">
             <transformation>
-                <scale x="3" y="3" z="3" />
+                <scale x="0.001" y="0.001" z="0.001" />
             </transformation>
             <materials>
                 <material id="whiteMaterial" />
             </materials>
             <texture id="explosion" length_s="1" length_t="1" />
-            <animationref id="explosion-anim" />
             <children>
                 <componentref id="explosion-half" />
                 <componentref id="explosion-bottom-half" />
             </children>
         </component>
+
+        <component id="X-explosions">
+            <transformation>
+                <translate x="0" y="10" z="0" />
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="explosion" length_s="1" length_t="1" />
+            <animationref id="explosion-anim-X" />
+            <children>
+                <componentref id="explosion" />
+            </children>
+        </component>
+        <component id="Y-explosions">
+            <transformation>
+                <translate x="0" y="10" z="0" />
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="explosion" length_s="1" length_t="1" />
+            <animationref id="explosion-anim-Y" />
+            <children>
+                <componentref id="explosion" />
+            </children>
+        </component>
+
+
         <component id="explosion-bottom-half">
             <transformation>
                 <rotate axis="x" angle="180" />
