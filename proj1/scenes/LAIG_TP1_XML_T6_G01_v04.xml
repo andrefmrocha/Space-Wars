@@ -412,6 +412,9 @@
                 <controlpoint xx="-1" yy="0" zz="1" />
             </patch>
         </primitive>
+        <primitive id="nurbs_plane">
+            <plane npartsU="2" npartsV="2"/>
+        </primitive>
     </primitives>
 
     <components>
@@ -2129,7 +2132,7 @@
             </materials>
             <texture id="inherit"/>
             <children>
-                <primitiveref id="square" />
+                <componentref id="skybox-square" />
             </children>
         </component>   
         <component id="skybox-bottom">
@@ -2142,7 +2145,7 @@
             </materials>
             <texture id="inherit"/>
             <children>
-                <primitiveref id="square" />
+                <componentref id="skybox-square" />
             </children>
         </component>     
         <component id="skybox-back">
@@ -2154,7 +2157,7 @@
             </materials>
             <texture id="inherit"/>
             <children>
-                <primitiveref id="square" />
+                <componentref id="skybox-square" />
             </children>
         </component>   
         <component id="skybox-front">
@@ -2167,7 +2170,7 @@
             </materials>
             <texture id="inherit"/>
             <children>
-                <primitiveref id="square" />
+                <componentref id="skybox-square" />
             </children>
         </component>    
         <component id="skybox-right">
@@ -2180,7 +2183,7 @@
             </materials>
             <texture id="inherit"/>
             <children>
-                <primitiveref id="square" />
+                <componentref id="skybox-square" />
             </children>
         </component>   
         <component id="skybox-left">
@@ -2193,7 +2196,7 @@
             </materials>
             <texture id="inherit"/>
             <children>
-                <primitiveref id="square" />
+                <componentref id="skybox-square" />
             </children>
         </component>            
         <component id="skybox">
@@ -2211,6 +2214,18 @@
                 <componentref id="skybox-front" />
                 <componentref id="skybox-right" />
                 <componentref id="skybox-left" />
+            </children>
+        </component>        
+        <component id="skybox-square">
+            <transformation>
+                <rotate axis="x" angle="90" />
+            </transformation>
+            <materials>
+                <material id="whiteMaterial" />
+            </materials>
+            <texture id="inherit" />
+            <children>
+                <primitiveref id="nurbs_plane" />
             </children>
         </component>
         <!-- SKYBOX END -->
