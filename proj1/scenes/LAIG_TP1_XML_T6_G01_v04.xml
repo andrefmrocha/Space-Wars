@@ -889,11 +889,11 @@
                 <rotate axis="y" angle="-90"/>
                 <translate x="-30" y="0" z="0" />
             </transformation>
+            <animationref id="diner" />
             <materials>
                 <material id="whiteMaterial" />
             </materials>
             <texture id="space_rocks" length_s="2" length_t="2"/>
-            <animationref id="diner" />
             <children>
                 <componentref id="space_rock" />
                 <componentref id="sign" />
@@ -921,11 +921,11 @@
                 <rotate axis="x" angle="90" />
                 <scale x="9" y="9" z="0.001" />
             </transformation>
+            <animationref id="ring-rotation" />
             <materials>
                 <material id="whiteMaterial" />
             </materials>
             <texture id="inherit"/>
-            <animationref id="ring-rotation" />
             <children>
                 <primitiveref id="torus" />
             </children>
@@ -1745,11 +1745,11 @@
                 <translate x="0" y="0" z="-1" />
                 <scale x="2.5" y="2.5" z="3" />
             </transformation>
+            <animationref id="scale-X-ring" />
             <materials>
                 <material id="whiteMaterial" />
             </materials>
             <texture id="futuristic_red" length_s="1" length_t="1"/>
-            <animationref id="scale-X-ring" />
             <children>
                 <primitiveref id="torus" />
             </children>
@@ -1758,11 +1758,11 @@
             <transformation>                
                 <translate x="0" y="0" z="1.5" /> <!-- 0.5 from cone base + 1 from arm connector -->
             </transformation>
+            <animationref id="rotate-X-ship" />
             <materials>
                 <material id="inherit" />
             </materials>
             <texture id="X_spaceship_hull" length_s="1" length_t="1"/>
-            <animationref id="rotate-X-ship" />
             <children>
                 <componentref id="X-spaceship-arm-cone" />
                 <componentref id="X-spaceship-arm-cone-base" />
@@ -2029,11 +2029,11 @@
             <transformation>
 
             </transformation>
+            <animationref id="rotate-Y-ship" />
             <materials>
                 <material id="whiteMaterial" />
             </materials>
             <texture id="futuristic_blue" length_s="1" length_t="1"/>
-            <animationref id="rotate-Y-ship" />
             <children>
                 <componentref id="Y-spaceship-Y-1" />
                 <componentref id="Y-spaceship-Y-2" />
@@ -2087,11 +2087,11 @@
             <transformation>
 
             </transformation>
+            <animationref id="rotate-Y-ship" />
             <materials>
                 <material id="whiteMaterial" />
             </materials>
             <texture id="Y_spaceship_hull" length_s="1" length_t="1"/>
-            <animationref id="rotate-Y-ship" />
             <children>
                 <componentref id="Y-spaceship-ring" />
                 <componentref id="Y-spaceship-arm-1" />
@@ -2247,11 +2247,11 @@
         <component id="X-laser-leaving">
             <transformation>
             </transformation>
+            <animationref id="fire-X-leaving"/>
             <materials>
                 <material id="red" />
             </materials>
             <texture id="none"/>
-            <animationref id="fire-X-leaving"/>
             <children>
                 <componentref id="X-laser" />
             </children>
@@ -2259,11 +2259,11 @@
         <component id="X-laser-near">
             <transformation>
             </transformation>
+            <animationref id="fire-X-near"/>
             <materials>
                 <material id="red" />
             </materials>
             <texture id="none"/>
-            <animationref id="fire-X-near"/>
             <children>
                 <componentref id="X-laser" />
             </children>
@@ -2271,11 +2271,11 @@
         <component id="X-laser-medium">
             <transformation>
             </transformation>
+            <animationref id="fire-X-medium"/>
             <materials>
                 <material id="red" />
             </materials>
             <texture id="none"/>
-            <animationref id="fire-X-medium"/>
             <children>
                 <componentref id="X-laser" />
             </children>
@@ -2283,11 +2283,11 @@
         <component id="X-laser-far">
             <transformation>
             </transformation>
+            <animationref id="fire-X-far"/>
             <materials>
                 <material id="red" />
             </materials>
             <texture id="none"/>
-            <animationref id="fire-X-far"/>
             <children>
                 <componentref id="X-laser" />
             </children>
@@ -2400,11 +2400,11 @@
             <transformation>
                 <translate x="0" y="0" z="0" />
             </transformation>
+            <animationref id="fire-Y-leaving" />
             <materials>
                 <material id="red" />
             </materials>
             <texture id="none"/>
-            <animationref id="fire-Y-leaving" />
             <children>
                 <componentref id="Y-blast" />
             </children>
@@ -2413,11 +2413,11 @@
             <transformation>
                 <translate x="0" y="0" z="0" />
             </transformation>
+            <animationref id="fire-Y-near" />
             <materials>
                 <material id="red" />
             </materials>
             <texture id="none"/>
-            <animationref id="fire-Y-near" />
             <children>
                 <componentref id="Y-blast" />
             </children>
@@ -2426,11 +2426,11 @@
             <transformation>
                 <translate x="0" y="0" z="0" />
             </transformation>
+            <animationref id="fire-Y-medium" />
             <materials>
                 <material id="red" />
             </materials>
             <texture id="none"/>
-            <animationref id="fire-Y-medium" />
             <children>
                 <componentref id="Y-blast" />
             </children>
@@ -2439,11 +2439,11 @@
             <transformation>
                 <translate x="0" y="0" z="0" />
             </transformation>
+            <animationref id="fire-Y-far" />
             <materials>
                 <material id="red" />
             </materials>
             <texture id="none"/>
-            <animationref id="fire-Y-far" />
             <children>
                 <componentref id="Y-blast" />
             </children>
@@ -2598,11 +2598,11 @@
                 <translate x="-5" y="7" z="0" />
                 <rotate axis="z" angle="30" />
             </transformation>
+            <animationref id="explosion-anim-fast" />
             <materials>
                 <material id="whiteMaterial" />
             </materials>
             <texture id="explosion" length_s="1" length_t="1" />
-            <animationref id="explosion-anim-fast" />
             <children>
                 <componentref id="explosion" />
             </children>
@@ -2612,11 +2612,11 @@
                 <translate x="-7" y="2" z="7" />
                 <rotate axis="z" angle="70" />
             </transformation>
+            <animationref id="explosion-anim-slow" />
             <materials>
                 <material id="whiteMaterial" />
             </materials>
             <texture id="explosion" length_s="1" length_t="1" />
-            <animationref id="explosion-anim-slow" />
             <children>
                 <componentref id="explosion" />
             </children>
@@ -2627,11 +2627,11 @@
                 <scale x="0.7" y="0.7" z="0.7" />
                 <rotate axis="x" angle="20" />
             </transformation>
+            <animationref id="explosion-anim-fast" />
             <materials>
                 <material id="whiteMaterial" />
             </materials>
             <texture id="explosion" length_s="1" length_t="1" />
-            <animationref id="explosion-anim-fast" />
             <children>
                 <componentref id="explosion" />
             </children>
@@ -2642,11 +2642,11 @@
                 <rotate axis="z" angle="-120" />
                 <scale x="0.5" y="0.5" z="0.5" />
             </transformation>
+            <animationref id="explosion-anim-slow" />
             <materials>
                 <material id="whiteMaterial" />
             </materials>
             <texture id="explosion" length_s="1" length_t="1" />
-            <animationref id="explosion-anim-slow" />
             <children>
                 <componentref id="explosion" />
             </children>
@@ -2657,11 +2657,11 @@
                 <rotate axis="z" angle="90" />
                 <scale x="0.6" y="0.6" z="0.6" />
             </transformation>
+            <animationref id="explosion-anim-slow" />
             <materials>
                 <material id="whiteMaterial" />
             </materials>
             <texture id="explosion" length_s="1" length_t="1" />
-            <animationref id="explosion-anim-slow" />
             <children>
                 <componentref id="explosion" />
             </children>
@@ -2687,11 +2687,11 @@
                 <translate x="-5" y="-7" z="0" />
                 <rotate axis="z" angle="40" />
             </transformation>
+            <animationref id="explosion-anim-slow" />
             <materials>
                 <material id="whiteMaterial" />
             </materials>
             <texture id="explosion" length_s="1" length_t="1" />
-            <animationref id="explosion-anim-slow" />
             <children>
                 <componentref id="explosion" />
             </children>
@@ -2701,11 +2701,11 @@
                 <translate x="-8" y="-2" z="7" />
                 <rotate axis="x" angle="30" />
             </transformation>
+            <animationref id="explosion-anim-fast" />
             <materials>
                 <material id="whiteMaterial" />
             </materials>
             <texture id="explosion" length_s="1" length_t="1" />
-            <animationref id="explosion-anim-fast" />
             <children>
                 <componentref id="explosion" />
             </children>
@@ -2717,11 +2717,11 @@
                 <rotate axis="z" angle="-20" />
                 <rotate axis="x" angle="40" />
             </transformation>
+            <animationref id="explosion-anim-slow" />
             <materials>
                 <material id="whiteMaterial" />
             </materials>
             <texture id="explosion" length_s="1" length_t="1" />
-            <animationref id="explosion-anim-slow" />
             <children>
                 <componentref id="explosion" />
             </children>
@@ -2732,11 +2732,11 @@
                 <scale x="0.5" y="0.5" z="0.5" />
                 <rotate axis="z" angle="60" />
             </transformation>
+            <animationref id="explosion-anim-fast" />
             <materials>
                 <material id="whiteMaterial" />
             </materials>
             <texture id="explosion" length_s="1" length_t="1" />
-            <animationref id="explosion-anim-fast" />
             <children>
                 <componentref id="explosion" />
             </children>
@@ -2746,11 +2746,11 @@
                 <translate x="3" y="-3" z="9" />
                 <scale x="0.4" y="0.4" z="0.4" />
             </transformation>
+            <animationref id="explosion-anim-fast" />
             <materials>
                 <material id="whiteMaterial" />
             </materials>
             <texture id="explosion" length_s="1" length_t="1" />
-            <animationref id="explosion-anim-fast" />
             <children>
                 <componentref id="explosion" />
             </children>
