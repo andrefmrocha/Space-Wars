@@ -36,10 +36,20 @@ const componentParser = {
       const childrenIndex = nodeNames.indexOf('children');
       const animationIndex = nodeNames.indexOf('animationref');
 
+ 
       if (transformationIndex == -1) onXMLError('Missing transformation tag on component');
       if (materialsIndex == -1) onXMLError('Missing materials tag on component');
       if (textureIndex == -1) onXMLError('Missing texture tag on component');
       if (childrenIndex == -1) onXMLError('Missing children tag on component');
+
+      if (transformationIndex != 0) console.warn('transformation tag out of place!');
+      if ((materialsIndex != 1 && animationIndex == -1) || (animationIndex != -1 && materialsIndex != 2))
+        console.warn('materials tag out of place!');
+      if ((textureIndex != 2 && animationIndex == -1) || (animationIndex != -1 && textureIndex != 3))
+        console.warn('texture tag out of place!');
+      if ((childrenIndex != 3 && animationIndex == -1) || (animationIndex != -1 && childrenIndex != 4))
+        console.warn('children tag out of place!');
+      if (animationIndex != -1 && animationIndex != 1) console.warn('animation tag out of place!');
 
       const currentComponent = {};
 
@@ -72,7 +82,7 @@ const componentParser = {
         )
       );
 
-      if(animationIndex != -1){
+      if (animationIndex != -1) {
         currentComponent.animation = componentParser.parseAnimationChildren(
           grandChildren[animationIndex],
           sceneGraph
@@ -80,7 +90,7 @@ const componentParser = {
       }
 
 
-      if(!currentComponent.texture) {
+      if (!currentComponent.texture) {
         sceneGraph.onXMLError("Component parser, missing texture");
       }
       else if (!currentComponent.materials || currentComponent.materials.length == 0) {
@@ -100,7 +110,7 @@ const componentParser = {
    * @param  {MySceneGraph} sceneGraph
    */
   parseComponentTexture: (textureRef, sceneGraph) => {
-    const textures = sceneGraph.textures; 
+    const textures = sceneGraph.textures;
     const textureID = parserUtils.reader.getString(textureRef, 'id');
     if (!textureID) console.error("missing texture ID");
 
@@ -128,7 +138,7 @@ const componentParser = {
       texture: texture ? texture : null
     };
   },
-  
+
   /**
    * @param  {XMLCollection Object} componentTransformation
    * @param  {Object} transformations
@@ -150,7 +160,7 @@ const componentParser = {
     return transformationParser.parseTransformation(componentTransformation, transformations, sceneGraph);
   },
 
-  
+
   /**
    * @param  {XMLCollection Object} materialsNode
    * @param  {Object} materials
@@ -166,7 +176,7 @@ const componentParser = {
     return componentMaterials;
   },
 
-  
+
   /**
    * @param  {XMLCollection Object} componentChildren
    */
@@ -198,7 +208,7 @@ const componentParser = {
 
   parseAnimationChildren: (animationsNode, sceneGraph) => {
     const id = parserUtils.reader.getString(animationsNode, 'id');
-    if(!id) sceneGraph.onXMLError('No id on animation ref');
+    if (!id) sceneGraph.onXMLError('No id on animation ref');
     return sceneGraph.animations[id];
   }
 }
